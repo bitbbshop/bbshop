@@ -743,22 +743,22 @@
         })
         
         //X버튼 눌렀을때 모달창 끄기.
-        span1.onclick = function () {
+      span1.onclick = function () {
             modal.style.display = "none";
         }
         span2.onclick = function () {
-            modal_sign_up.style.display = "none";
+        	findinfo.style.display = "none";
         }
 
         span3.onclick = function () {
-            emailcheck.style.display = "none";
+        	modal_sign_up.style.display = "none";
         }
        
         span4.onclick = function () {
-            moredetails.style.display = "none";
+        	emailcheck.style.display = "none";
         } 
         span5.onclick = function () {
-            findinfo.style.display = "none";
+        	moredetails.style.display = "none";
         }
 
         window.onclick = function (event) {
