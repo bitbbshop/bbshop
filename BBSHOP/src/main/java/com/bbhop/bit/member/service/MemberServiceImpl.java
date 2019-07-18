@@ -21,14 +21,30 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String memberCheck(String id, String pw) {
+	public String memberCheck(String member_id, String member_pw) {
 		// TODO Auto-generated method stub
-		return null;
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		sqlSession.getMapper(MemberMapper.class);
+		
+		if(mapper.memberCheck(member_id,member_pw)==1) {
+			
+			return "redirect:shoppingMall/main/shopping_main.sh";
+		}
+		
+		else {
+			return "index.me";
+		}
+		
 	}
 
 	@Override
 	public int getId(String id) {
 		// TODO Auto-generated method stub
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		sqlSession.getMapper(MemberMapper.class);
+		
+		
+		
 		return 0;
 	}
 

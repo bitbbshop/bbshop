@@ -4,6 +4,8 @@ import com.bbshop.bit.member.domain.MemberVO;
 
 public interface MemberMapper {
 	
-	//1.х╦©Ь╟║ют
+	//1.х╦О©╫О©╫О©╫О©╫О©╫О©╫
 	public void insert(MemberVO member);
+
+	public int memberCheck(String member_id, String member_pw);
 }
