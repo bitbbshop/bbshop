@@ -1,12 +1,14 @@
-package com.bbhop.bit.member.service;
+package com.bbshop.bit.member.service;
 
+
+import java.util.HashMap;
 
 import com.bbshop.bit.member.domain.MemberVO;
 
 public interface MemberService {
 
 	public  void register(MemberVO member);
-	public String memberCheck(String id, String pw);
+	public String memberCheck(HashMap<String,String> map ,String toPage);
 	public int getId(String id);
 	public MemberVO isExsist();
 	public MemberVO getMemberInfo(String id);

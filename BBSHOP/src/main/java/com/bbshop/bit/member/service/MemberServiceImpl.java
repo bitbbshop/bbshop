@@ -1,17 +1,20 @@
-package com.bbhop.bit.member.service;
+package com.bbshop.bit.member.service;
+
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbshop.bit.member.domain.MemberVO;
-import com.bit.bbshop.member.mapper.MemberMapper;
+import com.bbshop.bit.member.mapper.MemberMapper;
 
-@Service
+@Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
 	@Override
 	public void register(MemberVO member) {
 		// TODO Auto-generated method stub
@@ -20,21 +23,30 @@ public class MemberServiceImpl implements MemberService {
 		mapper.insert(member);
 	}
 
-	@Override
-	public String memberCheck(String member_id, String member_pw) {
+	
+	public String memberCheck(HashMap<String,String> map , String toPage) {
 		// TODO Auto-generated method stub
+		System.out.println("serviceimpl");
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		sqlSession.getMapper(MemberMapper.class);
-		
-		if(mapper.memberCheck(member_id,member_pw)==1) {
+		int result=mapper.memberCheck(map);
+		System.out.println("result="+result);
+		if(mapper.memberCheck(map)==1) {
 			
-			return "redirect:shoppingMall/main/shopping_main.sh";
+			if(toPage.equals("goShop")) {
+			
+				return "shoppingMall/main/shopping_main";
 		}
-		
+			else if(toPage.equals("goCommunity")){
+			
+			
+				return "shoppingMall/main/community_main";
+			}
+		}
 		else {
-			return "index.me";
+			return "index.do";
 		}
-		
+		return "index.do";
 	}
 
 	@Override

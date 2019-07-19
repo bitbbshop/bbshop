@@ -1,33 +1,43 @@
 package com.bbshop.bit.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bbhop.bit.member.service.MemberService;
+import com.bbshop.bit.member.domain.MemberVO;
+import com.bbshop.bit.member.service.MemberService;
 
 @Controller
-@RequestMapping("*.me")
+@RequestMapping("*.do")
 public class MemberController {
 	
-	@Autowired
-	private MemberService service;
+	@Autowired(required=true)
+	MemberService memberService;
 	
-	@RequestMapping(value="index.me", method=RequestMethod.POST)
+	@RequestMapping(value="index.do", method=RequestMethod.GET)
 	public String index() {
-		return "index";
+		System.out.println("index 입니다..");
+		return "shoppingMall/main/index";
 	}
 	
-	@RequestMapping(value="login" ,method=RequestMethod.POST)
-	public String login(@RequestParam("userid") String member_id, @RequestParam("password") String user_pw , HttpSession session) {
-			
-		String resultUrl = service.memberCheck(member_id, user_pw);
-		if(resultUrl.equals("redirect:shoppingMall/main/shopping_main.sh") || resultUrl.equals("redirect:shoppingMall/main/community_main.co")) {
-			session.setAttribute("id", member_id);
+	@RequestMapping(value="login.do" ,method=RequestMethod.POST)//RequestMethod 쿼리스트링으로 받을때 사용하는것. GET만가능 (RequestParam)
+	public String login(MemberVO vo, HttpSession session ,HttpServletRequest request) {
+		String toPage = request.getParameter("toPage"); //hidden 은 value값을 가져와야 한다.
+		System.out.println("로그인 ID:"+vo.getMEMBER_ID()+"로그인 PW:"+vo.getMEMBER_PW()+"이동 Page:"+toPage);
+		
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("MEMBER_ID", vo.getMEMBER_ID());
+		map.put("MEMBER_PW", vo.getMEMBER_PW());
+		
+		String resultUrl = memberService.memberCheck(map,toPage);
+		if(resultUrl.equals("shoppingMall/main/shopping_main") || resultUrl.equals("shoppingMall/main/community_main")) {
+			session.setAttribute("id", vo.getMEMBER_ID());
 		}
 		
 		return resultUrl;

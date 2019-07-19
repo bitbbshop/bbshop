@@ -5,31 +5,29 @@ import java.util.Date;
 public class MemberVO {
 	
 	private int USER_KEY;
-	private String ID;
+	private String MEMBER_ID;
 	private String NICKNAME;
-	private String PW;
+	private String MEMBER_PW;
 	private String NAME;
 	private Date BIRTH;
 	private int PHONE;
-	private int GLADE;
+	private int GRADE;
 	private int SAVINGS;
 	private int CAUTION;
 	private Date REGDATE;
 	private Date MODDATE;
 	private int FLAG;
-
-	
 	public int getUSER_KEY() {
 		return USER_KEY;
 	}
 	public void setUSER_KEY(int uSER_KEY) {
 		USER_KEY = uSER_KEY;
 	}
-	public String getID() {
-		return ID;
+	public String getMEMBER_ID() {
+		return MEMBER_ID;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setMEMBER_ID(String mEMBER_ID) {
+		MEMBER_ID = mEMBER_ID;
 	}
 	public String getNICKNAME() {
 		return NICKNAME;
@@ -37,11 +35,11 @@ public class MemberVO {
 	public void setNICKNAME(String nICKNAME) {
 		NICKNAME = nICKNAME;
 	}
-	public String getPW() {
-		return PW;
+	public String getMEMBER_PW() {
+		return MEMBER_PW;
 	}
-	public void setPW(String pW) {
-		PW = pW;
+	public void setMEMBER_PW(String mEMBER_PW) {
+		MEMBER_PW = mEMBER_PW;
 	}
 	public String getNAME() {
 		return NAME;
@@ -61,11 +59,11 @@ public class MemberVO {
 	public void setPHONE(int pHONE) {
 		PHONE = pHONE;
 	}
-	public int getGLADE() {
-		return GLADE;
+	public int getGRADE() {
+		return GRADE;
 	}
-	public void setGLADE(int gLADE) {
-		GLADE = gLADE;
+	public void setGLADE(int gRADE) {
+		GRADE = gRADE;
 	}
 	public int getSAVINGS() {
 		return SAVINGS;
@@ -97,12 +95,14 @@ public class MemberVO {
 	public void setFLAG(int fLAG) {
 		FLAG = fLAG;
 	}
-	
 	@Override
 	public String toString() {
-		return "MemberVO [USER_KEY=" + USER_KEY + ", ID=" + ID + ", NICKNAME=" + NICKNAME + ", PW=" + PW + ", NAME="
-				+ NAME + ", BIRTH=" + BIRTH + ", PHONE=" + PHONE + ", GLADE=" + GLADE + ", SAVINGS=" + SAVINGS
-				+ ", CAUTION=" + CAUTION + ", REGDATE=" + REGDATE + ", MODDATE=" + MODDATE + ", FLAG=" + FLAG + "]";
+		return "MemberVO [USER_KEY=" + USER_KEY + ", MEMBER_ID=" + MEMBER_ID + ", NICKNAME=" + NICKNAME + ", MEMBER_PW="
+				+ MEMBER_PW + ", NAME=" + NAME + ", BIRTH=" + BIRTH + ", PHONE=" + PHONE + ", GRADE=" + GRADE
+				+ ", SAVINGS=" + SAVINGS + ", CAUTION=" + CAUTION + ", REGDATE=" + REGDATE + ", MODDATE=" + MODDATE
+				+ ", FLAG=" + FLAG + "]";
 	}
+
+	
 		
 }

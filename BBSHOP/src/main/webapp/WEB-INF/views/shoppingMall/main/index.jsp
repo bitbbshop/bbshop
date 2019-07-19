@@ -384,14 +384,15 @@
                 <span class="close">&times;</span>
                 <h2 align="center">로 그 인</h2>
                 <div class="modal-body" style="padding: 40px 50px;">
-                    <form name="loginform" role="form" action="/shopping_main" method="post">
+                    <form id="loginform" name="loginform" role="form" action="login.do" method="post">
                         <div class="form-group">
+                       
                             <label for="userid">ID</label> <input type="text" class="form-control" id="userid"
-                                name="userid" placeholder="ID를 입력하세요...">
+                                name="MEMBER_ID" placeholder="ID를 입력하세요...">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label> <input type="text" class="form-control" id="password"
-                                name="password" placeholder="Password를 입력하세요...">
+                                name="MEMBER_PW" placeholder="Password를 입력하세요...">
                         </div>
                         <div class="checkbox">
                             <input type="checkbox" id="login_checkbox" checked /> <label
@@ -399,7 +400,7 @@
                             <input type="checkbox" id="login_maintain_checkbox" checked /> <label
                                 for="login_maintain_checkbox"><span></span>로그인 상태 유지</label>
                         </div>
-                        <input type="button" value="로그인" class="btn btn-info btn-block" onclick="check_input()">
+                        <input type="submit" value="로그인" class="btn btn-info btn-block">
                         <Br>
                     </form>
                     <input type="button" value="비회원 로그인" class="btn btn-info btn-block">
@@ -720,11 +721,25 @@
         var span3 = document.getElementsByClassName("close")[2];
         var span4 = document.getElementsByClassName("close")[3];
         var span5 = document.getElementsByClassName("close")[4];
-        //SHOP, COMMUNITY 눌렀을시.
-        $('#goShop, #goCommunity').click(function () {
+        //SHOP 눌렀을시.
+        $('#goShop').click(function () {
             modal.style.display = "block"; //modal.style.display = none 일시엔 보여지지 않지만 block으로 바꾸면 내용이보인다.
-
+			//동적으로 쇼핑몰 메인으로 가기위해 히든으로 value값을 줌.
+            var $hidden =$("<input type='hidden' name='toPage' value='goShop'>")
+			$('#loginform').append($hidden);
+            $hidden.appendTo($('#loginform'));
+            document.getElementById('loginform').appendChild(hidden);
         })
+        //Community 눌렀을시
+        $('#goCommunity').click(function () {
+            modal.style.display = "block"; //modal.style.display = none 일시엔 보여지지 않지만 block으로 바꾸면 내용이보인다.
+            //동적으로 커뮤니티 메인으로 가기위해 히든으로 value값을 줌.
+            var $hidden =$("<input type='hidden' name='toPage' value='goCommunity'>")
+			$('#loginform').append($hidden);
+            $hidden.appendTo($('#loginform'));
+            document.getElementById('loginform').appendChild(hidden);
+        })
+        
         //회원가입 눌렀을때
         $('#sign_up_btn').click(function () {
             modal.style.display = "none";
