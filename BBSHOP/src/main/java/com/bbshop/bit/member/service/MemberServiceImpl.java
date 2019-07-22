@@ -16,11 +16,14 @@ public class MemberServiceImpl implements MemberService {
 	private SqlSession sqlSession;
 	
 	@Override
-	public void register(MemberVO member) {
+	public void register(MemberVO vo) {
 		// TODO Auto-generated method stub
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		System.out.println("요기까지 성공?"+vo.toString());
+		
 		sqlSession.getMapper(MemberMapper.class);
-		mapper.insert(member);
+		mapper.insertMember(vo);
+		System.out.println("insert 성공?");
 	}
 
 	

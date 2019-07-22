@@ -5,10 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 <mapper namespace ="com.bbshop.bit.member.mapper.MemberMapper">
 
 	<resultMap type="com.bbshop.bit.member.domain.MemberVO" id="MemberResultMap">
-		<result property ="USER_KEY" column ="user_key"/>
-		<result property ="MEMBER_ID" column ="member_id"/>
-		<result property ="NICKNAME" column ="nickname"/>
-		<result property ="MEMBER_PW" column ="member_pw"/>
+		<result property ="USER_KEY" column ="USER_KEY"/>
+		<result property ="MEMBER_ID" column ="MEMBER_ID"/>
+		<result property ="NICKNAME" column ="NICKNAME"/>
+		<result property ="MEMBER_PW" column ="MEMBER_PW"/>
 		<result property ="NAME" column ="NAME"/>
 		<result property ="BIRTH" column ="BIRTH"/>
 		<result property ="PHONE" column ="PHONE"/>
@@ -29,7 +29,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 
 </select>
 
+<insert id="insertMember" parameterType="com.bbshop.bit.member.domain.MemberVO">
+	<selectKey keyProperty="USER_KEY" resultType="int" order="BEFORE">
+		select user_seq.nextval FROM DUAL
+	</selectKey>
+		
+		INSERT INTO SH_USER (user_key,member_id, member_pw, name, birth,phone,nickname,REGDATE,flag,grade,savings,caution,MODDATE
+		)
 
+		VALUES
+		(#{USER_KEY},#{MEMBER_ID}, #{MEMBER_PW}, #{NAME}, #{BIRTH} , #{PHONE} ,#{NICKNAME},SYSDATE,#{FLAG},#{GRADE},#{SAVINGS},#{CAUTION},SYSDATE
+		)
+	</insert>
 
 
 

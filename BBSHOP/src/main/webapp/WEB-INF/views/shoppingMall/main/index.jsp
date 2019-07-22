@@ -342,7 +342,7 @@
 
                                     <td style="text-align: center" class="BBSHOP" width="1000" height="100">
                                        
-										<!-- 여기서 버튼을 누르면 로그인 창이 뜬다. -->>
+										<!-- 여기서 버튼을 누르면 로그인 창이 뜬다. -->
 										<button id="goShop"
                                             style="background-color: rgba(255, 255, 255, 0); border: none ; border-width: 2000px "  >
                                             <p align="center">
@@ -391,7 +391,7 @@
                                 name="MEMBER_ID" placeholder="ID를 입력하세요...">
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label> <input type="text" class="form-control" id="password"
+                            <label for="password">Password</label> <input type="password" class="form-control" id="password"
                                 name="MEMBER_PW" placeholder="Password를 입력하세요...">
                         </div>
                         <div class="checkbox">
@@ -445,16 +445,16 @@
                 <h2 align="center">회 원 가 입</h2>
                 <div class="sign_up_body" style="padding: 40px 50px;">
 
-                    <form action="insertMember.me" method=post>
+                    <form action="register.do" method="post" name="sign_form" role="form">
                         <table width=100% cellspacing=0 cellpadding=0 align=center>
-                            <div class=form_singup_group>
+                            
                                 <tr>
                                     <td>
                                         <label for="sign_id">ID(Email)</label><BR>
 
-                                        <input type="text" class="form-control" id="sign_id" name="userid"
+                                        <input type="text" class="form-control" id="sign_id" name="MEMBER_ID"
                                             placeholder="Email을 입력하세요">
-                            </div>
+                      
                             </td>
                             <td><br>
                                 <input type="button" class="btn btn-info btn-block" name="emailbtn" value="Email인증"
@@ -467,7 +467,7 @@
                             <tr>
                                 <td>
                                     <label for="sign_pwd">Password</label><BR>
-                                    <input type="password" class="form-control" id="sign_pwd" name="password"
+                                    <input type="password" class="form-control" id="sign_pwd" name="MEMBER_PW"
                                         placeholder="암호를 입력하세요">
                                 </td>
 
@@ -483,7 +483,7 @@
                             <tr>
                                 <td>
                                     <label for="sign_name">Name</label><BR>
-                                    <input type="text" class="form-control" id="sign_name" name="name"
+                                    <input type="text" class="form-control" id="sign_name" name="NAME"
                                         placeholder="이름을 입력하세요">
                                 </td>
 
@@ -492,12 +492,12 @@
                             <tr>
                                 <td>
                                     <label for="sign_phone">Phone</label><BR>
-                                    <input type="text" class="form-control" id="sign_phone" name="phone"
+                                    <input type="text" class="form-control" id="sign_phone" name="PHONE"
                                         placeholder="-제외한 번호를 적어주세요 ex)01012345678">
                                 </td>
                                 <td>
                                     <br>
-                                    <input type="button" class="btn btn-info btn-block" name=phonebtn value="번호인증"
+                                    <input type="button" class="btn btn-info btn-block" name=checkphonebtn value="번호인증"
                                         onclick="checkPhone()" style="margin-left:10px">
                                 </td>
 
@@ -505,7 +505,7 @@
                             <tr>
                                 <td>
                                     <label for="sign_birth">Birth</label><BR>
-                                    <input type="text" class="form-control" id="sign_birth" name="birth"
+                                    <input type="text" class="form-control" id="sign_birth" name="BIRTH"
                                         placeholder="생년월일을 적어주세요 ex)190701">
                                 </td>
 
@@ -514,11 +514,11 @@
                             <tr>
                                 <td>
                                     <label for="sign_nickname">Nickname</label><BR>
-                                    <input type="text" class="form-control" id="sign_nickname" name="nickname"
+                                    <input type="text" class="form-control" id="sign_nickname" name="NICKNAME"
                                         placeholder="닉네임을 적어주세요">
                                 </td>
                             </tr>
-                </div>
+              
                 </table>
                 <br>
                 <input type="submit" class="btn btn-info btn-block" id="sign_btn" name="sign" value="회원가입">
@@ -758,7 +758,7 @@
         })
         
         //X버튼 눌렀을때 모달창 끄기.
-      span1.onclick = function () {
+        span1.onclick = function () {
             modal.style.display = "none";
         }
         span2.onclick = function () {
@@ -775,6 +775,7 @@
         span5.onclick = function () {
         	moredetails.style.display = "none";
         }
+
 
         window.onclick = function (event) {
             if (event.target == modal) { //스크립트가 시작될때의 이벤트를 만들어준다.

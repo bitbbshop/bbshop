@@ -9,9 +9,9 @@ public class MemberVO {
 	private String NICKNAME;
 	private String MEMBER_PW;
 	private String NAME;
-	private Date BIRTH;
+	private int BIRTH;
 	private int PHONE;
-	private int GRADE;
+	private String GRADE;
 	private int SAVINGS;
 	private int CAUTION;
 	private Date REGDATE;
@@ -47,10 +47,10 @@ public class MemberVO {
 	public void setNAME(String nAME) {
 		NAME = nAME;
 	}
-	public Date getBIRTH() {
+	public int getBIRTH() {
 		return BIRTH;
 	}
-	public void setBIRTH(Date bIRTH) {
+	public void setBIRTH(int bIRTH) {
 		BIRTH = bIRTH;
 	}
 	public int getPHONE() {
@@ -59,11 +59,11 @@ public class MemberVO {
 	public void setPHONE(int pHONE) {
 		PHONE = pHONE;
 	}
-	public int getGRADE() {
+	public String getGRADE() {
 		return GRADE;
 	}
-	public void setGLADE(int gRADE) {
-		GRADE = gRADE;
+	public void setGLADE(String grade) {
+		GRADE = grade;
 	}
 	public int getSAVINGS() {
 		return SAVINGS;

@@ -37,9 +37,28 @@ public class MemberController {
 		
 		String resultUrl = memberService.memberCheck(map,toPage);
 		if(resultUrl.equals("shoppingMall/main/shopping_main") || resultUrl.equals("shoppingMall/main/community_main")) {
-			session.setAttribute("id", vo.getMEMBER_ID());
+			session.setAttribute("member", vo.getMEMBER_ID());
 		}
 		
 		return resultUrl;
+	}
+	@RequestMapping(value="register.do",method=RequestMethod.POST)
+	public String register(MemberVO vo, HttpServletRequest request) {
+		System.out.println(vo.toString());
+		vo.setGLADE("silver");
+		//생일을 어떻게 date 값으로 가져올것인가?
+		
+		
+		try {
+			memberService.register(vo);
+			System.out.println("회원등록 성공!");
+			return "redirect:index.do";
+		}
+		catch(Exception e) {
+			System.out.println("회원 등록 실패...");
+			return "redirect:index.do";
+		}
+		
+	
 	}
 }
