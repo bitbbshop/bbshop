@@ -688,6 +688,7 @@
                 return false;
             }
             alert("이메일을 보냈습니다.");
+            location.href="authEmail.do?MEMBER_ID="+userid;
             emailcheck_Modal.style.display="block";
         }
         var emailSendAuth = function () {

@@ -12,4 +12,6 @@ public interface MemberMapper {
 	public int memberLogin(HashMap<String, String> map);
 	
 	public String memberPw(MemberVO member);
+
+	public void GetKey(String user_id, String key);
 }

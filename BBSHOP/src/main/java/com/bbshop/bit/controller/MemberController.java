@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bbshop.bit.member.domain.MemberVO;
 import com.bbshop.bit.member.service.MemberService;
+import com.bbshop.bit.member.service.UserMailSendService;
 
 @Controller
 @RequestMapping("*.do")
@@ -25,6 +26,9 @@ public class MemberController {
 	
 	@Autowired(required=true)
 	MemberService memberService;
+	
+	@Autowired
+	private UserMailSendService mailsender;
 	
 	@RequestMapping(value="index.do", method=RequestMethod.GET)
 	public String index() {
@@ -69,10 +73,7 @@ public class MemberController {
 	@RequestMapping(value="register.do",method=RequestMethod.POST)
 	public String register(MemberVO vo, HttpServletRequest request) {
 		System.out.println(vo.toString());
-		vo.setGLADE("silver");
-		//생일을 어떻게 date 값으로 가져올것인가?
-		
-		
+		vo.setGLADE("silver");	
 		try {
 			memberService.register(vo);
 			System.out.println("회원등록 성공!");
@@ -82,7 +83,11 @@ public class MemberController {
 			System.out.println("회원 등록 실패...");
 			return "redirect:index.do";
 		}
+	}
+	@RequestMapping(value="authEmail.do", method=RequestMethod.GET)
+	public void authEmail(MemberVO vo , HttpServletRequest request){
+		System.out.println(vo.toString());
 		
-	
+		mailsender.mailSendWithUserKey(vo.getMEMBER_ID(),vo.getMEMBER_ID(),request);
 	}
 }
