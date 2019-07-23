@@ -9,5 +9,7 @@ public interface MemberMapper {
 	//1.회원가입
 	public void insertMember(MemberVO member);
 
-	public int memberCheck(HashMap<String, String> map);
+	public int memberLogin(HashMap<String, String> map);
+	
+	public String memberPw(MemberVO member);
 }

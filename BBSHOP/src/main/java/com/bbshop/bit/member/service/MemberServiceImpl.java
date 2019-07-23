@@ -2,8 +2,11 @@ package com.bbshop.bit.member.service;
 
 import java.util.HashMap;
 
+import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bbshop.bit.member.domain.MemberVO;
@@ -12,6 +15,9 @@ import com.bbshop.bit.member.mapper.MemberMapper;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
+	@Inject
+    PasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
@@ -19,6 +25,11 @@ public class MemberServiceImpl implements MemberService {
 	public void register(MemberVO vo) {
 		// TODO Auto-generated method stub
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		 System.out.println("서비스레지스");
+
+	        String encPassword = passwordEncoder.encode(vo.getMEMBER_PW());
+	        vo.setMEMBER_PW(encPassword);
+	        //System.out.println("암호화된 비밀번호 : "+user.getUserPassword());
 		System.out.println("요기까지 성공?"+vo.toString());
 		
 		sqlSession.getMapper(MemberMapper.class);
@@ -27,14 +38,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	
-	public String memberCheck(HashMap<String,String> map , String toPage) {
+	public String memberLogin(HashMap<String,String> map , String toPage) {
 		// TODO Auto-generated method stub
 		System.out.println("serviceimpl");
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		sqlSession.getMapper(MemberMapper.class);
-		int result=mapper.memberCheck(map);
+		int result=mapper.memberLogin(map);
 		System.out.println("result="+result);
-		if(mapper.memberCheck(map)==1) {
+		if(mapper.memberLogin(map)==1) {
 			
 			if(toPage.equals("goShop")) {
 			
@@ -50,6 +61,14 @@ public class MemberServiceImpl implements MemberService {
 			return "index.do";
 		}
 		return "index.do";
+	}
+	
+	public String memberPw(MemberVO member) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		sqlSession.getMapper(MemberMapper.class);
+		String db_pw = mapper.memberPw(member);
+		return db_pw;
+		
 	}
 
 	@Override

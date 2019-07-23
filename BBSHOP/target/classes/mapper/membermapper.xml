@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		<result property ="FLAG" column ="FLAG"/>
 	</resultMap>
 
-<select id="memberCheck" parameterType="HashMap" resultType="int">
+<select id="memberLogin" parameterType="HashMap" resultType="int">
 
 	select count(*)
 	from sh_user
@@ -34,15 +34,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		select user_seq.nextval FROM DUAL
 	</selectKey>
 		
-		INSERT INTO SH_USER (user_key,member_id, member_pw, name, birth,phone,nickname,REGDATE,flag,grade,savings,caution,MODDATE
-		)
+		INSERT INTO SH_USER (user_key,member_id, member_pw, name, birth,phone,
+		nickname,REGDATE,flag,grade,savings,caution,MODDATE)
 
 		VALUES
-		(#{USER_KEY},#{MEMBER_ID}, #{MEMBER_PW}, #{NAME}, #{BIRTH} , #{PHONE} ,#{NICKNAME},SYSDATE,#{FLAG},#{GRADE},#{SAVINGS},#{CAUTION},SYSDATE
-		)
+		(#{USER_KEY},#{MEMBER_ID}, #{MEMBER_PW}, #{NAME}, #{BIRTH} , #{PHONE} ,
+		#{NICKNAME},SYSDATE,#{FLAG},#{GRADE},#{SAVINGS},#{CAUTION},SYSDATE)
 	</insert>
 
+<select id="memberPw" parameterType="com.bbshop.bit.member.domain.MemberVO" resultType="String">
+	select member_pw from sh_user where member_id=#{MEMBER_ID}
 
+
+</select>
 
 
 
