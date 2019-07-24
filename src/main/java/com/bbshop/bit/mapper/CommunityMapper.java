@@ -1,8 +1,8 @@
-package com.bbshop.mapper;
+package com.bbshop.bit.mapper;
 
 import java.util.List;
 
-import com.bbshop.domain.CommunityVO;
+import com.bbshop.bit.domain.CommunityVO;
 
 public interface CommunityMapper {
 

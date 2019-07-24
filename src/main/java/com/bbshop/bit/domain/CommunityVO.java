@@ -1,4 +1,4 @@
-package com.bbshop.domain;
+package com.bbshop.bit.domain;
 
 import java.util.Date;
 
