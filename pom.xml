@@ -178,7 +178,13 @@
          <artifactId>commons-io</artifactId>
          <version>1.4</version>
       </dependency>
-      
+       <!-- lombok 추가 -->
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         <version>1.18.0</version>
+         <scope>provided</scope>
+      </dependency>
       
       <!-- Test -->
       
