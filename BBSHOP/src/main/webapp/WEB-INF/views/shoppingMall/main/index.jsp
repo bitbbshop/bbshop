@@ -92,14 +92,12 @@
             /* Hidden by default */
             position: fixed;
             /* Stay in place */
-            z-index: 1;
+            z-index: 2;
             /* Sit on top */
             left: 10%;
             top: 10%;
-            width: 30%;
-            /* Full width */
-            height: 30%;
-            /* Full height */
+            width: 40%;
+            height: 40%; 
             overflow: auto;
             /* Enable scroll if needed */
        	    background-color: rgb(0, 0, 0);
@@ -156,11 +154,12 @@
 		/*회원가입 모달의 내용*/
         .sign_up_content {
             background-color: #fefefe;
-            margin: 8% auto;
+            margin: 5% auto;
             /* 15% from the top and centered */
             padding: 20px;
             border: 1px solid #888;
             width: 35%;
+            
             /* Could be more or less, depending on screen size */
         }
         /*이메일 인증 모달에 나오는 내용*/
@@ -495,12 +494,7 @@
                                     <input type="text" class="form-control" id="sign_phone" name="PHONE"
                                         placeholder="-제외한 번호를 적어주세요 ex)01012345678">
                                 </td>
-                                <td>
-                                    <br>
-                                    <input type="button" class="btn btn-info btn-block" name=checkphonebtn value="번호인증"
-                                        onclick="checkPhone()" style="margin-left:10px">
-                                </td>
-
+                                
                             </tr>
                             <tr>
                                 <td>
@@ -535,19 +529,19 @@
     </div>
 
 		<div id="emailcheck" class="emailcheck_Modal">
-			<div class="emailcheck_content">
+			<div calss="emailcheck_content">
 				<span class="close">&times;</span>
 				
 				<div class="emailcheck_body" style="padding: 40px 50px;">
 				
 					<h2 align=center>이메일 인증</h2>
-					<form>
+				
 						<div class="form-group">
 					    <label for="auth">인증키</label>
-                    	<input type="text" class="form-control" id="authkey" placeholder="인증키를 적어주세요"></div>
+                    	<input type="text" class="form-control" id="insertkey" placeholder="인증키를 적어주세요"></div>
 					<br>
-						<input type="submit" id="authkey_submit" value="인증" class="btn btn-info btn-block">
-					</form>
+						<input type="button" id="authkey_check" value="인증" class="btn btn-info btn-block" onclick="checkAuthkey()">
+			
 				</div>
 			</div>
 		</div>
@@ -669,9 +663,10 @@
     </div>
 	<!-- 이부분이 이메일 양식을 체크 하는부분 -->
     <script type="text/javascript">
+    var authkey;
+    var emailcheck_Modal = document.getElementById('emailcheck');
         var emailAvailCheck = function () {
             var userid = $('input[id=sign_id]').val();
-            var emailcheck_Modal = document.getElementById('emailcheck');
             alert(userid);
             if (userid == '') {
                 alert("메일 주소를 정확히 입력 해 주십시오");
@@ -688,9 +683,42 @@
                 return false;
             }
             alert("이메일을 보냈습니다.");
-            location.href="authEmail.do?MEMBER_ID="+userid;
+            
+            //컨트롤러에 ajax로 이메일을 보내고 인증키를 가져옴.
+            jQuery.ajax({
+    			url : '/bit/authEmail.do',
+    			type : 'POST',
+    			data : {MEMBER_ID:userid},    			
+    			dataType : "text",
+    			success : function(authkey_rand){
+    				alert(authkey_rand);
+    				//인증키를 authkey 변수에 넣어줌.
+    				authkey=authkey_rand;
+    			},
+    			error:function(){
+    				alert("ajax통신 실패!!!");
+    			}
+    			});
             emailcheck_Modal.style.display="block";
         }
+        
+        var checkAuthkey = function(){
+        	var insertkey = $('input[id=insertkey]').val();
+        	if(authkey==insertkey){
+        		alert("인증키가 일치합니다OOOOOOOOO.")
+        		       		
+        		emailcheck_Modal.style.display="none";
+        		
+        		//disabled 였던 버튼을 false로 바꿔줘야한다.
+        		$sign_btn = $('#sign_btn').attr('disabled',false);
+        	}
+        	else{
+        		alert("인증키가 틀립니다XXXXXXXX.")
+        		$('input[id=insertkey]').focus();
+        	}
+        	}
+        
+        
         var emailSendAuth = function () {
             var userid = $('input[id=sign_id]').val();
             if (userid == '') {
@@ -745,7 +773,8 @@
         $('#sign_up_btn').click(function () {
             modal.style.display = "none";
             modal_sign_up.style.display = "block";
-
+        	$sign_btn = $('#sign_btn').attr('disabled',true);
+    		
         })
         //추가사항 눌렀을때
         $('#moredetails_btn').click(function () {

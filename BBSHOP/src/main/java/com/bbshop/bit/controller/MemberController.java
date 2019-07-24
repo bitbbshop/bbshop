@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbshop.bit.member.domain.MemberVO;
 import com.bbshop.bit.member.service.MemberService;
@@ -84,10 +85,13 @@ public class MemberController {
 			return "redirect:index.do";
 		}
 	}
-	@RequestMapping(value="authEmail.do", method=RequestMethod.GET)
-	public void authEmail(MemberVO vo , HttpServletRequest request){
+	@ResponseBody
+	@RequestMapping(value="authEmail.do", method=RequestMethod.POST)
+	public String authEmail(MemberVO vo , HttpServletRequest request){
 		System.out.println(vo.toString());
-		
-		mailsender.mailSendWithUserKey(vo.getMEMBER_ID(),vo.getMEMBER_ID(),request);
+		String key= "";
+		key=mailsender.mailSendWithUserKey(vo.getMEMBER_ID(),vo.getMEMBER_ID(),request);
+		System.out.println(key);
+		return key;
 	}
 }
