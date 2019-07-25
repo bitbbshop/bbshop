@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bbshop.bit.domain.PageDTO;
+import com.bbshop.bit.domain.PagingVO;
 import com.bbshop.bit.service.CommunityService;
 
 @Controller
@@ -27,18 +29,14 @@ public class CommunityController {
 		return "shoppingMall/community/community_form";
 	}
 
-	// 커뮤니티 - 게시판
-	@RequestMapping("/community_list.do")
-	public String community_list(Model model) {
-
-		System.out.println("여기까지 와용");
-		
-		System.out.println(communityService.getList().toString());
-		
-		model.addAttribute("list", communityService.getList());
-
-		return "shoppingMall/community/community_list";
-	}
+//	// 커뮤니티 - 게시판
+//	@RequestMapping("/community_list.do")
+//	public String community_list(Model model) {
+//
+//		model.addAttribute("list", communityService.getList());
+//
+//		return "shoppingMall/community/community_list";
+//	}
 
 	// 커뮤니티 - 글 상세
 	@RequestMapping("/community_detail.do")
@@ -50,6 +48,17 @@ public class CommunityController {
 	@RequestMapping("/community_modify.do")
 	public String community_modify() {
 		return "shoppingMall/community/community_modify";
+	}
+	
+	@RequestMapping("/community_list.do")
+	public String list(PagingVO pagingvo, Model model) {
+		
+		System.out.println("컨트롤러 : " + communityService.getList(pagingvo).toString());
+		
+		model.addAttribute("list", communityService.getList(pagingvo));
+		model.addAttribute("pageMaker", new PageDTO(pagingvo, 123));
+		
+		return "shoppingMall/community/community_list";
 	}
 
 }

@@ -2,15 +2,20 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bbshop.bit.mapper.CommunityMapper">
-	<select id="getList"
-		resultType="com.bbshop.bit.domain.CommunityVO">
-    <![CDATA[
-    select * from community where board_num > 0
-    ]]>
+
+	<select id="getListWithPaging" resultType="com.bbshop.bit.domain.CommunityVO">
+	<![CDATA[
+	select
+	
+		board_num, title, board_content,writer,regdate,moddate 
+		
+	from 
+		(
+			select rownum rn, board_num, title, board_content, writer, regdate, moddate 
+			from community 
+			where rownum <= #{PAGENUM} * #{AMOUNT})
+	where rn > (#{PAGENUM} -1) * #{AMOUNT}
+	]]>
 	</select>
-
-
-
-
-
+	
 </mapper>

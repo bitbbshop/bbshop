@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbshop.bit.domain.CommunityVO;
+import com.bbshop.bit.domain.PagingVO;
 import com.bbshop.bit.mapper.CommunityMapper;
 
 @Service
@@ -15,11 +16,21 @@ public class CommunityServiceImpl implements CommunityService {
 	@Autowired
 	private SqlSession sqlSession;
 
+//	@Override
+//	public List<CommunityVO> getList() {
+//		
+//		CommunityMapper communityMapper = sqlSession.getMapper(CommunityMapper.class);
+//		
+//		return communityMapper.getList();
+//	}
+
 	@Override
-	public List<CommunityVO> getList() {
-		
+	public List<CommunityVO> getList(PagingVO pagingvo) {
+
 		CommunityMapper communityMapper = sqlSession.getMapper(CommunityMapper.class);
 		
-		return communityMapper.getList();
+		return communityMapper.getListWithPaging(pagingvo);
 	}
+	
+	
 }
