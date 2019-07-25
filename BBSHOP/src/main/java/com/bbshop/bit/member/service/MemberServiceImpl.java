@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bbshop.bit.member.domain.MemberVO;
+import com.bbshop.bit.member.domain.MoreDetailsVO;
 import com.bbshop.bit.member.mapper.MemberMapper;
 
 @Service("memberService")
@@ -35,6 +36,23 @@ public class MemberServiceImpl implements MemberService {
 		sqlSession.getMapper(MemberMapper.class);
 		mapper.insertMember(vo);
 		System.out.println("insert 성공?");
+	}
+	
+	public long getUser_key(MemberVO vo) {
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		sqlSession.getMapper(MemberMapper.class);
+		System.out.println(vo.getMEMBER_ID());
+		long user_key =mapper.getUser_key(vo);
+		System.out.println("key 가져오기 성공!::::"+user_key);
+		return user_key;
+	}
+	
+	public void moreDetailsRegister(MoreDetailsVO md) {
+		MemberMapper mapper= sqlSession.getMapper(MemberMapper.class);
+		System.out.println("추가사항 회원가입");
+		System.out.println(md.toString());
+		sqlSession.getMapper(MemberMapper.class);
+		mapper.moreDetailsRegister(md);
 	}
 
 	

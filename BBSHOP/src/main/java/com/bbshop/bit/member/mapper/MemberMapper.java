@@ -3,6 +3,7 @@ package com.bbshop.bit.member.mapper;
 import java.util.HashMap;
 
 import com.bbshop.bit.member.domain.MemberVO;
+import com.bbshop.bit.member.domain.MoreDetailsVO;
 
 public interface MemberMapper {
 	
@@ -14,4 +15,6 @@ public interface MemberMapper {
 	public String memberPw(MemberVO member);
 
 	public void GetKey(String user_id, String key);
+	public void moreDetailsRegister(MoreDetailsVO md);
+	public long getUser_key(MemberVO vo);
 }

@@ -567,17 +567,18 @@
                                     <label for="team">선호 구단</label>
                                 </td>
                                 <td>
-                                    <select class="form-control" name="TEAM">
-                                        <option value="엘지">LG</option>
-                                        <option value="키움">Kiwoom</option>
-                                        <option value="기아">Kia</option>
-                                        <option value="한화">Hanwha</option>
-                                        <option value="롯데">Lotte</option>
-                                        <option value="삼성">Samsung</option>
-                                        <option value="엔씨">NC</option>
-                                        <option value="두산">Doosan</option>
-                                        <option value="케이티">KT</option>
-                                        <option value="에스케이">SK</option>
+                                    <select class="form-control" name="TEAM" id="team">
+                                    	<option value="team">Team</option>
+                                        <option value="LG">LG</option>
+                                        <option value="Kiwoom">Kiwoom</option>
+                                        <option value="Kia">Kia</option>
+                                        <option value="Hanwha">Hanwha</option>
+                                        <option value="Lotte">Lotte</option>
+                                        <option value="Samsung">Samsung</option>
+                                        <option value="NC">NC</option>
+                                        <option value="Doosan">Doosan</option>
+                                        <option value="KT">KT</option>
+                                        <option value="SK">SK</option>
 
                                     </select>
                                 </td>
@@ -588,14 +589,15 @@
                                 <td>
 
                                     <div class="position select">
-                                    <select class="form-control" name="POSITION">
-                                        <option value="1루수">1루수</option>
-                                        <option value="2루수">2루수</option>
-                                        <option value="3루수">3루수</option>
-                                        <option value="유격수">유격수</option>
-                                        <option value="외야수">외야수</option>
-                                        <option value="포수">포수</option>
-                                        <option value="투수">투수</option>
+                                    <select class="form-control" name="POSITION" id="position">
+                                    	<option value="position">Position</option>
+                                        <option value="First baseman">1루수</option>
+                                        <option value="Second baseman">2루수</option>
+                                        <option value="third baseman">3루수</option>
+                                        <option value="shortstop">유격수</option>
+                                        <option value="outfielder">외야수</option>
+                                        <option value="catcher">포수</option>
+                                        <option value="pitcher">투수</option>
 
                                     </select>
                                     </div>
@@ -608,20 +610,23 @@
                                 </td>
                                 <td>
                                    <div class="hand-select">
-                                    <select class="form-control" name="HAND">
-                                        <option value="left">좌투(오른손 착용)</option>
-                                        <option value="right">우투(왼손 착용)</option>
+                                    <select class="form-control" name="HAND" id="hand">
+                                        <option value="hand">Hand</option>
+                                        <option value="0">좌투(오른손 착용)</option>
+                                        <option value="1">우투(왼손 착용)</option>
                                     </select>
                                     </div>
                                 </td>
 
                             </tr>
                        
+                       
                             <tr>
-                                <td><label for="brand">브랜드</label></td>
+                                <td><label for="brand">브랜드1</label></td>
                                 <td>
                                  <div>
-                                   <select class="form-control" name="BRAND">
+                                   <select class="form-control" name="BRAND1" id="brand1">
+                                   		<option value="default">선택1</option>
                                         <option value="Adidas">Adidas</option>
                                         <option value="Asics">Asics</option>
                                         <option value="Descente">Descente</option>
@@ -636,13 +641,33 @@
                                 </div>
                                 </td>
                                
+                            </tr>
+                            <tr>
+                                <td><label for="brand">브랜드2</label></td>
+                                <td>
+                                 <div>
+                                   <select class="form-control" name="BRAND2" id="brand2">
+                                   			<option value="default">선택2</option>
+                                        <option value="Adidas">Adidas</option>
+                                        <option value="Asics">Asics</option>
+                                        <option value="Descente">Descente</option>
+                                        <option value="Diamond">Diamond</option>
+                                        <option value="FilaReebok">FILA/Reebok</option>
+                                        <option value="Mizuno">Mizuno</option>
+                                        <option value="Nike">Nike</option>
+                                        <option value="Morimoto">Morimoto</option>
+                                        <option value="UnderArmour">UnderArmour</option>
+                                        <option value="Wilson">Wilson</option>
+                                    </select>
+                                </div>
+                                </td>
                                
                             </tr>
-                          
+                          </table>
                        
-                    </table>
+                
                     <br>
-                    <input type="submit" class="btn btn-info btn-block" id="sign_submit_btn" name="sign" value="회원가입">
+                    <input type="button" class="btn btn-info btn-block" id="moredetails_submit" name="sign" value="회원가입">
                 </form>
             </div>
         </div>
@@ -764,11 +789,47 @@
             $("#md_phone").val(MEMBER_PHONE);  
             $("#md_birth").val(MEMBER_BIRTH);              
         })
+        
+        $('#moredetails_submit').click(function(){
+           	var team=$("#team option:selected").val();
+           	var position=$("#position option:selected").val();
+           	var hand=$("#hand option:selected").val();
+           	var brand1=$("#brand1 option:selected").val();
+           	var brand2=$("#brand2 option:selected").val();
+            
+           	var MEMBER_ID= $("#md_id").val();
+            var MEMBER_PW= $("#md_pw").val();
+            var MEMBER_NICKNAME= $("#md_nickname").val();
+            var MEMBER_NAME= $("#md_name").val();
+            var MEMBER_PHONE= $("#md_phone").val();
+            var MEMBER_BIRTH= $("#md_birth").val();
+            
+           	
+         var formData={TEAM:${'team'},POSITION:${'position'},HAND:${'hand'},BRAND1:${'brand1'},BRAND2:${'brand2'}
+         ,MEMBER_ID:${'MEMBER_ID'},MEMBER_PW:${'MEMBER_PW'},NICKNAME:${'MEMBER_NICKNAME'},NAME:${'MEMBER_NAME'},PHONE:${'MEMBER_PHONE'},BIRTH:${'MEMBER_BIRTH'}};
+       	
+            jQuery.ajax({
+    			url : 'moredetails.do',
+    			type : 'POST',
+    			data : formData,    			
+    			dataType : "text",
+    			success : function(){
+    				
+    				alert("통신완료!");
+    			},
+    			error:function(){
+    				alert("ajax통신 실패!!!");
+    			}
+    			});
+           //	location.href="moredetails.do?TEAM="+team;
+        });
 		//아이디 비밀번호 찾기 눌렀을때
         $('#find_info_btn').click(function(){
         	modal.style.display="none";
         	findinfo.style.display="block";
         })
+        
+        
         
         //X버튼 눌렀을때 모달창 끄기.
         span1.onclick = function () {

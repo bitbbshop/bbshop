@@ -74,8 +74,9 @@ public class MemberController {
 	}
 	@RequestMapping(value="register.do",method=RequestMethod.POST)
 	public String register(MemberVO vo, HttpServletRequest request) {
+		vo.setGRADE("silver");
 		System.out.println(vo.toString());
-		vo.setGLADE("silver");	
+			
 		try {
 			memberService.register(vo);
 			System.out.println("회원등록 성공!");
@@ -98,10 +99,29 @@ public class MemberController {
 	
 	@RequestMapping(value="moredetails.do", method=RequestMethod.POST)
 	public String moredetails(MemberVO vo, MoreDetailsVO md, HttpServletRequest request) {
+		
+		vo.setGRADE("silver");
 		System.out.println(vo.toString());
 		System.out.println(md.toString());
 		
-		return "redirect:index.do";
+		try {
+		
+			memberService.register(vo);
+			long user_key=memberService.getUser_key(vo);
+			System.out.println(user_key);
+			md.setUSER_KEY(user_key);
+			memberService.moreDetailsRegister(md);
+			System.out.println("추가정보 등록 성공!");
+
+			return "redirect:index.do";
+		}
+		catch(Exception e) {
+			System.out.println("회원등록 실패..");
+
+			return "redirect:index.do";
+		}
+		
+		
 		
 	}
 }

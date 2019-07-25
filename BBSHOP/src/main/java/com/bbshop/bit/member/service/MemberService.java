@@ -4,6 +4,7 @@ package com.bbshop.bit.member.service;
 import java.util.HashMap;
 
 import com.bbshop.bit.member.domain.MemberVO;
+import com.bbshop.bit.member.domain.MoreDetailsVO;
 
 public interface MemberService {
 
@@ -12,6 +13,8 @@ public interface MemberService {
 	public int getId(String id);
 	public MemberVO isExsist();
 	public MemberVO getMemberInfo(String id);
+	public void moreDetailsRegister(MoreDetailsVO md);
+	public long getUser_key(MemberVO vo);
 	public boolean deleteMemberInfo(String id, String pw);
 	public void modify(MemberVO member);
 	public String memberPw(MemberVO member);

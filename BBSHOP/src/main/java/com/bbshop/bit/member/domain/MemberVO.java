@@ -4,23 +4,23 @@ import java.util.Date;
 
 public class MemberVO {
 	
-	private int USER_KEY;
+	private long USER_KEY;
 	private String MEMBER_ID;
 	private String NICKNAME;
 	private String MEMBER_PW;
 	private String NAME;
 	private int BIRTH;
-	private int PHONE;
+	private String PHONE;
 	private String GRADE;
-	private int SAVINGS;
+	private long SAVINGS;
 	private int CAUTION;
 	private Date REGDATE;
 	private Date MODDATE;
 	private int FLAG;
-	public int getUSER_KEY() {
+	public long getUSER_KEY() {
 		return USER_KEY;
 	}
-	public void setUSER_KEY(int uSER_KEY) {
+	public void setUSER_KEY(long uSER_KEY) {
 		USER_KEY = uSER_KEY;
 	}
 	public String getMEMBER_ID() {
@@ -53,22 +53,22 @@ public class MemberVO {
 	public void setBIRTH(int bIRTH) {
 		BIRTH = bIRTH;
 	}
-	public int getPHONE() {
+	public String getPHONE() {
 		return PHONE;
 	}
-	public void setPHONE(int pHONE) {
+	public void setPHONE(String pHONE) {
 		PHONE = pHONE;
 	}
 	public String getGRADE() {
 		return GRADE;
 	}
-	public void setGLADE(String grade) {
-		GRADE = grade;
+	public void setGRADE(String gRADE) {
+		GRADE = gRADE;
 	}
-	public int getSAVINGS() {
+	public long getSAVINGS() {
 		return SAVINGS;
 	}
-	public void setSAVINGS(int sAVINGS) {
+	public void setSAVINGS(long sAVINGS) {
 		SAVINGS = sAVINGS;
 	}
 	public int getCAUTION() {
@@ -102,7 +102,7 @@ public class MemberVO {
 				+ ", SAVINGS=" + SAVINGS + ", CAUTION=" + CAUTION + ", REGDATE=" + REGDATE + ", MODDATE=" + MODDATE
 				+ ", FLAG=" + FLAG + "]";
 	}
-
+	
 	
 		
 }
