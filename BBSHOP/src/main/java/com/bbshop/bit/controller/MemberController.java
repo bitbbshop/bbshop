@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbshop.bit.member.domain.MemberVO;
+import com.bbshop.bit.member.domain.MoreDetailsVO;
 import com.bbshop.bit.member.service.MemberService;
 import com.bbshop.bit.member.service.UserMailSendService;
 
@@ -93,5 +94,14 @@ public class MemberController {
 		key=mailsender.mailSendWithUserKey(vo.getMEMBER_ID(),vo.getMEMBER_ID(),request);
 		System.out.println(key);
 		return key;
+	}
+	
+	@RequestMapping(value="moredetails.do", method=RequestMethod.POST)
+	public String moredetails(MemberVO vo, MoreDetailsVO md, HttpServletRequest request) {
+		System.out.println(vo.toString());
+		System.out.println(md.toString());
+		
+		return "redirect:index.do";
+		
 	}
 }

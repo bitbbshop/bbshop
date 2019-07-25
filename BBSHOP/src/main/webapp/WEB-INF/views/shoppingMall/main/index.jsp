@@ -511,7 +511,7 @@
                                     <input type="text" class="form-control" id="sign_nickname" name="NICKNAME"
                                         placeholder="닉네임을 적어주세요">
                                 </td>
-                            </tr>
+                            
               
                 </table>
                 <br>
@@ -551,16 +551,23 @@
             <span class="close">&times;</span>
             <h2 align="center">추 가 사 항</h2>
             <div class="moredetail_body" style="padding: 40px 50px;">
-
-                <form action="insertMember.me" method=post>
-                    <table width=100% cellspacing=0 cellpadding=0 align=center>
                         <div class=form_moredetails_group>
+
+                <form action="moredetails.do" method="post" id="moredetailsform">
+                	<input type='hidden'name='MEMBER_ID' id='md_id' value=''>
+            		<input type='hidden'name='MEMBER_PW' id='md_pw' value=''>
+                 	<input type='hidden' name='NAME' id='md_name' value=''>
+                 	<input type='hidden' name='PHONE' id='md_phone' value=''>
+                 	<input type='hidden' name='BIRTH' id='md_birth' value=''>
+                 	<input type='hidden' name='NICKNAME' id='md_nickname' value=''>
+                
+                    <table width=100% cellspacing=0 cellpadding=0 align=center colspan="2">
                             <tr>
                                 <td>
                                     <label for="team">선호 구단</label>
                                 </td>
                                 <td>
-                                    <select>
+                                    <select class="form-control" name="TEAM">
                                         <option value="엘지">LG</option>
                                         <option value="키움">Kiwoom</option>
                                         <option value="기아">Kia</option>
@@ -577,18 +584,20 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="position">포지션</label></td>
+                                    <label for="position">주 포지션</label></td>
                                 <td>
 
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="1루수"/> <label for="1루수"><span></span>1루수</label>
-                                        <input type="checkbox" id="2루수" /> <label for="2루수"><span></span>2루수</label>
-                                        <input type="checkbox" id="3루수" /> <label for="3루수"><span></span>3루수</label>
-                                        <input type="checkbox" id="유격수" /> <label for="유격수"><span></span>유격수</label>
-                                        <input type="checkbox" id="투수" /> <label for="투수"><span></span>&nbsp;투수 </label>
-                                        <input type="checkbox" id="포수" /> <label for="포수"><span></span>&nbsp;포수 </label>
-                                        <input type="checkbox" id="외야수" /> <label for="외야수"><span></span>외야수</label>
+                                    <div class="position select">
+                                    <select class="form-control" name="POSITION">
+                                        <option value="1루수">1루수</option>
+                                        <option value="2루수">2루수</option>
+                                        <option value="3루수">3루수</option>
+                                        <option value="유격수">유격수</option>
+                                        <option value="외야수">외야수</option>
+                                        <option value="포수">포수</option>
+                                        <option value="투수">투수</option>
 
+                                    </select>
                                     </div>
 
                                 </td>
@@ -598,62 +607,39 @@
                                     <label for="hand">좌/우</label>
                                 </td>
                                 <td>
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="left_checkbox" /> <label
-                                            for="left_checkbox"><span></span>좌투(오른손 착용)</label>
-                                        <input type="checkbox" id="right_checkbox" /> <label
-                                            for="right_checkbox"><span></span>우투(왼손 착용)</label>
+                                   <div class="hand-select">
+                                    <select class="form-control" name="HAND">
+                                        <option value="left">좌투(오른손 착용)</option>
+                                        <option value="right">우투(왼손 착용)</option>
+                                    </select>
                                     </div>
                                 </td>
 
                             </tr>
+                       
                             <tr>
+                                <td><label for="brand">브랜드</label></td>
                                 <td>
-                                    <label for="brand">브랜드</label></td>
-                                <td>
-
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="mizuno" /> <label
-                                            for="mizuno"><span></span>Mizuno</label>
-                                        <input type="checkbox" id="zett" /> <label for="zett"><span></span>Zett</label>
-                                        <input type="checkbox" id="wilson" /> <label
-                                            for="wilson"><span></span>Wilson</label>
-                                        <input type="checkbox" id="ssk" /> <label for="ssk"><span></span>SSK</label>
-                                        <input type="checkbox" id="hatakeyama" /> <label
-                                            for="hatakeyama"><span></span>Hatakeyama </label>
-                                        <input type="checkbox" id="belgard" /> <label for="belgard"><span></span>Belgard
-                                        </label>
-                                        <input type="checkbox" id="rawilings" /> <label
-                                            for="rawilings"><span></span>Rawilings</label>
-                                        <input type="checkbox" id="adidas" /> <label
-                                            for="adidas"><span></span>Adidas</label>
-                                        <input type="checkbox" id="nike" /> <label for="nike"><span></span>Nike</label>
-                                        <input type="checkbox" id="morimoto" /> <label
-                                            for="morimoto"><span></span>Morimoto</label>
-                                        <input type="checkbox" id="descente" /> <label
-                                            for="descente"><span></span>Descente</label>
-                                        <input type="checkbox" id="brett" /> <label for="brett"><span></span>Brett
-                                        </label>
-                                        <input type="checkbox" id="bmc" /> <label for="bmc"><span></span>B M C </label>
-                                        <input type="checkbox" id="franklin" /> <label
-                                            for="franklin"><span></span>Franklin</label>
-                                        <input type="checkbox" id="storm/volt" /> <label
-                                            for="storm/volt"><span></span>Storm/volt</label>
-                                        <input type="checkbox" id="underarmour" /> <label
-                                            for="underarmour"><span></span>UnderArmour</label>
-                                        <input type="checkbox" id="fila/reebok" /> <label
-                                            for="fila/reebok"><span></span>FILA/Reebok</label>
-                                        <input type="checkbox" id="diamond" /> <label
-                                            for="diamond"><span></span>Diamond</label>
-                                        <input type="checkbox" id="asics" /> <label for="asics"><span></span>Asics
-                                        </label>
-                                        <input type="checkbox" id="tpx/easton" /> <label
-                                            for="tpx/easton"><span></span>TPX/Easton </label>
-                                    </div>
-
+                                 <div>
+                                   <select class="form-control" name="BRAND">
+                                        <option value="Adidas">Adidas</option>
+                                        <option value="Asics">Asics</option>
+                                        <option value="Descente">Descente</option>
+                                        <option value="Diamond">Diamond</option>
+                                        <option value="FilaReebok">FILA/Reebok</option>
+                                        <option value="Mizuno">Mizuno</option>
+                                        <option value="Nike">Nike</option>
+                                        <option value="Morimoto">Morimoto</option>
+                                        <option value="UnderArmour">UnderArmour</option>
+                                        <option value="Wilson">Wilson</option>
+                                    </select>
+                                </div>
                                 </td>
+                               
+                               
                             </tr>
-                        </div>
+                          
+                       
                     </table>
                     <br>
                     <input type="submit" class="btn btn-info btn-block" id="sign_submit_btn" name="sign" value="회원가입">
@@ -719,24 +705,6 @@
         	}
         
         
-        var emailSendAuth = function () {
-            var userid = $('input[id=sign_id]').val();
-            if (userid == '') {
-                alert("메일 주소를 정확히 입력 해 주십시오");
-                return false;
-            }
-            var useridex = userid.split('@');
-            if (useridex.length < 2) {
-                alert("메일 주소를 정확히 입력 해 주십시오");
-                return false;
-            }
-
-            if (useridex[0] == '' || useridex[1] == '') {
-                alert("메일 주소를 정확히 입력 해 주십시오");
-                return false;
-            }
-
-        }
     </script>
 
     <script>
@@ -780,6 +748,21 @@
         $('#moredetails_btn').click(function () {
             modal_sign_up.style.display = "none";
             moredetails.style.display = "block";
+            
+            var MEMBER_ID= $("#sign_id").val();
+            var MEMBER_PW= $("#sign_pwd").val();
+            var MEMBER_NICKNAME= $("#sign_nickname").val();
+            var MEMBER_NAME= $("#sign_name").val();
+            var MEMBER_PHONE= $("#sign_phone").val();
+            var MEMBER_BIRTH= $("#sign_birth").val();
+            
+            
+            $("#md_id").val(MEMBER_ID);  
+            $("#md_pw").val(MEMBER_PW);  
+            $("#md_nickname").val(MEMBER_NICKNAME);  
+            $("#md_name").val(MEMBER_NAME);  
+            $("#md_phone").val(MEMBER_PHONE);  
+            $("#md_birth").val(MEMBER_BIRTH);              
         })
 		//아이디 비밀번호 찾기 눌렀을때
         $('#find_info_btn').click(function(){
