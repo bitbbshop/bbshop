@@ -101,19 +101,11 @@
                         
                         <c:forEach items="${list}" var="board">
                            <tr>
-                              <td><c:out value="${board.board_num}"/></td>
-                              <td style="text-align:left;"><a href="/community_detail.do"><c:out value="${board.title}"/></a></td>
+                              <td><c:out value="${board.BOARD_NUM}"/></td>
+                              <td style="text-align:left;"><a href="/community_detail.do"><c:out value="${board.TITLE}"/></a></td>
                               <td>서주혁</td>
-                              <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
-                              <td><c:out value="${board.hit}"/></td>
-                           </tr>
-                           
-                           <tr>
-                              <td></td>
-                              <td style="text-align:left;"><a href="/community_detail.do">엘지 넘잘해요</a></td>
-                              <td>엔젤지수</td>
-                              <td>2019/07/10</td>
-                              <td>5</td>
+                              <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.REGDATE}"/></td>
+                              <td><c:out value="${board.HIT}"/></td>
                            </tr>
                           </c:forEach>
                         </tbody>
@@ -162,13 +154,7 @@
                               </div>
                            </div>
                         </div>
-
                      </div>
-
-                  
-
-
-
                </div>
             </div>
          </div>

@@ -8,4 +8,8 @@ public interface CommunityMapper {
 
 	
 	public List<CommunityVO> getList();
+	
+	//public List<CommunityVO> getListWithPaging(PagingVO pagingvo);
+	
+	
 }
