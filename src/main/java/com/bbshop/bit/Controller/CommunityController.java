@@ -2,6 +2,7 @@ package com.bbshop.bit.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bbshop.bit.service.CommunityService;
@@ -14,8 +15,9 @@ public class CommunityController {
 
 	/* 커뮤니티 */
 	// 커뮤니티 - 메인
-	@RequestMapping("/community_main.do")
+	@RequestMapping("community_main.do")
 	public String community_main() {
+		
 		return "shoppingMall/main/community_main";
 	}
 
@@ -27,7 +29,14 @@ public class CommunityController {
 
 	// 커뮤니티 - 게시판
 	@RequestMapping("/community_list.do")
-	public String community_list() {
+	public String community_list(Model model) {
+
+		System.out.println("여기까지 와용");
+		
+		System.out.println(communityService.getList().toString());
+		
+		model.addAttribute("list", communityService.getList());
+
 		return "shoppingMall/community/community_list";
 	}
 

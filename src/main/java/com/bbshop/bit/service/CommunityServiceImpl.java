@@ -14,8 +14,6 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	private CommunityMapper mapper;
 
 	@Override
 	public List<CommunityVO> getList() {

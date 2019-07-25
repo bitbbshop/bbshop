@@ -58,7 +58,7 @@
 							<tr>
 								<td align="center"><br /> <input type="submit" value="등록" style="float:right;"/></td>
 								<td align="center"><br /> <input type="button" value="취소" style="float:left;"
-									onclick="location.href='/community_list'" /></td>
+									onclick="location.href='/community_list.do'" /></td>
 							</tr>
 						</table>
 					</div>
