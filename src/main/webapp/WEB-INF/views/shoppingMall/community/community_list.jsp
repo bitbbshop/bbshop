@@ -131,9 +131,9 @@ a {
 								aria-label="Page navigation example">
 								<ul class="pagination">
 
-									<c:if test="{pageMaker.prev}">
+									<c:if test="${pageMaker.prev}">
 										<li class="page-item page-item-left"><a class="page-link"
-											href="#">Previous<i class="fa fa-chevron-left"
+											href="#"><i class="fa fa-chevron-left"
 												aria-hidden="true"></i>
 										</a></li>
 									</c:if>
@@ -145,9 +145,9 @@ a {
 									</c:forEach>
 
 
-									<c:if test="{pageMaker.next}">
+									<c:if test="${pageMaker.next}">
 										<li class="page-item page-item-right"><a
-											class="page-link" href="#">Next<i
+											class="page-link" href="#"><i
 												class="fa fa-chevron-right" aria-hidden="true"></i>
 										</a></li>
 									</c:if>
