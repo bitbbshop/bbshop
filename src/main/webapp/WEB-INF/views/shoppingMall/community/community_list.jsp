@@ -190,10 +190,13 @@ a {
 </section>
 <!-- 페이징 처리 -->
 <form id='actionForm' action="/community_list.do">
-	<input type='hidden' name='PAGENUM' value='${pageMaker.pagingvo.PAGENUM }'> 
-	<input type='hidden' name='AMOUNT' value='${pageMaker.pagingvo.AMOUNT }'>
-	<input type='hidden' name='TYPE' value='<c:out value="${pageMaker.pagingvo.TYPE }"/>'>
-	<input type='hidden' name='KEYWORD' value='<c:out value="${pageMaker.pagingvo.KEYWORD }"/>'>
+	<input type='hidden' name='PAGENUM'
+		value='${pageMaker.pagingvo.PAGENUM }'> <input type='hidden'
+		name='AMOUNT' value='${pageMaker.pagingvo.AMOUNT }'> <input
+		type='hidden' name='TYPE'
+		value='<c:out value="${pageMaker.pagingvo.TYPE }"/>'> <input
+		type='hidden' name='KEYWORD'
+		value='<c:out value="${pageMaker.pagingvo.KEYWORD }"/>'>
 </form>
 
 <script type="text/javascript">
