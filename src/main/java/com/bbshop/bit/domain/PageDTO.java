@@ -22,7 +22,7 @@ public class PageDTO {
 		
 		if(realEnd < this.endPage) {
 			this.endPage = realEnd;
-		}
+		}//수정
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEnd;
 	}
