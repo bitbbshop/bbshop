@@ -102,7 +102,7 @@ a {
 								<tr>
 									<th style="width: 50px;">번호</th>
 									<th style="width: 500px; text-align: left;">제목</th>
-									<th style="width: 100px;">글쓴이</th>
+									<th style="width: 100px;">닉네임</th>
 									<th style="width: 150px;">날짜</th>
 									<th style="width: 50px;">조회</th>
 								</tr>
