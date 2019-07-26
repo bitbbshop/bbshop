@@ -112,7 +112,7 @@ a {
 									<tr>
 										<td><c:out value="${board.BOARD_NUM}" /></td>
 										<td style="text-align: left;"><a
-											href="/community_detail.do"><c:out value="${board.TITLE}" /></a></td>
+											href="/community_detail.do?BOARD_NUM=<c:out value="${board.BOARD_NUM}"/>"><c:out value="${board.TITLE}" /></a></td>
 										<td>서주혁</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd"
 												value="${board.REGDATE}" /></td>
