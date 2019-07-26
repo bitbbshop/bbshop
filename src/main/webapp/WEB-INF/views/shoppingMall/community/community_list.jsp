@@ -212,6 +212,27 @@ a {
 			actionForm.find("input[name='PAGENUM']").val($(this).attr("href"));
 			actionForm.submit();
 		});
+		
+		//검색처리 이벤트
+		var searchForm = $("#searchForm");
+		
+		$("#searchForm button").on("click",function(e){
+			
+			if(!searchForm.find("option:selected").val()){
+				alert("검색종류를 선택하세요");
+				return false;
+			}
+			if(!searchForm.find("input[name='KEYWORD']").val()){
+				alert("키워드를 선택하세요");
+				return false;
+			}
+			
+			searchForm.find("input[name='PAGENUM']").val("1");
+			e.preventDefault();
+			
+			searchForm.submit();
+	
+		});
 	});
 </script>
 
