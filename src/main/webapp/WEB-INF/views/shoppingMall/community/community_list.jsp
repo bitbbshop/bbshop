@@ -156,34 +156,27 @@ a {
 							</nav>
 						</div>
 
-						<!-- select -->
-						<!-- 
-						<div>
-							<div class="single-element-widget">
-								<div class="default-select" id="default-select">
-									<select>
-										<option value="1">글쓴이</option>
-										<option value="1">제목</option>
-									</select> <input type="text" placeholder="">
-									<button>검색</button>
-								</div>
-							</div>
-						</div>
-						 -->
-						<!-- 검색 목록 -->
+						<!-- 검색 조건과 키워드-->
 						<div class="single-element-widget">
 							<div class="default-select" id="default-select">
 								<form id="searchForm" action="/community_list.do">
-									<select name="type">
-										<option value="">--</option>
-										<option value="T">제목</option>
-										<option value="C">내용</option>
-										<option value="N">닉네임</option>
-										<option value="TC">제목 or 내용</option>
-									</select> <input type="text" name="keyword" /> <input type="hidden"
-										name="PAGENUM" value="${pageMaker.pagingvo.PAGENUM}">
-									<input type="hidden" name="AMOUNT"
-										value="${pageMaker.pagingvo.AMOUNT}">
+									<select name="TYPE">
+										<option value=""
+											<c:out value="${pageMaker.pagingvo.TYPE == null? 'selected':''}"/>>--</option>
+										<option value="T"
+											<c:out value="${pageMaker.pagingvo.TYPE == null? 'selected':''}"/>>제목</option>
+										<option value="C"
+											<c:out value="${pageMaker.pagingvo.TYPE == null? 'selected':''}"/>>내용</option>
+										<option value="N"
+											<c:out value="${pageMaker.pagingvo.TYPE == null? 'selected':''}"/>>닉네임</option>
+										<option value="TC"
+											<c:out value="${pageMaker.pagingvo.TYPE == null? 'selected':''}"/>>제목or내용</option>
+									</select> <input type="text" name="KEYWORD"
+										value='<c:out value="${pageMaker.pagingvo.KEYWORD}"/>' /> <input
+										type="hidden" name="PAGENUM"
+										value='<c:out value="${pageMaker.pagingvo.PAGENUM}"/>' /> <input
+										type="hidden" name="AMOUNT"
+										value='<c:out value="${pageMaker.pagingvo.AMOUNT}"/>' />
 									<button class="btn btn-defaault">검색</button>
 								</form>
 							</div>
@@ -201,6 +194,7 @@ a {
 		value='${pageMaker.pagingvo.PAGENUM }'> <input type='hidden'
 		name='AMOUNT' value='${pageMaker.pagingvo.AMOUNT }'>
 </form>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -212,26 +206,26 @@ a {
 			actionForm.find("input[name='PAGENUM']").val($(this).attr("href"));
 			actionForm.submit();
 		});
-		
+
 		//검색처리 이벤트
 		var searchForm = $("#searchForm");
-		
-		$("#searchForm button").on("click",function(e){
-			
-			if(!searchForm.find("option:selected").val()){
+
+		$("#searchForm button").on("click", function(e) {
+
+			if (!searchForm.find("option:selected").val()) {
 				alert("검색종류를 선택하세요");
 				return false;
 			}
-			if(!searchForm.find("input[name='KEYWORD']").val()){
+			if (!searchForm.find("input[name='KEYWORD']").val()) {
 				alert("키워드를 선택하세요");
 				return false;
 			}
-			
+
 			searchForm.find("input[name='PAGENUM']").val("1");
 			e.preventDefault();
-			
+
 			searchForm.submit();
-	
+
 		});
 	});
 </script>
