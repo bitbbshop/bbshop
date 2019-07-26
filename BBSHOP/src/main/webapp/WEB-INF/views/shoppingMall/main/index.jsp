@@ -266,53 +266,7 @@
         
     </style>
 
-    <script>
-        function check_input() {
-            var str, i, ch;
-            // 아이디 체크 ----> 
-            if (document.loginform.userid.value == "") {//아이디가 적혀있지 않을때
-                alert("아이디를 입력하세요!!!");
-                document.loginform.userid.focus(); //아이디 입력창으로 커맨드가 넘어간다.
-                return;
-            }
-            else {
-                str = document.loginform.userid.value; //아이디가 있으면 str에 아이디 값을 저장.
-
-                for (i = 0; i < str.length; i++) { //ch에다가 하나씩 잘라서 넣어줌.
-                    ch = str.substring(i, i + 1);
-                    if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z")//숫자,문자가 아닐경우 특수 문자이기 때문에 다시 입력해야한다.
-                        || (ch >= "A" && ch <= "Z"))) {
-                        alert("특수문자가 포함, 다시 입력!!!");
-                        document.loginform.userid.focus();
-                        return;
-                    }
-                }
-            } // 아이디 체크 <------
-
-            // 패스워드 체크 ------ 아이디 체크와 같은식.>
-            if (document.loginform.password.value == "") {
-                alert("패스워드를 입력하세요!!!");
-                document.loginform.password.focus();
-                return;
-            }
-            else {
-                str = document.loginform.password.value;
-
-                for (i = 0; i < str.length; i++) {
-                    ch = str.substring(i, i + 1);
-                    if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z")
-                        || (ch >= "A" && ch <= "Z"))) {
-                        alert("특수문자가 포함, 다시 입력!!!");
-                        document.loginform.password.focus();
-                        return;
-                    }
-                }
-            } // 패스워드 체크 <------
-
-            loginform.submit();
-        }
-    </script>
-
+   
 </head>
 
 <body>
@@ -448,16 +402,19 @@
                         <table width=100% cellspacing=0 cellpadding=0 align=center>
                             
                                 <tr>
-                                    <td>
-                                        <label for="sign_id">ID(Email)</label><BR>
+                                    <td><div style='float:left'>
+                                        <label for="sign_id">ID(Email)</label> &nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        <div class="check_font" id="id_check" style='float:center'></div>
+                                   
 
                                         <input type="text" class="form-control" id="sign_id" name="MEMBER_ID"
                                             placeholder="Email을 입력하세요">
                       
                             </td>
                             <td><br>
-                                <input type="button" class="btn btn-info btn-block" name="emailbtn" value="Email인증"
-                                     style="margin-left:10px" onclick="emailAvailCheck()">
+                                <input type="button" class="btn btn-info btn-block" name="emailbtn" id="auth_Email" value="Email인증"
+                                     style="margin-left:10px" onclick="emailAvailCheck()" disabled="true">
 
                             </td>
 
@@ -472,8 +429,9 @@
 
                             </tr>
                             <tr>
-                                <td>
-                                    <label for="sign_pwd_check">Password Check</label><BR>
+                                <td><div style='float:left'>
+                                    <label for="sign_pwd_check">Password Check</label>&nbsp;&nbsp;&nbsp;</div>
+                                     <div class="check_font" id="pw_check" style='float:center'></div>
                                     <input type="password" class="form-control" id="sign_pwd_check"
                                         name="password_check" placeholder="암호를 다시 입력하세요">
                                 </td>
@@ -486,6 +444,15 @@
                                         placeholder="이름을 입력하세요">
                                 </td>
 
+                            </tr>
+                            
+                            <tr>
+                                <td><div style='float:left'>
+                                    <label for="sign_nickname">Nickname</label>&nbsp;&nbsp;&nbsp;</div>
+                                      <div class="check_font" id="nick_check" style='float:center'></div>
+                                    <input type="text" class="form-control" id="sign_nickname" name="NICKNAME"
+                                        placeholder="닉네임을 적어주세요">
+                                </td>
                             </tr>
 
                             <tr>
@@ -505,22 +472,16 @@
 
                             </tr>
 
-                            <tr>
-                                <td>
-                                    <label for="sign_nickname">Nickname</label><BR>
-                                    <input type="text" class="form-control" id="sign_nickname" name="NICKNAME"
-                                        placeholder="닉네임을 적어주세요">
-                                </td>
                             
               
                 </table>
                 <br>
-                <input type="submit" class="btn btn-info btn-block" id="sign_btn" name="sign" value="회원가입">
+                <input type="submit" class="btn btn-info btn-block" id="sign_btn" name="sign" value="회원가입" disabled="true" >
                 
                 </form>
                 
                 <br>
-                <button id="moredetails_btn" class="btn btn-info btn-block">추가사항 입력</button>
+                <button id="moredetails_btn" class="btn btn-info btn-block" disabled="true">추가사항 입력</button>
 
 
             </div>
@@ -583,10 +544,11 @@
                                     </select>
                                 </td>
                             </tr>
+                       
                             <tr>
-                                <td>
+                                <td>     <br>
                                     <label for="position">주 포지션</label></td>
-                                <td>
+                                <td>     <br>
 
                                     <div class="position select">
                                     <select class="form-control" name="POSITION" id="position">
@@ -605,10 +567,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td width="20%">
+                                <td width="20%">     <br>
                                     <label for="hand">좌/우</label>
                                 </td>
-                                <td>
+                                <td>     <br>
                                    <div class="hand-select">
                                     <select class="form-control" name="HAND" id="hand">
                                         <option value="hand">Hand</option>
@@ -622,8 +584,9 @@
                        
                        
                             <tr>
-                                <td><label for="brand">브랜드1</label></td>
-                                <td>
+                                <td>     <br>
+                                <label for="brand">브랜드1</label></td>
+                                <td>     <br>
                                  <div>
                                    <select class="form-control" name="BRAND1" id="brand1">
                                    		<option value="default">선택1</option>
@@ -643,10 +606,33 @@
                                
                             </tr>
                             <tr>
-                                <td><label for="brand">브랜드2</label></td>
                                 <td>
+                                     <br><label for="brand">브랜드2</label></td>
+                                <td>     <br>
                                  <div>
                                    <select class="form-control" name="BRAND2" id="brand2">
+                                   			<option value="default">선택2</option>
+                                        <option value="Adidas">Adidas</option>
+                                        <option value="Asics">Asics</option>
+                                        <option value="Descente">Descente</option>
+                                        <option value="Diamond">Diamond</option>
+                                        <option value="FilaReebok">FILA/Reebok</option>
+                                        <option value="Mizuno">Mizuno</option>
+                                        <option value="Nike">Nike</option>
+                                        <option value="Morimoto">Morimoto</option>
+                                        <option value="UnderArmour">UnderArmour</option>
+                                        <option value="Wilson">Wilson</option>
+                                    </select>
+                                </div>
+                                </td>
+                               
+                            </tr>
+                            <tr>
+                                <td>     <br>
+                                <label for="brand">브랜드3</label></td>
+                                <td>     <br>
+                                 <div>
+                                   <select class="form-control" name="BRAND3" id="brand3">
                                    			<option value="default">선택2</option>
                                         <option value="Adidas">Adidas</option>
                                         <option value="Asics">Asics</option>
@@ -672,6 +658,145 @@
             </div>
         </div>
     </div>
+    
+     <script>
+    //로그인시 아이디와 패스워드 체크
+        function check_input() {
+            var str, i, ch;
+            // 아이디 체크 ----> 
+            if (document.loginform.userid.value == "") {//아이디가 적혀있지 않을때
+                alert("아이디를 입력하세요!!!");
+                document.loginform.userid.focus(); //아이디 입력창으로 커맨드가 넘어간다.
+                return;
+            }
+            else {
+                str = document.loginform.userid.value; //아이디가 있으면 str에 아이디 값을 저장.
+
+                for (i = 0; i < str.length; i++) { //ch에다가 하나씩 잘라서 넣어줌.
+                    ch = str.substring(i, i + 1);
+                    if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z")//숫자,문자가 아닐경우 특수 문자이기 때문에 다시 입력해야한다.
+                        || (ch >= "A" && ch <= "Z"))) {
+                        alert("특수문자가 포함, 다시 입력!!!");
+                        document.loginform.userid.focus();
+                        return;
+                    }
+                }
+            } // 아이디 체크 <------
+
+            // 패스워드 체크 ------ 아이디 체크와 같은식.>
+            if (document.loginform.password.value == "") {
+                alert("패스워드를 입력하세요!!!");
+                document.loginform.password.focus();
+                return;
+            }
+            else {
+                str = document.loginform.password.value;
+
+                for (i = 0; i < str.length; i++) {
+                    ch = str.substring(i, i + 1);
+                    if (!((ch >= "0" && ch <= "9") || (ch >= "a" && ch <= "z")
+                        || (ch >= "A" && ch <= "Z"))) {
+                        alert("특수문자가 포함, 다시 입력!!!");
+                        document.loginform.password.focus();
+                        return;
+                    }
+                }
+            } // 패스워드 체크 <------
+
+            loginform.submit();
+        }
+                
+        
+    </script>
+    <!-- 아이디 중복과 비밀번호 일치 시키는 코드. -->
+    <script>
+    $(document).ready(function(){
+    	//blur 는 input태그에서 포커스가 떠났을때 발생하는 jquery 이벤트 메소드이다. sign_id태그에서 벗어났을때 아이디가 중복인지 확인한다.
+    	$("#sign_id").blur(function() {
+        	
+        	var MEMBER_ID = $("#sign_id").val();
+        	
+        	$.ajax({
+        		url:'check_id.do?MEMBER_ID='+MEMBER_ID,
+        		type:"GET", //여기서 String값으로 받고 밑에서 비교하는것을 success,fail로 비교하자!!
+        		success : function(data) {
+        			console.log("1: 중복이란다  0: 없는 아이디 란다 ="+data);
+        			
+        			if(data=='success'){
+        				$("#id_check").text("사용중이란다");
+        				$("#id_check").css("color","red");
+        				$("#auth_Email").attr("disabled",true);
+        				$("#sign_id").focus();
+        				
+        			}else {
+						$("#id_check").text("사용 가능하단다");
+						$("#id_check").css("color","green");
+						$("#auth_Email").attr("disabled",false);
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+    	$("#sign_pwd_check").blur(function(){
+    		var password = $("#sign_pwd").val();
+    		var password_check = $("#sign_pwd_check").val();
+    		if(password == password_check){
+    			$("#pw_check").text("비밀번호가 일치합니다!");
+    			$("#pw_check").css("color","green");
+    			
+    		}
+    		else{
+    			$("#pw_check").text("비밀번호가 일치하지 않습니다.");
+    			$("#pw_check").css("color","red");
+    			$("#sign_pwd").focus();
+    		}
+    		
+    	})
+    });
+    $("#sign_nickname").blur(function() {
+    	
+    	var MEMBER_NICKNAME = $("#sign_nickname").val();
+    	
+    	$.ajax({
+    		url:'check_nickname.do?NICKNAME='+MEMBER_NICKNAME,
+    		type:"GET", //여기서 String값으로 받고 밑에서 비교하는것을 success,fail로 비교하자!!
+    		success : function(data) {
+    			console.log("success: 중복이란다  false: 없는 닉네임 이란다 ="+data);
+    			
+    			if(data=='success'){
+    				$("#nick_check").text("사용중이란다");
+    				$("#nick_check").css("color","red");
+    				$("#sign_nickname").focus();
+    				
+    			}else {
+					$("#nick_check").text("사용 가능하단다");
+					$("#nick_check").css("color","green");
+					
+				}
+			}, error : function() {
+					console.log("실패");
+			}
+		});
+	});	
+    
+    $().ready(function(){
+    		$sign_btn=document.getElementById('sign_btn');
+    		$moredetails_btn =document.getElementById('moredetails_btn');	
+    		
+    	if($('#sign_id').val()!=null &&$('#sign_pwd').val()!=null &&$('#sign_nickname').val()!=null && $('#sign_phone').val()!=null){
+    		 $('#sign_birth').blur(function(){
+    			 
+    		$sign_btn = $('#sign_btn').attr('disabled',false);
+    		$moredetails_btn = $('#moredetails_btn').attr('disabled',false);
+    		 })
+    	}		
+    	
+    })
+		});	
+    
+    </script>
+    
+    
 	<!-- 이부분이 이메일 양식을 체크 하는부분 -->
     <script type="text/javascript">
     var authkey;
@@ -697,7 +822,7 @@
             
             //컨트롤러에 ajax로 이메일을 보내고 인증키를 가져옴.
             jQuery.ajax({
-    			url : '/bit/authEmail.do',
+    			url : 'authEmail.do',
     			type : 'POST',
     			data : {MEMBER_ID:userid},    			
     			dataType : "text",
@@ -721,7 +846,7 @@
         		emailcheck_Modal.style.display="none";
         		
         		//disabled 였던 버튼을 false로 바꿔줘야한다.
-        		$sign_btn = $('#sign_btn').attr('disabled',false);
+        		//$sign_btn = $('#sign_btn').attr('disabled',false);
         	}
         	else{
         		alert("인증키가 틀립니다XXXXXXXX.")
@@ -766,8 +891,7 @@
         $('#sign_up_btn').click(function () {
             modal.style.display = "none";
             modal_sign_up.style.display = "block";
-        	$sign_btn = $('#sign_btn').attr('disabled',true);
-    		
+      
         })
         //추가사항 눌렀을때
         $('#moredetails_btn').click(function () {
@@ -796,7 +920,9 @@
            	var hand=$("#hand option:selected").val();
            	var brand1=$("#brand1 option:selected").val();
            	var brand2=$("#brand2 option:selected").val();
+           	var brand2=$("#brand3 option:selected").val();
             
+           	
            	var MEMBER_ID= $("#md_id").val();
             var MEMBER_PW= $("#md_pw").val();
             var MEMBER_NICKNAME= $("#md_nickname").val();
@@ -805,8 +931,7 @@
             var MEMBER_BIRTH= $("#md_birth").val();
             
            	
-         var formData={TEAM:${'team'},POSITION:${'position'},HAND:${'hand'},BRAND1:${'brand1'},BRAND2:${'brand2'}
-         ,MEMBER_ID:${'MEMBER_ID'},MEMBER_PW:${'MEMBER_PW'},NICKNAME:${'MEMBER_NICKNAME'},NAME:${'MEMBER_NAME'},PHONE:${'MEMBER_PHONE'},BIRTH:${'MEMBER_BIRTH'}};
+         var formData={TEAM:${'team'},POSITION:${'position'},HAND:${'hand'},BRAND1:${'brand1'},BRAND2:${'brand2'},BRAND3:${'brand3'},MEMBER_ID:${'MEMBER_ID'},MEMBER_PW:${'MEMBER_PW'},NICKNAME:${'MEMBER_NICKNAME'},NAME:${'MEMBER_NAME'},PHONE:${'MEMBER_PHONE'},BIRTH:${'MEMBER_BIRTH'}};
        	
             jQuery.ajax({
     			url : 'moredetails.do',
@@ -867,6 +992,7 @@
             	findinfo.style.display="none";
             }
         }
+        
 
 
     </script>

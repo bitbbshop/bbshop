@@ -89,15 +89,23 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
-	@Override
-	public int getId(String id) {
-		// TODO Auto-generated method stub
+	public int getId(MemberVO vo) {		// TODO Auto-generated method stub
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		sqlSession.getMapper(MemberMapper.class);
+		System.out.println("serviceImpl까지 들어오나?"+vo.getMEMBER_ID());
+		int result=mapper.getId(vo);
 		
 		
+		return result;
+	}
+	public int getNickname(MemberVO vo) {		// TODO Auto-generated method stub
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		sqlSession.getMapper(MemberMapper.class);
+		System.out.println("serviceImpl까지 들어오나?"+vo.getNICKNAME());
+		int result=mapper.getNickname(vo);
 		
-		return 0;
+		
+		return result;
 	}
 
 	@Override

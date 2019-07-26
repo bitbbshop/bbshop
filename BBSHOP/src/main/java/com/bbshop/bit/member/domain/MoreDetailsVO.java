@@ -10,6 +10,7 @@ public class MoreDetailsVO {
 	private int HAND;
 	private String BRAND1;
 	private String BRAND2;
+	private String BRAND3;
 	
 	public long getUSER_KEY() {
 		return USER_KEY;
@@ -47,10 +48,16 @@ public class MoreDetailsVO {
 	public void setBRAND2(String bRAND2) {
 		BRAND2 = bRAND2;
 	}
+	public String getBRAND3() {
+		return BRAND3;
+	}
+	public void setBRAND3(String bRAND3) {
+		BRAND2 = bRAND3;
+	}
 	
 	@Override
 	public String toString() {
 		return "MoreDetailsVO [USER_KEY=" + USER_KEY + ", TEAM=" + TEAM + ", POSITION=" + POSITION + ", HAND=" + HAND
-				+ ", BRAND1=" + BRAND1 + ", BRAND2=" + BRAND2 + "]";
+				+ ", BRAND1=" + BRAND1 + ", BRAND2=" + BRAND2 +",BRAND3="+BRAND3+ "]";
 	}
 }

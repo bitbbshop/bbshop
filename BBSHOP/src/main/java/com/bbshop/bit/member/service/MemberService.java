@@ -10,7 +10,8 @@ public interface MemberService {
 
 	public  void register(MemberVO member);
 	public String memberLogin(HashMap<String,String> map ,String toPage);
-	public int getId(String id);
+	public int getId(MemberVO vo);
+	public int getNickname(MemberVO vo);
 	public MemberVO isExsist();
 	public MemberVO getMemberInfo(String id);
 	public void moreDetailsRegister(MoreDetailsVO md);

@@ -31,8 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 
 <insert id="moreDetailsRegister" parameterType="com.bbshop.bit.member.domain.MoreDetailsVO">
 	
-		INSERT INTO U_MOREDETAIL (user_key,team,position,hand,brand1,brand2)
-		VALUES(#{USER_KEY}, #{TEAM},#{POSITION},#{HAND},#{BRAND1},#{BRAND2})
+		INSERT INTO U_MOREDETAIL (user_key,team,position,hand,brand1,brand2,brand3)
+		VALUES(#{USER_KEY}, #{TEAM},#{POSITION},#{HAND},#{BRAND1},#{BRAND2},#{BRAND3})
 
 </insert>
 
@@ -56,5 +56,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	select user_key from sh_user where member_id=#{MEMBER_ID}
 </select>
 
+<select id="getId" parameterType="com.bbshop.bit.member.domain.MemberVO" resultType="int">
+	select count(*) from sh_user where member_id=#{MEMBER_ID}
+</select>
 
+<select id="getNickname" parameterType="com.bbshop.bit.member.domain.MemberVO" resultType="int">
+	select count(*) from sh_user where nickname=#{NICKNAME}
+</select>
 </mapper>

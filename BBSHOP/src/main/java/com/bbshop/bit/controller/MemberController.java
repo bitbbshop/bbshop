@@ -124,4 +124,43 @@ public class MemberController {
 		
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="check_id.do" , method=RequestMethod.GET)
+	public String check_id(MemberVO vo) {
+		System.out.println("중복체크할 아이디:"+vo.getMEMBER_ID());
+		
+		int temp = memberService.getId(vo);
+		
+		String result ="";
+		System.out.println("중복체크가 끝났는가??"+result);
+		if(temp==1) {
+			result="success";
+		}
+		else {
+			result="false";
+		}
+		
+		return result;
+		
+	}
+	@ResponseBody
+	@RequestMapping(value="check_nickname.do" , method=RequestMethod.GET)
+	public String check_nickname(MemberVO vo) {
+		System.out.println("중복체크할 nickname:"+vo.getNICKNAME());
+		
+		int temp = memberService.getNickname(vo);
+		
+		String result ="";
+		if(temp==1) {
+			result="success";
+		}
+		else {
+			result="false";
+		}
+		System.out.println("중복체크가 끝났는가??"+result);
+		
+		return result;
+		
+	}
 }
