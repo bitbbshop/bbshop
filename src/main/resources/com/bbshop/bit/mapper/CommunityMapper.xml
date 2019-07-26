@@ -2,8 +2,31 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bbshop.bit.mapper.CommunityMapper">
+	<!-- 목록과 데이터 개수 처리 -->
+	<sql id="pagingvo">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like'%'||#{KEYWORD}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							title like'%'||#{KEYWORD}||'%'
+						</when>
+						<when test="type == 'N'.toString()">
+							title like'%'||#{KEYWORD}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 
-	<select id="getListWithPaging" resultType="com.bbshop.bit.domain.CommunityVO">
+
+
+	<select id="getListWithPaging"
+		resultType="com.bbshop.bit.domain.CommunityVO">
 	<![CDATA[
 	select
 	
@@ -13,9 +36,28 @@
 		(
 			select rownum rn, board_num, title, board_content, writer, regdate, moddate 
 			from community 
-			where rownum <= #{PAGENUM} * #{AMOUNT})
+			where ]]>
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							title like '%'||#{KEYWORD}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							title like '%'||#{KEYWORD}||'%'
+						</when>
+						<when test="type=='N'.toString()">
+							title like '%'||#{KEYWORD}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+			<![CDATA[
+			 rownum <= #{PAGENUM} * #{AMOUNT})
 	where rn > (#{PAGENUM} -1) * #{AMOUNT}
 	]]>
 	</select>
-	
+
 </mapper>
