@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Sunflower:300,500,700&amp;subset=korean" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
     <style>
         /*바디태그에 폰트넣기*/
@@ -359,6 +360,15 @@
                     <input type="button" value="비회원 로그인" class="btn btn-info btn-block">
                     <!--여기에 비회원 로그인할 컨트롤러 설정을 해야함.-->
                     <br>
+                    <!-- 카카오 api 버튼 -->
+                    <div align="center">
+                    <Button id="kakao-login-btn" style="width:100% auto" onclick="location.href='http://developers.kakao.com/logout'"></Button>
+					</div>
+					<br>
+
+
+					
+
                     <div style=" float:left;  margin-right:40px">
                         <Button id="sign_up_btn" class="btn btn-info btn-block">회원가입</Button> </div>
 
@@ -705,7 +715,35 @@
 
             loginform.submit();
         }
-                
+    
+      //<![CDATA[ // 사용할 앱의 JavaScript 키를 설정해 주세요. 
+    	  Kakao.init('25bbcf79c9a33e4e0d27eaa6bd0ddcf3'); //여기서 아까 발급받은 키 중 javascript키를 사용해준다. 
+    	  // 카카오 로그인 버튼을 생성합니다.
+    	  Kakao.Auth.createLoginButton({ 
+    		  container: '#kakao-login-btn', 
+    		  success: function(authObj){
+    			  Kakao.API.request({
+
+    			       url: '/v1/user/me',
+
+    			       success: function(res) {
+
+    			           //  alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
+    			           //  alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+    			          
+    			           console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+    			             console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
+    			             console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+    			    		 console.log(res.birthday)
+    			             console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
+    			           }
+    			         })
+    		  }, 
+    		fail: function(err) { 
+    			alert("실패"+JSON.stringify(err)); 
+    			}
+    			  }); //]]>
+
         
     </script>
     <!-- 아이디 중복과 비밀번호 일치 시키는 코드. -->
