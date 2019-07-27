@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CommunityController {
 
-	@RequestMapping(value="*.community_main.do",method=RequestMethod.GET)
+	@RequestMapping(value="community_main.do",method=RequestMethod.GET)
 	public String commuMain() {
 		System.out.println("여기까지 들어오느가?");
-		return "shoppingMall\\main\\community_main.do";
+		return "shoppingMall/main/community_main";
 	}
 }

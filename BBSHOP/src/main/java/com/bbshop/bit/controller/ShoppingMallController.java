@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public class ShoppingMallController {
 
-	@RequestMapping(value="*.shopping_main.do" ,method=RequestMethod.GET)
+	@RequestMapping(value="shopping_main.do" ,method=RequestMethod.GET)
 	public String shopmain() {
-		return "shoppingMall\\main\\shopping_main.do";
+		return "shoppingMall/main/shopping_main";
 	}
 }

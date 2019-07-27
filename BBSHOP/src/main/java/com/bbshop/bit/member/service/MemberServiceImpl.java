@@ -26,16 +26,16 @@ public class MemberServiceImpl implements MemberService {
 	public void register(MemberVO vo) {
 		// TODO Auto-generated method stub
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		 System.out.println("서비스레지스");
+		 System.out.println("ServiceImpl register");
 
 	        String encPassword = passwordEncoder.encode(vo.getMEMBER_PW());
 	        vo.setMEMBER_PW(encPassword);
 	        //System.out.println("암호화된 비밀번호 : "+user.getUserPassword());
-		System.out.println("요기까지 성공?"+vo.toString());
+		System.out.println("비밀번호 암호화 성공"+vo.toString());
 		
 		sqlSession.getMapper(MemberMapper.class);
 		mapper.insertMember(vo);
-		System.out.println("insert 성공?");
+		System.out.println("insert 성공!!!");
 	}
 	
 	public long getUser_key(MemberVO vo) {

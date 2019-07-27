@@ -340,7 +340,7 @@
                 <div class="modal-body" style="padding: 40px 50px;">
                     <form id="loginform" name="loginform" role="form" action="login.do" method="post">
                         <div class="form-group">
-                       
+                       <input type='hidden' id='toPage' name='toPage' value=''>
                             <label for="userid">ID</label> <input type="text" class="form-control" id="userid"
                                 name="MEMBER_ID" placeholder="ID를 입력하세요...">
                         </div>
@@ -736,7 +736,23 @@
     			             console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
     			    		 console.log(res.birthday)
     			             console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
-    			           }
+    			             var MEMBER_ID =  res.kaccount_email;
+    						 
+    			    		 $.ajax({
+    			         		url:'kakaoLogin.do',
+    			         		type:'POST', //여기서 String값으로 받고 밑에서 비교하는것을 success,fail로 비교하자!!
+    			         		data:{MEMBER_ID:res.kaccount_email , NICKNAME:res.properties['nickname'],toPage:$("#toPage").val()},
+    			         		dataType : "text",
+    			         		success : function(data) {
+    			         			alert('성공'+data);
+    			         			location.href=data;
+    			         				}, 
+    			         		error : function() {
+    			         			alert('실패');
+    			 						console.log("실패");
+    			 				}
+    			 			});
+    			       }
     			         })
     		  }, 
     		fail: function(err) { 
@@ -910,19 +926,13 @@
         $('#goShop').click(function () {
             modal.style.display = "block"; //modal.style.display = none 일시엔 보여지지 않지만 block으로 바꾸면 내용이보인다.
 			//동적으로 쇼핑몰 메인으로 가기위해 히든으로 value값을 줌.
-            var $hidden =$("<input type='hidden' name='toPage' value='goShop'>")
-			$('#loginform').append($hidden);
-            $hidden.appendTo($('#loginform'));
-            document.getElementById('loginform').appendChild(hidden);
-        })
+            $('[name="toPage"]').val("goShop");
+		})
         //Community 눌렀을시
         $('#goCommunity').click(function () {
             modal.style.display = "block"; //modal.style.display = none 일시엔 보여지지 않지만 block으로 바꾸면 내용이보인다.
             //동적으로 커뮤니티 메인으로 가기위해 히든으로 value값을 줌.
-            var $hidden =$("<input type='hidden' name='toPage' value='goCommunity'>")
-			$('#loginform').append($hidden);
-            $hidden.appendTo($('#loginform'));
-            document.getElementById('loginform').appendChild(hidden);
+            $('[name="toPage"]').val("goCommunity");
         })
         
         //회원가입 눌렀을때
@@ -950,7 +960,7 @@
             $("#md_name").val(MEMBER_NAME);  
             $("#md_phone").val(MEMBER_PHONE);  
             $("#md_birth").val(MEMBER_BIRTH);              
-        })
+        });
         
         $('#moredetails_submit').click(function(){
            	var team=$("#team option:selected").val();

@@ -72,6 +72,43 @@ public class MemberController {
 		
 		return resultUrl;
 	}
+	
+	//이메일을 받아와서 먼저 아이디 체크를 해보고 없으면 아이디를 넣어준다!
+	@ResponseBody
+	@RequestMapping(value="kakaoLogin.do" , method=RequestMethod.POST)
+	public String kakaoLogin(MemberVO vo , HttpServletRequest request,HttpSession session) {
+		vo.setMEMBER_ID(request.getParameter("MEMBER_ID"));
+		String toPage = request.getParameter("toPage");
+		System.out.println(vo.getMEMBER_ID());
+		String result ="";
+		System.out.println(toPage);
+		if (toPage.equals("goShop")) {
+			
+			result="shopping_main.do";
+		}
+		else {
+			
+			result="community_main.do";
+		}
+		int temp = memberService.getId(vo);
+		if(temp==1) {
+			System.out.println("아이디가 존재 합니다");
+			session.setAttribute("member",vo.getMEMBER_ID());
+		}
+		else {
+			System.out.println("아이디가 없으니 이쪽으로 들어오니??");
+			vo.setMEMBER_PW("kakao");
+			vo.setGRADE("silver");
+			vo.setNAME(vo.getNICKNAME());
+			vo.setPHONE("kakao");
+			
+			memberService.register(vo);
+			session.setAttribute("member", vo.getMEMBER_ID());
+		}
+		System.out.println(result);
+		return result;
+	}
+	
 	@RequestMapping(value="register.do",method=RequestMethod.POST)
 	public String register(MemberVO vo, HttpServletRequest request) {
 		vo.setGRADE("silver");
