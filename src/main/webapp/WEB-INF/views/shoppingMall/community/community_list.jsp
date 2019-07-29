@@ -30,13 +30,13 @@ a {
 				<nav style="width: 1200px;">
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist"
 						style="margin-top: 120px;">
-						<a class="nav-item nav-link active" id="nav-home-tab"
+						<a class="nav-item nav-link active" id="kbo"
 							data-toggle="tab" href="#nav-home" role="tab"
-							aria-controls="nav-home" aria-selected="true"> <img
+							aria-controls="nav-home" aria-selected="false"> <img
 							src="resources/community/img/kbo_main.png" width="70" height="70"
 							class="img-fluid rounded"></a> <a
-							class="nav-item nav-link link" id="nav-home-tab"
-							data-toggle="tab" href="#nav-home" role="tab"
+							class="nav-item nav-link " id="lg"
+							data-toggle="tab" href="http://naver.com" role="tab"
 							aria-controls="nav-home" aria-selected="false"> <img
 							src="resources/community/img/lgtwins_main.png" width="70"
 							height="70" class="img-fluid rounded"></a> <a
@@ -45,27 +45,27 @@ a {
 							aria-selected="false"> <img
 							src="resources/community/img/lottegiants_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="nav-contact-tab"
+						</a> <a class="nav-item nav-link" id="hanwha"
 							data-toggle="tab" href="#nav-contact" role="tab"
-							aria-controls="nav-contact" aria-selected="false"> <img
+							aria-controls="nav-contact" aria-selected="true"> <img
 							src="resources/community/img/hanwhaeagles_main.png" width="80"
 							height="70" class="img-fluid rounded"></a> <a
-							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							class="nav-item nav-link" id="kia" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
 							aria-selected="false"> <img
 							src="resources/community/img/kiatigers_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="nav-contact-tab"
+						</a> <a class="nav-item nav-link" id="doosan"
 							data-toggle="tab" href="#nav-contact" role="tab"
 							aria-controls="nav-contact" aria-selected="false"> <img
 							src="resources/community/img/doosanbears_main.png" width="70"
 							height="70" class="img-fluid rounded"></a> <a
-							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							class="nav-item nav-link" id="nc" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
 							aria-selected="false"> <img
 							src="resources/community/img/ncdinos_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="nav-contact-tab"
+						</a> <a class="nav-item nav-link" id="samsung"
 							data-toggle="tab" href="#nav-contact" role="tab"
 							aria-controls="nav-contact" aria-selected="false"> <img
 							src="resources/community/img/samsunglions_main.png" width="75"
@@ -75,7 +75,7 @@ a {
 							aria-selected="false"> <img
 							src="resources/community/img/kiwoomheroes_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="nav-contact-tab"
+						</a> <a class="nav-item nav-link" id="kt"
 							data-toggle="tab" href="#nav-contact" role="tab"
 							aria-controls="nav-contact" aria-selected="false"> <img
 							src="resources/community/img/skwyverns_main.png" width="70"
