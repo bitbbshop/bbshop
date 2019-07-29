@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bbshop.bit.domain.PageDTO;
 import com.bbshop.bit.domain.PagingVO;
@@ -50,11 +52,11 @@ public class CommunityController {
 		return "shoppingMall/community/community_modify";
 	}
 	
-	@RequestMapping("/community_list.do")
-	public String list(PagingVO pagingvo, Model model) {
-		
+	@RequestMapping(value ="/community_list.do",  method=RequestMethod.GET)
+	public String list(PagingVO pagingvo, Model model, @RequestParam("TEAM_NAME") String teamName) {		
 		System.out.println("컨트롤러 : " + communityService.getList(pagingvo).toString());
 		
+		System.out.println(teamName);
 		model.addAttribute("list", communityService.getList(pagingvo));
 		model.addAttribute("pageMaker", new PageDTO(pagingvo, 123));
 		

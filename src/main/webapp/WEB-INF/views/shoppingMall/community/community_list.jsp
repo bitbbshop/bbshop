@@ -22,6 +22,11 @@ a {
 }
 </style>
 
+<!-- 
+	1.메인에서 리스트로 넘어올때 그 Team_name을 받아온다.
+	2. 팀을 받아오면 id값이 일치하는 태그를 찾고 그태그의 클래스를  addClass를 이용해서 active를 추가해준다.
+ -->
+
 <!-- ================================게시판========================== -->
 <section id="tabs" class="project-tab">
 	<div class="container" style="margin-left: 300px;">
@@ -200,6 +205,9 @@ a {
 </form>
 
 <script type="text/javascript">
+
+	
+
 	$(document).ready(function() {
 
 		var actionForm = $("#actionForm");
