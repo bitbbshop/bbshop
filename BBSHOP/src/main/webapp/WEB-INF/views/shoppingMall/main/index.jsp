@@ -357,7 +357,7 @@
                         <input type="submit" value="로그인" class="btn btn-info btn-block">
                         <Br>
                     </form>
-                    <input type="button" value="비회원 로그인" class="btn btn-info btn-block">
+                    <input type="button" value="비회원 로그인" id="noAccount" class="btn btn-info btn-block">
                     <!--여기에 비회원 로그인할 컨트롤러 설정을 해야함.-->
                     <br>
                     <!-- 카카오 api 버튼 -->
@@ -765,6 +765,15 @@
     <!-- 아이디 중복과 비밀번호 일치 시키는 코드. -->
     <script>
     $(document).ready(function(){
+    	
+    	$("#noAccount").click(function(){
+    		var toPage = $("#toPage").val();
+    		alert(toPage);
+    		location.href="noAccount.do?toPage="+toPage;
+    	})
+    		
+    	
+    	
     	//blur 는 input태그에서 포커스가 떠났을때 발생하는 jquery 이벤트 메소드이다. sign_id태그에서 벗어났을때 아이디가 중복인지 확인한다.
     	$("#sign_id").blur(function() {
         	

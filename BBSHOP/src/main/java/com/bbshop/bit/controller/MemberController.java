@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bbshop.bit.member.domain.MemberVO;
@@ -21,7 +22,7 @@ import com.bbshop.bit.member.service.UserMailSendService;
 @Controller
 @RequestMapping("*.do")
 public class MemberController {
-	
+	private int noAccountCount;
 	@Inject
     PasswordEncoder passwordEncoder;
 	
@@ -68,9 +69,27 @@ public class MemberController {
 		String resultUrl = memberService.memberLogin(map,toPage);
 		if(resultUrl.equals("shoppingMall/main/shopping_main") || resultUrl.equals("shoppingMall/main/community_main")) {
 			session.setAttribute("member", vo.getMEMBER_ID());
+			
 		}
 		
 		return resultUrl;
+	}
+	
+	@RequestMapping(value="noAccount.do" , method=RequestMethod.GET)
+	public String noAccount (HttpServletRequest request,HttpSession session ,@RequestParam("toPage") String toPage) {
+//		String toPage = request.getParameter("toPage"); //hidden 은 value값을 가져와야 한다.
+		System.out.println("비회원 페이지이동:"+toPage);
+		String result = "";
+		noAccountCount++;
+		if(toPage.equals("goShop")) {
+			result="redirect:/shopping_main.do";
+		}
+		else {
+			result="redirect:/community_main.do";
+		}
+		session.setAttribute("member", "noAccount"+noAccountCount);
+		
+		return result;
 	}
 	
 	//이메일을 받아와서 먼저 아이디 체크를 해보고 없으면 아이디를 넣어준다!
