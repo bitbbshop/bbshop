@@ -85,7 +85,7 @@
 						<td>
 							<div class="col-lg-2.5 col-md-5.5 visit mb-2.5"
 								data-aos="fade-up" data-aos-delay="200">
-								<a href="/community_list.doTEAM_NAME=hanwha"><img
+								<a href="/community_list.do?TEAM_NAME=hanwha"><img
 									src="resources/community/img/hanwhaeagles_main.png"
 									alt="Image placeholder" class="img-fluid rounded"> </a>
 							</div>
@@ -95,7 +95,7 @@
 						<td>
 							<div class="col-lg-2.5 col-md-5.5 visit mb-2.5"
 								data-aos="fade-up" data-aos-delay="300">
-								<a href="/community_list.doTEAM_NAME=kia"><img
+								<a href="/community_list.do?TEAM_NAME=kia"><img
 									src="resources/community/img/kiatigers_main.png"
 									alt="Image placeholder" class="img-fluid rounded"> </a>
 							</div>
