@@ -1,5 +1,8 @@
 package com.bbshop.bit.Controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,16 +54,27 @@ public class CommunityController {
 	public String community_modify() {
 		return "shoppingMall/community/community_modify";
 	}
-	
+	//커뮤니티 - 리스트
 	@RequestMapping(value ="/community_list.do",  method=RequestMethod.GET)
-	public String list(PagingVO pagingvo, Model model, @RequestParam("TEAM_NAME") String teamName) {		
-		System.out.println("컨트롤러 : " + communityService.getList(pagingvo).toString());
+	public String list(PagingVO pagingvo, Model model, @RequestParam("TEAM_NAME") String teamName) {
 		
-		System.out.println(teamName);
-		model.addAttribute("list", communityService.getList(pagingvo));
+		System.out.println(pagingvo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagingvo", pagingvo);
+		map.put("teamName", teamName);
+		
+	//	System.out.println(map.get("pagingvo"));
+	//	System.out.println(map.get("teamName"));
+		
+		//System.out.println("컨트롤러 : " + communityService.getList(pagingvo).toString());
+		
+		//System.out.println("teamName : " + teamName);
+		
+		model.addAttribute("teamName", teamName);
+		model.addAttribute("list", communityService.getList(map));
 		model.addAttribute("pageMaker", new PageDTO(pagingvo, 123));
 		
 		return "shoppingMall/community/community_list";
-	}
+	} 	
 
 }

@@ -12,6 +12,7 @@ public class PagingVO {
 	private String TYPE;
 	private String KEYWORD;
 	
+	
 	public PagingVO() {
 		this(1,10);
 	}
@@ -20,7 +21,7 @@ public class PagingVO {
 		this.PAGENUM = pageNum;
 		this.AMOUNT = amount;
 	}
-	
+
 	public String[]  getTypeArr() {
 		return TYPE == null ? new String[] {} : TYPE.split("");
 	}

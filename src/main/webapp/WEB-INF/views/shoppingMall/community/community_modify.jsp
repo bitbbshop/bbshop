@@ -8,6 +8,7 @@
 	charset="utf-8"></script>
 
 <body>
+
 <div style="margin-bottom:100px;">
 </div>
 	<div class="section-top-border">
@@ -16,8 +17,8 @@
 				<h3 class="mb-30 title_color" style="font-weight:bold;">글 수정</h3>
 				<form id="writeForm" action="">
 					<div class="mt-10">
-						<input type="text" name="writer" value="작성자" required
-							class="single-input" readonly>
+						<input type="text" name="writer" value='<c:out value="${community.writer}"/>' required
+							class="single-input" readonly/>
 					</div>
 					<div class="mt-10">
 						<input type="text" name="subject" value="엘지 최고에용"
@@ -96,6 +97,8 @@
 			fCreator : "createSEditor2"
 		});
 	</script>
+	
+	
 </body>
 
 <%@ include file="../include/community_footer.jsp" %>

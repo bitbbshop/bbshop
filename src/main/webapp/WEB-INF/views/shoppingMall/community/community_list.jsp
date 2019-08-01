@@ -176,6 +176,8 @@ a {
 										value='<c:out value="${pageMaker.pagingvo.PAGENUM}"/>' /> <input
 										type="hidden" name="AMOUNT"
 										value='<c:out value="${pageMaker.pagingvo.AMOUNT}"/>' />
+										<input type='hidden' name="TEAM_NAME" value=${teamName}>
+										
 									<button class="btn btn-defaault">검색</button>
 								</form>
 							</div>
@@ -196,6 +198,7 @@ a {
 		value='<c:out value="${pageMaker.pagingvo.TYPE }"/>'> <input
 		type='hidden' name='KEYWORD'
 		value='<c:out value="${pageMaker.pagingvo.KEYWORD }"/>'>
+		<input type='hidden' name="TEAM_NAME" value=${teamName}>
 </form>
 
 <script type="text/javascript">
