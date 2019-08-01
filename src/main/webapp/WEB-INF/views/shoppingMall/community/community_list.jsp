@@ -22,70 +22,64 @@ a {
 }
 </style>
 
-<!-- 
-	1.메인에서 리스트로 넘어올때 그 Team_name을 받아온다.
-	2. 팀을 받아오면 id값이 일치하는 태그를 찾고 그태그의 클래스를  addClass를 이용해서 active를 추가해준다.
- -->
-
 <!-- ================================게시판========================== -->
 <section id="tabs" class="project-tab">
 	<div class="container" style="margin-left: 300px;">
 		<div class="row">
 			<div class="col-md-12">
 				<nav style="width: 1200px;">
-					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist"
-						style="margin-top: 120px;">
-						<a class="nav-item nav-link active" id="kbo"
+					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist" style="margin-top: 120px;">
+						<a class="nav-item nav-link" id="nav-home-tab" name="kbo"
 							data-toggle="tab" href="#nav-home" role="tab"
-							aria-controls="nav-home" aria-selected="false"> <img
+							aria-controls="nav-home" aria-selected="true"> <img
 							src="resources/community/img/kbo_main.png" width="70" height="70"
 							class="img-fluid rounded"></a> <a
-							class="nav-item nav-link " id="lg"
-							data-toggle="tab" href="http://naver.com" role="tab"
+							class="nav-item nav-link link" id="nav-contact-tab" name="lg"
+							data-toggle="tab" href="#nav-contact" role="tab"
 							aria-controls="nav-home" aria-selected="false"> <img
 							src="resources/community/img/lgtwins_main.png" width="70"
 							height="70" class="img-fluid rounded"></a> <a
-							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							class="nav-item nav-link" id="nav-contact-tab" name="lotte" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
 							aria-selected="false"> <img
 							src="resources/community/img/lottegiants_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="hanwha"
+						</a> <a class="nav-item nav-link" id="nav-contact-tab" name="hanwha"
 							data-toggle="tab" href="#nav-contact" role="tab"
-							aria-controls="nav-contact" aria-selected="true"> <img
+							aria-controls="nav-contact" aria-selected="false"> <img
 							src="resources/community/img/hanwhaeagles_main.png" width="80"
 							height="70" class="img-fluid rounded"></a> <a
-							class="nav-item nav-link" id="kia" data-toggle="tab"
+							class="nav-item nav-link" id="nav-contact-tab" name="kia" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
 							aria-selected="false"> <img
 							src="resources/community/img/kiatigers_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="doosan"
+						</a> <a class="nav-item nav-link" id="nav-contact-tab" name="doosan"
 							data-toggle="tab" href="#nav-contact" role="tab"
 							aria-controls="nav-contact" aria-selected="false"> <img
 							src="resources/community/img/doosanbears_main.png" width="70"
 							height="70" class="img-fluid rounded"></a> <a
-							class="nav-item nav-link" id="nc" data-toggle="tab"
+							class="nav-item nav-link" id="nav-contact-tab" name ="nc" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
 							aria-selected="false"> <img
 							src="resources/community/img/ncdinos_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="samsung"
+						</a> <a class="nav-item nav-link" id="nav-contact-tab" name="samsung"
 							data-toggle="tab" href="#nav-contact" role="tab"
 							aria-controls="nav-contact" aria-selected="false"> <img
 							src="resources/community/img/samsunglions_main.png" width="75"
 							height="70" class="img-fluid rounded"></a> <a
-							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							class="nav-item nav-link" id="nav-contact-tab" name="kiwoom" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
 							aria-selected="false"> <img
 							src="resources/community/img/kiwoomheroes_main.png" width="80"
 							height="70" class="img-fluid rounded">
-						</a> <a class="nav-item nav-link" id="kt"
+						</a> <a class="nav-item nav-link" id="nav-contact-tab" name="sk"
 							data-toggle="tab" href="#nav-contact" role="tab"
 							aria-controls="nav-contact" aria-selected="false"> <img
 							src="resources/community/img/skwyverns_main.png" width="70"
 							height="70" class="img-fluid rounded"></a> <a
-							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							class="nav-item nav-link" id="nav-contact-tab" name="kt" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
 							aria-selected="false"> <img
 							src="resources/community/img/ktwiz_main.png" width="70"
@@ -206,16 +200,37 @@ a {
 
 <script type="text/javascript">
 
-	
-
 	$(document).ready(function() {
-
+		
+		var logoName = $('a.nav-item.nav-link');
+		var teamName = '${teamName}';
+		
+		// 변수 확인
+		console.log('logoName : ' + logoName + " teamName : " + teamName);
+		
+		/*		
+		for(i=0; i<logoName.length; i++) {
+			if(logoName[i].name.equals(teamName)) {
+				alert(i);
+			}
+			
+		}
+		*/
+		
+		// 메인에서 접속 시에 navtab 이동
+		var navtab = $("#nav-tab");	
+		navtab.find("a[name='" + teamName + "']").addClass("active show");
+		
 		var actionForm = $("#actionForm");
 
 		$(".page-item a").on("click", function(e) {
+			
 			e.preventDefault();
+			
 			console.log('click');
+			
 			actionForm.find("input[name='PAGENUM']").val($(this).attr("href"));
+			
 			actionForm.submit();
 		});
 
