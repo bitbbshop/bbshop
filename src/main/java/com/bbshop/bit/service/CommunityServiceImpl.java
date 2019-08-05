@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bbshop.bit.domain.CommunityVO;
+import com.bbshop.bit.domain.PagingVO;
 import com.bbshop.bit.mapper.CommunityMapper;
 
 @Service
@@ -31,6 +32,14 @@ public class CommunityServiceImpl implements CommunityService {
 		CommunityMapper communityMapper = sqlSession.getMapper(CommunityMapper.class);
 		
 		return communityMapper.getListWithPaging(map);
+	}
+
+	@Override
+	public int getTotal(Map<String,Object> map) {
+		
+		CommunityMapper communityMapper = sqlSession.getMapper(CommunityMapper.class);
+		
+		return communityMapper.getTotalCount(map);
 	}
 	
 	

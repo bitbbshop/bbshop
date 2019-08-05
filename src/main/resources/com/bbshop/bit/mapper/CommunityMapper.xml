@@ -3,27 +3,6 @@
 
 <mapper namespace="com.bbshop.bit.mapper.CommunityMapper">
 	<!-- 목록과 데이터 개수 처리 -->
-	<sql id="pagingvo">
-		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-			<foreach item="type" collection="typeArr">
-				<trim prefix="OR">
-					<choose>
-						<when test="type == 'T'.toString()">
-							title like'%'||#{KEYWORD}||'%'
-						</when>
-						<when test="type == 'C'.toString()">
-							title like'%'||#{KEYWORD}||'%'
-						</when>
-						<when test="type == 'N'.toString()">
-							title like'%'||#{KEYWORD}||'%'
-						</when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-	</sql>
-
-
 
 <select id="getListWithPaging" 
 parameterType="map" resultType="com.bbshop.bit.domain.CommunityVO">
@@ -60,7 +39,19 @@ parameterType="map" resultType="com.bbshop.bit.domain.CommunityVO">
 			 rownum <= #{pagingvo.PAGENUM} * #{pagingvo.AMOUNT})
 	where rn > (#{pagingvo.PAGENUM} -1) * #{pagingvo.AMOUNT}
 	]]>
+	
+	
+	
 
 	</select>
+	
+	<select id="getTotalCount" parameterType="map" resultType="int">
+	
+
+	
+	select count(*) from community
+	where team_name= #{teamName}
+	</select>
+	
 
 </mapper>

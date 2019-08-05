@@ -70,9 +70,12 @@ public class CommunityController {
 		
 		//System.out.println("teamName : " + teamName);
 		
+		
+		int total = communityService.getTotal(map);
+		
 		model.addAttribute("teamName", teamName);
 		model.addAttribute("list", communityService.getList(map));
-		model.addAttribute("pageMaker", new PageDTO(pagingvo, 123));
+		model.addAttribute("pageMaker", new PageDTO(pagingvo, total));
 		
 		return "shoppingMall/community/community_list";
 	} 	
