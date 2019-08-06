@@ -309,7 +309,8 @@ body {
 						<aside class="left_widgets p_filter_widgets">
 							<div class="l_w_title">
 								<h3
-									style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">실시간 채팅</h3>
+									style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">
+									뉴스</h3>
 							</div>
 							<div class="widgets_inner">
 								<ul>
