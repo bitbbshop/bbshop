@@ -1,14 +1,21 @@
 package com.bbshop.bit.Controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bbshop.bit.domain.PageDTO;
 import com.bbshop.bit.domain.PagingVO;
@@ -44,10 +51,30 @@ public class CommunityController {
 //	}
 
 	// 커뮤니티 - 글 상세
-	@RequestMapping("/community_detail.do")
-	public String community_detail() {
-		return "shoppingMall/community/community_detail";
-	}
+	@RequestMapping(value = "/community_detail.do", method=RequestMethod.GET)
+	public ModelAndView community_detail(ModelAndView model) {
+		
+			String url = "https://sports.media.daum.net/sports/baseball/";
+	        Document doc = null;
+	        
+	        try {
+	        	
+	            doc = Jsoup.connect(url).get();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	         
+
+	        Elements element = doc.select("table.tbl_rank");
+
+	        model.addObject("element", element);
+
+	        model.setViewName("shoppingMall/community/community_detail");
+	        
+			return model;
+		}
+
+	
 
 	// 커뮤니티 - 글 수정
 	@RequestMapping("/community_modify.do")
@@ -78,6 +105,6 @@ public class CommunityController {
 		model.addAttribute("pageMaker", new PageDTO(pagingvo, total));
 		
 		return "shoppingMall/community/community_list";
-	} 	
+	}
 
 }

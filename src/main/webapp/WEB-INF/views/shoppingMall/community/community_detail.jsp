@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%
+	String title = (String)request.getAttribute("title");
+	ArrayList<String> list_text = (ArrayList<String>)request.getAttribute("list_text");
+	ArrayList<String> list_link = (ArrayList<String>)request.getAttribute("list_link");
+%>
 
 <%@ include file="../include/community_header.jsp"%>
 
@@ -113,7 +119,7 @@ body {
 	<section class="cat_product_area section_gap">
 		<div class="container-fluid">
 			<div class="row flex-row-reverse">
-				<div class="col-lg-9" style="margin-left:auto;margin-right:auto;">
+				<div class="col-lg-9" style="margin-left: auto; margin-right: auto;">
 					<div class="single-post row">
 
 						<div class="col-lg-12  col-md-12">
@@ -263,13 +269,13 @@ body {
 						<div class="row">
 							<div
 								class="col-lg-12 col-md-12 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-								<div class="thumb" style="width:100%;">
+								<div class="thumb" style="width: 100%;">
 									<a href="#"> <img class="img-fluid"
 										src="resources/shoppingMall/img/left_arrow.png" alt=""
-										style="width: 30px;float:left;">
+										style="width: 30px; float: left;">
 									</a> <a href="#"> <img class="img-fluid"
 										src="resources/shoppingMall/img/right_arrow.png" alt=""
-										style="width: 30px;float:right;">
+										style="width: 30px; float: right;">
 									</a>
 								</div>
 							</div>
@@ -281,43 +287,37 @@ body {
 					<div style="width: 100%;">
 						<div class="button-group-area mt-40">
 							<a href="/community_list.do" id="go_list"
-								class="genric-btn primary radius" style="margin-left: 500px;">목록보기</a>
+								class="genric-btn primary radius" style="margin-left: 400px;">목록보기</a>
 							<a href="/community_modify.do" id="modify_post"
 								class="genric-btn primary radius">수정</a> <a id="delete_post"
-								class="genric-btn primary radius" style="float: right;">삭제</a>
+								class="genric-btn primary radius">삭제</a>
 						</div>
 					</div>
 					<!-- 수정, 삭제, 목록보기 버튼 끝 -->
 				</div>
 
 				<!-- 왼쪽 사이드 바 -->
-				<div class="col-lg-2" style="margin-right:auto; margin-left:auto;">
+
+				<div class="col-lg-3" style="margin-right: auto; margin-left: auto;">
 					<div class="left_sidebar_area">
 						<aside class="left_widgets cat_widgets">
 							<div class="l_w_title"
 								style="text-align: center; background: white;">
-								<h3
-									style="font-size: 20px; font-weight: bold; color: lightcoral;">순위보기</h3>
-								<p>
-									SK <br> 키움 <br> 두산 <br> LG <br> NC <br>
-									KT <br> 삼성 <br> KIA <br> 한화 <br> 롯데 <br>
-							</div>
-							<div class="widgets_inner">
-								<p>
+								${element}
 							</div>
 						</aside>
 						<aside class="left_widgets p_filter_widgets">
 							<div class="l_w_title">
 								<h3
-									style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">스포츠
-									뉴스</h3>
+									style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">실시간 채팅</h3>
 							</div>
 							<div class="widgets_inner">
 								<ul>
 									<li><p>크롤링 구현 예정입니다.</p></li>
 									<li><a
 										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=144&aid=0000621625">
-											[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로</a></li>
+											[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년 80억’
+											상한제 수용키로</a></li>
 									<li><a
 										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=109&aid=0004052054">
 											"이명기는 통산 타율 3할 타자" 트레이드 효과는 이제부터</a></li>
@@ -336,10 +336,67 @@ body {
 									<li><a
 										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
 											'왕조의 연결고리' 김강민이 말하는 2019년의 SK</a></li>
+									<li><a
+										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
+											'왕조의 연결고리' 김강민이 말하는 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독]
+											프로야구선수협, FA ‘4년 80억’ 상한제 수용키로 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제
+											수용키로[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년
+											80억’ 상한제 수용키로</a></li>
 								</ul>
 							</div>
 						</aside>
 					</div>
+				</div>
+				<!-- 왼쪽 사이드 바 -->
+				<div class="col-lg-12"
+					style="margin-right: auto; margin-left: auto;">
+					<div class="l_w_title">
+						<h3
+							style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">스포츠
+							뉴스</h3>
+					</div>
+					<div class="col-md-6">
+						<div class="widgets_inner">
+							<p>국내야구</p>
+						</div>
+					</div>
+					<div class="col-md-6"></div>
+					<div class="col-md-6">
+						<div class="widgets_inner">
+							<ul>
+								<li><p>크롤링 구현 예정입니다.</p></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=144&aid=0000621625">
+										[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년 80억’
+										상한제 수용키로</a></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=109&aid=0004052054">
+										"이명기는 통산 타율 3할 타자" 트레이드 효과는 이제부터</a></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=076&aid=0003443645">
+										[SC집중분석]레전드 넘어서는 최정. 467홈런 이승엽 넘기가 가능할까</a></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=468&aid=0000536149">
+										한선태가 새긴 유강남의 조언 "마운드에선 네가 왕이다"</a></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=382&aid=0000747370">
+										완전체 앞둔 LG 타선, 새로운 고민 된 외야 조합</a></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938146">
+										LG 윌슨·켈리, '1989년생·9승·원투펀치' 복덩이</a></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
+										'왕조의 연결고리' 김강민이 말하는 2019년의 SK</a></li>
+								<li><a
+									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
+										'왕조의 연결고리' 김강민이 말하는 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독]
+										프로야구선수협, FA ‘4년 80억’ 상한제 수용키로 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제
+										수용키로[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년
+										80억’ 상한제 수용키로</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6"></div>
 				</div>
 			</div>
 		</div>
@@ -353,14 +410,15 @@ body {
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
-							<!-- header title -->
+				<!-- header title -->
 				<h4 class="modal-title" align="center">신고하기</h4>
-				
+
 				<!-- 닫기(x) 버튼 -->
 				<span class="close">&times;</span>
 			</div>
 			<!-- body -->
-			<form id="reportForm" name="report" role="form" action="/community_info.do">
+			<form id="reportForm" name="report" role="form"
+				action="/community_info.do">
 				<div class="modal-body">
 					<table>
 						<tr class="report_content">
