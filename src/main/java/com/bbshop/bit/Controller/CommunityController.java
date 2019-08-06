@@ -63,11 +63,35 @@ public class CommunityController {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	         
+	        
+	        String url1 = "https://sports.media.daum.net/sports/baseball/";
+	        Document doc1 = null;
+	        
+	        try {
+	        	
+	            doc1 = Jsoup.connect(url1).get();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        String url2 = "https://sports.media.daum.net/sports/worldbaseball/";
+	        Document doc2 = null;
+	        
+	        try {
+	        	
+	            doc2 = Jsoup.connect(url2).get();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 
+     
 	        Elements element = doc.select("table.tbl_rank");
-
+	        Elements element1 = doc1.select("div.news_newest").select("ul.list_news");
+	        Elements element2 = doc2.select("div.news_newest").select("ul.list_news");	        	       
 	        model.addObject("element", element);
+	        model.addObject("element1", element1);
+	        model.addObject("element2", element2);
+	        
 
 	        model.setViewName("shoppingMall/community/community_detail");
 	        

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.ArrayList"%>
 <%
-	String title = (String)request.getAttribute("title");
-	ArrayList<String> list_text = (ArrayList<String>)request.getAttribute("list_text");
-	ArrayList<String> list_link = (ArrayList<String>)request.getAttribute("list_link");
+	String title = (String) request.getAttribute("title");
+	ArrayList<String> list_text = (ArrayList<String>) request.getAttribute("list_text");
+	ArrayList<String> list_link = (ArrayList<String>) request.getAttribute("list_link");
 %>
 
 <%@ include file="../include/community_header.jsp"%>
@@ -169,7 +169,7 @@ body {
 							</div>
 						</div>
 
-						<div class="col-lg-9 col-md-9 blog_details"
+						<div class="col-lg-	 col-md-9 blog_details"
 							style="min-width: 100%;">
 							<p>차명석 단장은 조셉의 웨이버 공시에 대해 "외국인 선수는 실력 여부를 떠나 일단 경기에 나서야 하는데
 								(가래톳과 허리 통증으로) 제대로 뛰질 못했으니까…"라고 답답해했다. 조셉은 좋은 성적(타율 0.274 9홈런
@@ -284,7 +284,7 @@ body {
 					<!-- 이전글 다음글 버튼 끝 -->
 
 					<!-- 수정, 삭제, 목록보기 버튼 -->
-					<div style="width: 100%;">
+					<div style="width: 100%; margin-bottom: 50px";>
 						<div class="button-group-area mt-40">
 							<a href="/community_list.do" id="go_list"
 								class="genric-btn primary radius" style="margin-left: 400px;">목록보기</a>
@@ -310,94 +310,43 @@ body {
 							<div class="l_w_title">
 								<h3
 									style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">
-									뉴스</h3>
+									실시간 채팅</h3>
 							</div>
 							<div class="widgets_inner">
 								<ul>
-									<li><p>크롤링 구현 예정입니다.</p></li>
 									<li><a
 										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=144&aid=0000621625">
 											[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년 80억’
 											상한제 수용키로</a></li>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=109&aid=0004052054">
-											"이명기는 통산 타율 3할 타자" 트레이드 효과는 이제부터</a></li>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=076&aid=0003443645">
-											[SC집중분석]레전드 넘어서는 최정. 467홈런 이승엽 넘기가 가능할까</a></li>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=468&aid=0000536149">
-											한선태가 새긴 유강남의 조언 "마운드에선 네가 왕이다"</a></li>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=382&aid=0000747370">
-											완전체 앞둔 LG 타선, 새로운 고민 된 외야 조합</a></li>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938146">
-											LG 윌슨·켈리, '1989년생·9승·원투펀치' 복덩이</a></li>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
-											'왕조의 연결고리' 김강민이 말하는 2019년의 SK</a></li>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
-											'왕조의 연결고리' 김강민이 말하는 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독]
-											프로야구선수협, FA ‘4년 80억’ 상한제 수용키로 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제
-											수용키로[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년
-											80억’ 상한제 수용키로</a></li>
+
 								</ul>
 							</div>
 						</aside>
 					</div>
 				</div>
 				<!-- 왼쪽 사이드 바 -->
-				<div class="col-lg-12"
-					style="margin-right: auto; margin-left: auto;">
+				<div class="col-lg-12">
 					<div class="l_w_title">
 						<h3
 							style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">스포츠
 							뉴스</h3>
 					</div>
-					<div class="col-md-6">
-						<div class="widgets_inner">
-							<p>국내야구</p>
-						</div>
+				</div>
+
+				<div class="col-md-6">
+					<div>
+						<p style="text-align: center;">해외야구</p>
+						${element2}
+					
 					</div>
-					<div class="col-md-6"></div>
-					<div class="col-md-6">
-						<div class="widgets_inner">
-							<ul>
-								<li><p>크롤링 구현 예정입니다.</p></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=144&aid=0000621625">
-										[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년 80억’
-										상한제 수용키로</a></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=109&aid=0004052054">
-										"이명기는 통산 타율 3할 타자" 트레이드 효과는 이제부터</a></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=076&aid=0003443645">
-										[SC집중분석]레전드 넘어서는 최정. 467홈런 이승엽 넘기가 가능할까</a></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=468&aid=0000536149">
-										한선태가 새긴 유강남의 조언 "마운드에선 네가 왕이다"</a></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=382&aid=0000747370">
-										완전체 앞둔 LG 타선, 새로운 고민 된 외야 조합</a></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938146">
-										LG 윌슨·켈리, '1989년생·9승·원투펀치' 복덩이</a></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
-										'왕조의 연결고리' 김강민이 말하는 2019년의 SK</a></li>
-								<li><a
-									href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=241&aid=0002938915">
-										'왕조의 연결고리' 김강민이 말하는 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독]
-										프로야구선수협, FA ‘4년 80억’ 상한제 수용키로 [단독] 프로야구선수협, FA ‘4년 80억’ 상한제
-										수용키로[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년
-										80억’ 상한제 수용키로</a></li>
-							</ul>
-						</div>
+				</div>
+				<div class="col-md-6">
+					<div>
+						<p style="text-align: center;">국내야구</p>
+						${element1}
+					
+						</ul>
 					</div>
-					<div class="col-md-6"></div>
 				</div>
 			</div>
 		</div>
@@ -522,6 +471,7 @@ body {
 			alert('글을 삭제하시겠습니까?');
 		}
 	</script>
+	
 
 	<%@ include file="../include/community_footer.jsp"%>
 </body>
