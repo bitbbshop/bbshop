@@ -1,4 +1,4 @@
-package com.bbshop.bit.controller;
+package com.bbshop.bit.Controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,8 +68,45 @@ public class CommunityController {
 	@RequestMapping("/community_detail.do")
 	public String community_detail(Model model, @RequestParam("BOARD_NUM") long board_num) {
 		
+		String url = "http://mlbpark.donga.com/mp/b.php?b=kbotown";
+        Document doc = null;
+        
+        try {
+        	
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        String url1 = "https://sports.media.daum.net/sports/baseball/";
+        Document doc1 = null;
+        
+        try {
+        	
+            doc1 = Jsoup.connect(url1).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        String url2 = "https://sports.media.daum.net/sports/worldbaseball/";
+        Document doc2 = null;
+        
+        try {
+        	
+            doc2 = Jsoup.connect(url2).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+ 
+        Elements element = doc.select("div.scoreBoard");
+        Elements element1 = doc1.select("div.news_newest").select("ul.list_news");
+        Elements element2 = doc2.select("div.news_newest").select("ul.list_news");
 		communityService.updateHit(board_num);
 		model.addAttribute("post", communityService.getPost((long) board_num));
+		model.addAttribute("element", element);
+        model.addAttribute("element1", element1);
+        model.addAttribute("element2", element2);
 
 		return "shoppingMall/community/community_detail";
 	}

@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-<!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.bbshop.bit.mapper.CommunityMapper">
-	<!-- 목록과 데이터 개수 처리 -->
-
-<select id="getListWithPaging" 
-parameterType="map" resultType="com.bbshop.bit.domain.CommunityVO">
-
-	<![CDATA[
-
-	select board_num, title, board_content,writer,regdate,moddate, hit
-	from 
-		(
-			select rownum rn, board_num, title, board_content, writer, regdate, moddate, hit 
-			from community 
-			where team_name= #{teamName} and ]]>
-
-		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-			<foreach item="type" collection="pagingvo.typeArr">
-			
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
@@ -74,7 +51,6 @@ parameterType="map" resultType="com.bbshop.bit.domain.CommunityVO">
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item="type" collection="pagingvo.typeArr">
 
->>>>>>> 8553b687ee4c3a295e8843b57eb60efe9978d75c
 				<trim prefix="OR">
 					<choose>
 						<when test="type=='T'.toString()">
@@ -95,18 +71,6 @@ parameterType="map" resultType="com.bbshop.bit.domain.CommunityVO">
 			 rownum <= #{pagingvo.PAGENUM} * #{pagingvo.AMOUNT})
 	where rn > (#{pagingvo.PAGENUM} -1) * #{pagingvo.AMOUNT}
 	]]>
-<<<<<<< HEAD
-	
-	
-	
-
-	</select>
-	
-	<select id="getTotalCount" parameterType="map" resultType="int">
-	
-
-	
-=======
 
 	</select>
 
@@ -162,13 +126,8 @@ parameterType="map" resultType="com.bbshop.bit.domain.CommunityVO">
 	</update>
 	
 	<select id="getTotalCount" parameterType="map" resultType="int">
->>>>>>> 8553b687ee4c3a295e8843b57eb60efe9978d75c
 	select count(*) from community
 	where team_name= #{teamName}
 	</select>
-	
-<<<<<<< HEAD
 
-=======
->>>>>>> 8553b687ee4c3a295e8843b57eb60efe9978d75c
 </mapper>
