@@ -27,11 +27,19 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
+<<<<<<< HEAD
      <welcome-file-list>
       <welcome-file>community_main.do</welcome-file>
    </welcome-file-list>
    
    <!-- Korean Filter -->
+=======
+  	<welcome-file-list>
+		<welcome-file>community_main.do</welcome-file>
+	</welcome-file-list>
+
+	<!-- Korean Filter -->
+>>>>>>> 8553b687ee4c3a295e8843b57eb60efe9978d75c
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
