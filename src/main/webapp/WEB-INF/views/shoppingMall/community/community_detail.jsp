@@ -6,6 +6,8 @@
 	ArrayList<String> list_text = (ArrayList<String>) request.getAttribute("list_text");
 	ArrayList<String> list_link = (ArrayList<String>) request.getAttribute("list_link");
 %>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
 <%@ include file="../include/community_header.jsp"%>
 
@@ -110,6 +112,10 @@ body {
 	font-size: 16px;
 	font-weight: bold;
 	color: white !important;
+}
+
+.caption {
+	display: none;
 }
 </style>
 
@@ -302,8 +308,7 @@ body {
 					<div class="left_sidebar_area">
 						<aside class="left_widgets cat_widgets">
 							<div class="l_w_title"
-								style="text-align: center; background: white;">
-								${element}
+								style="text-align: center; background: white;">${element}
 							</div>
 						</aside>
 						<aside class="left_widgets p_filter_widgets">
@@ -312,15 +317,7 @@ body {
 									style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">
 									실시간 채팅</h3>
 							</div>
-							<div class="widgets_inner">
-								<ul>
-									<li><a
-										href="https://sports.news.naver.com/kbaseball/news/read.nhn?oid=144&aid=0000621625">
-											[단독] 프로야구선수협, FA ‘4년 80억’ 상한제 수용키로[단독] 프로야구선수협, FA ‘4년 80억’
-											상한제 수용키로</a></li>
-
-								</ul>
-							</div>
+							
 						</aside>
 					</div>
 				</div>
@@ -337,14 +334,14 @@ body {
 					<div>
 						<p style="text-align: center;">해외야구</p>
 						${element2}
-					
+
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div>
 						<p style="text-align: center;">국내야구</p>
 						${element1}
-					
+
 						</ul>
 					</div>
 				</div>
@@ -470,8 +467,9 @@ body {
 		delete_postBtn.onclick = function() {
 			alert('글을 삭제하시겠습니까?');
 		}
+		$('caption').remove();
 	</script>
-	
+
 
 	<%@ include file="../include/community_footer.jsp"%>
 </body>

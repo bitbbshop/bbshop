@@ -54,7 +54,7 @@ public class CommunityController {
 	@RequestMapping(value = "/community_detail.do", method=RequestMethod.GET)
 	public ModelAndView community_detail(ModelAndView model) {
 		
-			String url = "https://sports.media.daum.net/sports/baseball/";
+			String url = "http://mlbpark.donga.com/mp/b.php?b=kbotown";
 	        Document doc = null;
 	        
 	        try {
@@ -85,7 +85,7 @@ public class CommunityController {
 	        }
 
      
-	        Elements element = doc.select("table.tbl_rank");
+	        Elements element = doc.select("div.scoreBoard");
 	        Elements element1 = doc1.select("div.news_newest").select("ul.list_news");
 	        Elements element2 = doc2.select("div.news_newest").select("ul.list_news");	        	       
 	        model.addObject("element", element);
