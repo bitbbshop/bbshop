@@ -252,13 +252,13 @@ body {
 				</div>
 
 				<!-- 왼쪽 사이드 바 -->
-				<div class="col-lg-3" style="margin-right:auto; margin-left:auto;">
+				<div class="col-lg-2.5" style="margin-right:auto; margin-left:auto;">
 					<div class="left_sidebar_area">
 						<aside class="left_widgets cat_widgets">
 							<div class="l_w_title"
 								style="text-align: center; background: white;">
 								<h3
-									style="font-size: 20px; font-weight: bold; color: lightcoral;">순위보기</h3>
+									style="font-size: 20px; font-weight: bold; color: lightcoral; text-align: center;">순위보기</h3>
 									${element}
 							</div>
 							<div class="widgets_inner">
@@ -267,9 +267,24 @@ body {
 						</aside>
 						<aside class="left_widgets p_filter_widgets">
 							<div class="l_w_title">
-								<h3 style="text-align: center; font-size: 17px; font-weight: bold; color: lightcoral;">
+								<h3 style="text-align: left; font-size: 17px; font-weight: bold; color: lightcoral;">
 									실시간 채팅</h3>
-								
+									    <input type="text" id="message"/>
+    <input type="button" id="sendBtn" value="전송"/>
+    <div id="data"></div>
+
+
+								<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/57a72994c11fe69b0bd8fa90/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 							</div>
 							
 						</aside>
@@ -627,6 +642,44 @@ body {
     });
 
 	</script>
+	<!-- 소켓 추가 -->
+	<script type="text/javascript" src="<c:url value="/static/js/jquery/jquery-1.11.2.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/static/js/sockjs-0.3.4.js"/>"></script>
+<script type="text/javascript">
+ 
+    $(document).ready(function(){
+        $("#sendBtn").click(function(){
+            sendMessage();
+        });
+    });
+    
+    //websocket을 지정한 URL로 연결
+    var sock= new SockJS("<c:url value="/echo"/>");
+    //websocket 서버에서 메시지를 보내면 자동으로 실행된다.
+    sock.onmessage = onMessage;
+    //websocket 과 연결을 끊고 싶을때 실행하는 메소드
+    sock.onclose = onClose;
+    
+    
+    function sendMessage(){
+        
+            //websocket으로 메시지를 보내겠다.
+            sock.send($("#message").val());
+        
+    }
+            
+    //evt 파라미터는 websocket이 보내준 데이터다.
+    function onMessage(evt){  //변수 안에 function자체를 넣음.
+        var data = evt.data;
+        $("#data").append(data+"<br/>");
+        /* sock.close(); */
+    }
+    
+    function onClose(evt){
+        $("#data").append("연결 끊김");
+    }
+    
+</script>
 	<%@ include file="../include/community_footer.jsp"%>
 </body>
 

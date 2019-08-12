@@ -61,11 +61,7 @@
 								<td align="center"><br /> <input type="submit" id="savebutton" value="등록" 
 								style="float:right;"></td>
 								<td align="center"><br /> <input type="button" value="취소" style="float:left;"
-<<<<<<< HEAD
-									onclick="location.href='/community_list.do'" /></td>
-=======
 									onclick="location.href='/community_list.do?TEAM_NAME=${teamName}'" /></td>
->>>>>>> 8553b687ee4c3a295e8843b57eb60efe9978d75c
 							</tr>
 						</table>
 					</div>

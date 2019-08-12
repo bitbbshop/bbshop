@@ -23,13 +23,8 @@
 				<form id="writeForm" action="/communityUpdateAction.do" method="post">
 				<input type="hidden" name="BOARD_NUM" value=<c:out value='${post.BOARD_NUM}'/>>
 					<div class="mt-10">
-<<<<<<< HEAD
-						<input type="text" name="writer" value='<c:out value="${community.writer}"/>' required
-							class="single-input" readonly/>
-=======
 						<input type="text" name="WRITER" value=<c:out value='${post.WRITER}'/> required
 							class="single-input" readonly>
->>>>>>> 8553b687ee4c3a295e8843b57eb60efe9978d75c
 					</div>
 					<div class="mt-10">
 						<input type="text" name="TITLE" value=<c:out value='${post.TITLE}'/>
@@ -69,11 +64,7 @@
 							<tr>
 								<td align="center"><br /> <input type="submit" id="savebutton" value="수정" style="float:right;"/></td>
 								<td align="center"><br /> <input type="button" value="취소" style="float:left;"
-<<<<<<< HEAD
-									onclick="location.href='/community_list.do'" /></td>
-=======
 									onclick="location.href='/community_list.do?TEAM_NAME=${post.TEAM_NAME}'" /></td>
->>>>>>> 8553b687ee4c3a295e8843b57eb60efe9978d75c
 							</tr>
 						</table>
 					</div>

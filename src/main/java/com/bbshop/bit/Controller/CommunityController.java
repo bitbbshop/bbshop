@@ -242,5 +242,7 @@ public class CommunityController {
 		}
 		return "redirect:/community_detail.do";
 	}
+	
+	
 
 }
