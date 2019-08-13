@@ -1,6 +1,7 @@
 package com.bbshop.bit.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -27,4 +28,6 @@ public class CommunityVO {
 	private long DEP;	
 	private int SEQ_BOARD;
 	private int RN;
+	
+	private List<BoardAttachVO> attachList;
 }
