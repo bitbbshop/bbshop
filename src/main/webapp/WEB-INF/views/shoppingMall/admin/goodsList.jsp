@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="java.util.*"%>
+<%@ page import="com.bbshop.bit.domain.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <head>
   <meta charset="utf-8" />
@@ -48,6 +50,7 @@ th{
 <%@include file="sidebar.jsp" %>
 
     <div class="main-panel">
+    <!-- Navbar -->
      <%@include file='top_nav.jsp' %>
       <!-- End Navbar -->
       <div class="content">
@@ -58,7 +61,7 @@ th{
                 <div class="card-header card-header-primary">
                   <h4 class="card-title ">상품 목록</h4>
                   <div style='float:right'>
-                   <a href="addGoods">
+                   <a href="addGoods.do">
           			    <i class="material-icons" style='color:white'>add</i></a></div>
                 </div>
                 <div class="card-body">
@@ -67,7 +70,17 @@ th{
                     <table class="table" style="background-color: rgba(230, 236, 236, 0.4)">
                       <thead class=" text-primary">
                           <th style="text-align: center">
-                          <input type='checkbox' id='all_check'>
+                          <!-- 
+                          <div class="form-check">
+                          	<label class="form-check-label">
+                            <input class="form-check-input" id='check_all' type="checkbox" value="">
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                  </label>
+                                  </div> -->
+                         <input type='checkbox' id='check_all' class="form-check-input">
+                          
                         </th>
                                <th style="text-align: center">
                           상품번호
@@ -110,46 +123,59 @@ th{
                         </th>
                         
                       </thead>
-                      <tbody>
+                      <tbody id="goodsListTable">
+                      <!--  foreach 문을 에이잭스로 불러 보자. 에이잭스의 스타트와 엔드값을 어마운트로 조정하면 될거같다. -->
+                      <c:forEach var="goods" items="${goodsList}" varStatus="status" begin="${PageMaker.cri.pageNum*5-5 }" end="${PageMaker.cri.pageNum*5-1 }">
+                      
+                      
                         <tr>
                         
                           <td  style="text-align: center">
-                              <input type='checkbox' id='checkrow'>
+                              <input type='checkbox' class='check'>
                           </td>
                         
                         
                           <td  style="text-align: center">
-                              <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'">0000001</Button>
+                              <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'">${goods.goods_num}</Button>
                           </td>
                           <td  style="text-align: center">
                               글러브
                           </td>
                           <td width=10% height=10% style='text-align:center'>
-                            <img src="${pageContext.request.contextPath }/resources/admin_bootstrap/assets/img/0.jpeg" width=60% >
+                            <img src="${goods.main_img}" width=60% >
                           </td>
                           <td  style="text-align: center">
-                             <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'" >매우빠른공을 던질수있는 글러브</Button>
+                             <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'" >${goods.name }</Button>
                           </td>
                           <td class="text-primary"  style="text-align: center">
-                            36,738원
+                            ${goods.price}원
                           </td>
                           <td  style="text-align: center">
                             99
                           </td>
                           <td  style="text-align: center">
-                            20
+                            ${goods.sales}개
                           </td>
                           <td  style="text-align: center">
-                            (주)류현진
+                            ${goods.brand }
                           </td>
                           <td  style="text-align: center">
-                              19.07.05
+                              ${goods.regdate}
                             </td>
                             <td  style="text-align: center">
-                              O
+                              <c:choose>
+                              
+                              	<c:when test="${goods.best ==0 }">
+                              		일반
+                              	</c:when>
+                              	<c:when test="${goods.best ==1 }">
+                              		인기
+                              	</c:when>
+                              </c:choose>
+                              
                             </td>
                             <td  style="text-align: center">
-                                30
+                                ${goods.discount}
                               </td>
                               <td  style="text-align: center">
                                 X
@@ -158,95 +184,10 @@ th{
                                 <button class="btn btn-danger btn-sm">삭제</button>
                               </td>
                         </tr>
-                        <tr>
-                          <td  style="text-align: center">
-                              <input type='checkbox' id='checkrow'>
-                          </td>
-                            <td style="text-align: center">
-                              <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'">0000002</Button>
-                            </td>
-                            <td style="text-align: center">
-                                글러브
-                            </td>
-                            <td width=10% height=10% style='text-align:center'>
-                              <img src = "${pageContext.request.contextPath }/resources/admin_bootstrap/assets/img/1.jpg" width=60%>
-                            </td>
-                            <td style="text-align: center">
-                                <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'">손에 상처가 안나게 해주는 강철가죽장갑</Button>
-                            </td>
-                            <td class="text-primary" style="text-align: center">
-                              999,999원
-                            </td>
-                            <td style="text-align: center">
-                              99
-                            </td >
-                            <td style="text-align:center">
-                              20
-                            </td>
-                            <td style="text-align: center">
-                              (주)류현진
-                            </td>
-                            <td style="text-align: center">
-                                19.07.05
-                              </td>
-                              <td style="text-align: center">
-                                O
-                              </td>
-                              <td style="text-align: center">
-                                  30
-                                </td>
-                                <td style="text-align: center">
-                                  X
-                                </td>
-                                <td style="text-align: center">
-                                  <button class="btn btn-danger btn-sm">삭제</button>
-                                </td>
-                          </tr><tr>
-                            <td  style="text-align: center">
-                              <input type='checkbox' id='checkrow'>
-                          </td>
-                              <td  style="text-align: center">
-                                  <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'">0000003</Button>
-                              </td>
-                              <td  style="text-align: center">
-                                  배트
-                              </td>
-                              <td width=10% height=10% style='text-align:center'>
-                                <img src="${pageContext.request.contextPath }/resources/admin_bootstrap/assets/img/2.png" width=60% >
-                              </td>
-                              <td  style='text-align: center'>
-                                  <Button id="modifygoods_btn" type="button" class="btn btn-link" onclick="location.href='modifyGoods'">우는애도 그치게 하는 전설의 불빠따
-                                    </td></Button>
-                              <td class="text-primary"  style="text-align: center">
-                                100,000,000원
-                              </td>
-                              <td  style="text-align: center">
-                                1
-                              </td>
-                              <td  style="text-align: center">
-                                99
-                              </td>
-                              <td  style="text-align: center">
-                                (주)추신수
-                              </td>
-                              <td  style="text-align: center">
-                                  92.05.17
-                                </td>
-                                <td  style="text-align: center">
-                                  O
-                                </td>
-                                <td  style="text-align: center">
-                                    0
-                                  </td>
-                                  <td  style="text-align: center">
-                                    X
-                                  </td>
-                                  <td  style="text-align: center">
-                                    <button class="btn btn-danger btn-sm">삭제</button>
-                                  </td>
-                            </tr>
+                       </c:forEach>
+                       
                       </tbody>
-                      <form>
+                      
                         <table id='table_footer'width="100%">
                       	<tr>
                       	 	<td align=left><button class='btn btn-dark btn-sm'>선택 삭제</button></td>
@@ -254,15 +195,23 @@ th{
                    
                       	<td style='text-align:center'>
                       		<ul class="pagination">
+										<c:if test="${PageMaker.prev}">
 										<li class="page-item disabled"><a class="page-link"
-											href="#">이전</a></li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">4</a></li>
-										<li class="page-item"><a class="page-link" href="#">5</a></li>
-										<li class="page-item"><a class="page-link" href="#">다음</a></li>
+											href="${PageMaker.startPage -1 }">이전</a></li>
+										</c:if>
+										<c:forEach var="num" begin="${PageMaker.startPage}" end="${PageMaker.endPage}">
+										<li class="page-item ${PageMaker.cri.pageNum==num?"active":"" }" id="btn_${num}">
+										<a class="page-link" href="<c:out value="${num}"/>"><c:out value="${num}"/></a></li>
+										</c:forEach>
+										<c:if test="${PageMaker.next}">
+										<li class="page-item"><a class="page-link"
+											href="${PageMaker.endPage+1 }">다음</a></li>
+										</c:if>
 									</ul>
+							<form id='pageForm' action="goodsList.do" method='POST'>
+								<input type='hidden' name='pageNum' value='${PageMaker.cri.pageNum}'>
+								<input type='hidden' name='amount' value='${PageMaker.cri.amount}'>
+							</form>
                       	</td>
                       		
                       	<td style='text-align:right;' width=30%>
@@ -292,7 +241,7 @@ th{
                       	 
                       	</tr>
                       </table>
-                      	</form>
+                      	
                     </table>
                   </div>
                 </div>
@@ -303,7 +252,6 @@ th{
             </div>
           </div>
         </div>
-      </div>
       </div>
 
       <footer class="footer">
@@ -366,7 +314,7 @@ th{
         <li class="header-title">Images</li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${pageContext.request.contextPath }/resources/admin_bootstrap/assets/img/sidebar-1.jpg" alt="">
+            <img src="${pageContext.request.contextPath }/resources/admin_bootstrap/assets/img/admin_img2.jpg" alt="">
           </a>
         </li>
         <li>
@@ -444,7 +392,8 @@ th{
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
   <script src="${pageContext.request.contextPath }/resources/admin_bootstrap/assets/js/plugins/arrive.min.js"></script>
- 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   <script type="text/javascript">
     var modifyForm = document.getElementById('modifygoods');
     var span = document.getElementsByClassName('close')[0];
@@ -460,12 +409,126 @@ th{
     }
 
   </script>
-  <script>
+ 
+  <script>	
+
+  //선택체크 부분 
+  //전체체크를 누르면 하위에 모든 체크박스가 체크된다.
+	$(document).on("click","#check_all",function(){
+		if($('#check_all').is(':checked')){
+			$('.check').prop('checked' , true);
+		}
+		else{
+			$('.check').prop('checked', false);
+			
+		}	
+	});
+	
+	//하위 항목중 하나라도 체크가 풀릴시 전체 체크도 풀려야한다.
+	 $(document).on('click','.check',function(){
+		if($("input[class='check']:checked").length<=${PageMaker.cri.amount}){
+			$("#check_all").prop("checked",false);
+			
+		}else{
+			$("#check_all").prop("checked",true);
+		}
+	
+	
+	});
   
-  </script>
-  <script>
     $(document).ready(function() {
+    
       $().ready(function() {
+    	 
+		//페이지 이동부분
+ 		 var actionForm =$("#pageForm");
+	
+ 		  $(".page-item a").on("click",function(e){
+				e.preventDefault(); //페이지 이동이없도록 처리한다.
+				console.log("click");
+				//FORM에 있는 pageNum값을 클릭한 페이지의 숫자로 바꿔주기 위한 코드.
+				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+				var data = {
+						//form의 페이지 넘과 어마운트를 받아온다(amount는 없어도 상관없다.)
+						pageNum: actionForm.find("input[name='pageNum']").val(), 
+						amount: actionForm.find("input[name='amount']").val()
+					};
+				console.log("pageNum="+data.pageNum);
+				var str = '';
+				var end = ${PageMaker.endPage};
+				var start = ${PageMaker.startPage};
+				var paging = '';
+	
+				$.ajax({
+					url:"goodsListPaging.do",
+					type:"GET",
+					data:data,
+					dataType:"json",
+					contentType:"application/json",
+					success:function(data){
+						console.log("성공!");
+						//여러가지 데이터 타입을 받아옴.
+						console.log(data);
+						console.log(data.goodsList);
+						console.log(data.goodsList[0]);
+						console.log(data.PageMaker.cri.pageNum);
+						//한 페이지당 굿즈 리스트를 5개씩 받기위해 설정. 초기에는 pageNum이 1 이고 ajax가 실행될 시기에는 2부터 시작하기에 가능하게만듬.
+						for( var i = data.PageMaker.cri.pageNum*5-5;i<data.PageMaker.cri.pageNum*5;i++){
+							var values=data.goodsList[i];
+							console.log(values);
+							str+="<tr><td  style='text-align: center'>"
+							//	 +"<div class='form-check'>"
+                          	//	 +"<label class='form-check-label'> "                         
+                            //	 +"<input class='form-check-input' type='checkbox'>"
+                            //    +"<span class='form-check-sign'>"
+                            //   +"<span class='check'></span>"
+                            //  +"</span></label></div>"
+                            +"<input type='checkbox' class='check'>"
+			                 +"</td>"
+			                 +"<td  style='text-align: center'>"
+			                 +"<Button id='modifygoods_btn"+i+" type='button' class='btn btn-link' onclick="+"location.href='modifyGoods'>"+values.GOODS_NUM+"</Button></td>"
+			             	 +"<td  style='text-align: center'>글러브</td>"
+			             	 +"<td width=10% height=10% style='text-align:center'>"
+			               	 +"<img src="+values.MAIN_IMG+" width=60% ></td>"
+			             	 +"<td  style='text-align: center'>"
+			                 +"<Button id='modifygoods_btn'"+i+" type='button' class='btn btn-link' onclick="+"'location.href='modifyGoods'>"+values.NAME+"</Button></td>"
+			             	 +"<td class='text-primary'  style='text-align: center'>"
+			               	 +values.PRICE+"원</td>"
+			             	 +"<td  style='text-align: center'>99</td>"
+			             	 +"<td  style='text-align: center'>"+values.SALES+"개</td>"
+			             	 +"<td  style='text-align: center'>"+values.BRAND+"</td>"
+			             	 +"<td  style='text-align: center'>"+values.REGDATE+"</td>"
+			               	 +"<td  style='text-align: center'>일반</td>"
+			               	 +"<td  style='text-align: center'>"+values.DISCOUNT+"</td>"
+			                 +"<td  style='text-align: center'>X</td>"
+			                 +"<td  style='text-align: center'><button class='btn btn-danger btn-sm'>삭제</button></td></tr>";
+							//마지막 페이지에서 증가 사이즈를 5의 폭으로 줬는데 마지막페이지가 5가 안될경우에는 오류가 나기 때문에 goodsList[i+1]가 null일경우 포문을 빠져나간다.
+							if(data.goodsList[i+1]==null)
+								break;
+								
+							
+						}
+						$('#goodsListTable').empty();
+						$('#goodsListTable').append(str);
+						
+						// 페이징 버튼 AJAX 처리
+						
+					
+					
+						
+						$('.page-item').removeClass("active");
+						$('#btn_' + actionForm.find("input[name='pageNum']").val()).addClass("active");
+					},
+					error:function(){
+						console.log("실패");
+					}
+					});
+				
+			  });
+ 
+    	  
+    	   
+    	  
     	  
     	  $(".sidebar-wrapper li").eq(2).addClass('active');
     	 
@@ -474,6 +537,8 @@ th{
         $sidebar = $('.sidebar');
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+        
 
         $full_page = $('.full-page');
 
@@ -541,6 +606,7 @@ th{
 
 
           var new_image = $(this).find("img").attr('src');
+          alert(new_image);
 
           if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
             $sidebar_img_container.fadeOut('fast', function() {

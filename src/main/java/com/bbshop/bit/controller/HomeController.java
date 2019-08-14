@@ -1,15 +1,7 @@
 package com.bbshop.bit.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
@@ -18,18 +10,18 @@ public class HomeController {
 	@RequestMapping("/")
 	public String index() {
 
-		return "shoppingMall/main/index";
+		return "index.do";
 	}
 
 	/* 쇼핑몰 */
 	// 쇼핑몰 - 메인
-	@RequestMapping("/shopping_main")
+	@RequestMapping("/shopping_main.do")
 	public String shopping_main() {
 		return "shoppingMall/main/shopping_main";
 	}
 
 	// 쇼핑몰 - 상품 리스트
-	@RequestMapping("/goods_list")
+	@RequestMapping("/goods_list.do")
 	public String goods_list() {
 		return "shoppingMall/goods/goods_list";
 	}
