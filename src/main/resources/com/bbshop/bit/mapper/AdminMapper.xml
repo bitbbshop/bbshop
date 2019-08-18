@@ -149,4 +149,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 
 </update>
 
+<select id="getOnetoone" resultType="com.bbshop.bit.domain.OnetooneVO">
+	select * from onetoone order by one_one_num desc
+</select>
+
+<select id="searchOtoCategory" parameterType="hashmap" resultType="com.bbshop.bit.domain.OnetooneVO">
+	select * from onetoone
+	where 
+	 <foreach collection="search" item ="category" open="(" close=")" separator="or">
+	one_category = #{category}
+	</foreach>
+	   
+</select>
+
 </mapper>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.bbshop.bit.domain.FAQVO;
 import com.bbshop.bit.domain.GoodsVO;
+import com.bbshop.bit.domain.OnetooneVO;
 
 public interface AdminService {
 
@@ -17,4 +18,6 @@ public interface AdminService {
 	public void deleteFAQ(Map<String, Object> deleteMap);
 	public FAQVO getFAQ(int faq_num);
 	public void ModifyFAQ(FAQVO faq);
+	public List<OnetooneVO> getOnetoone();
+	public List<OnetooneVO> searchOtoCategory(Map<String, Object> map);
 }

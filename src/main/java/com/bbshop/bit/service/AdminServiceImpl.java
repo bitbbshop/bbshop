@@ -15,6 +15,7 @@ import com.bbshop.bit.domain.Gd_GloveVO;
 import com.bbshop.bit.domain.Gd_ShoesVO;
 import com.bbshop.bit.domain.Gd_UniformVO;
 import com.bbshop.bit.domain.GoodsVO;
+import com.bbshop.bit.domain.OnetooneVO;
 import com.bbshop.bit.mapper.AdminMapper;
 
 @Service("adminService")
@@ -231,5 +232,43 @@ public class AdminServiceImpl implements AdminService {
 			System.out.println("수정 실패");
 		}
 		
+	}
+
+
+	@Override
+	public List<OnetooneVO> getOnetoone() {
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<OnetooneVO> list = new ArrayList<OnetooneVO>();
+		try {
+			list= mapper.getOnetoone();
+			System.out.println("List 불러오기 성공");
+		}
+		catch(Exception e) {
+			System.out.println("List 불러오기 실패");
+		}
+		
+		
+		return list;
+	}
+
+
+	@Override
+	public List<OnetooneVO> searchOtoCategory(Map<String,Object> map) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<OnetooneVO> list = new ArrayList<OnetooneVO>();
+		System.out.println(map);
+		try {
+			list= mapper.searchOtoCategory(map);
+			System.out.println(list);
+			System.out.println("List 불러오기 성공");
+		}
+		catch(Exception e) {
+			System.out.println(list);
+			System.out.println("List 불러오기 실패");
+		}
+		return list;
 	}
 }

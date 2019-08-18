@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bbshop.bit.domain.AdminPageDTO;
 import com.bbshop.bit.domain.Criteria;
@@ -28,6 +29,7 @@ import com.bbshop.bit.domain.Gd_GloveVO;
 import com.bbshop.bit.domain.Gd_ShoesVO;
 import com.bbshop.bit.domain.Gd_UniformVO;
 import com.bbshop.bit.domain.GoodsVO;
+import com.bbshop.bit.domain.OnetooneVO;
 import com.bbshop.bit.service.AdminService;
 
 @Controller
@@ -377,7 +379,66 @@ public class AdminController {
 	}
 	
 	@RequestMapping("service_OneToOne.do")
-	public String onetoone() {
+	public String onetoone(Model model,Criteria cri) {
+		
+		List<OnetooneVO> onetooneList =adminService.getOnetoone();
+		System.out.println(onetooneList);
+		
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,onetooneList.size());
+		
+		
+		
+		model.addAttribute("onetoone",onetooneList);
+		model.addAttribute("PageMaker",temp);
+		return "shoppingMall/admin/service_OneToOne";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="service_OnetoonePaging.do", consumes = "application/json", method= {RequestMethod.POST,RequestMethod.GET})
+	public Map<String,Object> OnetooneListPaging(Model model , Criteria cri,HttpServletRequest request) {
+		System.out.println("FAQ 페이지 입니다.");
+		List<OnetooneVO> onetooneList = adminService.getOnetoone();
+		System.out.println(onetooneList);
+		
+		cri.setAmount(5);
+		
+		
+		//post방식으로 넘어온 pageNum을 출력하고 그값을 criteria객체에 넣어준다.
+			System.out.println("pageNum:"+request.getParameter("pageNum"));
+			cri.setAmount(5);
+			cri.setPageNum(Integer.parseInt(request.getParameter("pageNum")));
+	
+		
+		AdminPageDTO temp = new AdminPageDTO(cri,onetooneList.size());
+		System.out.println(temp);
+		System.out.println(cri);
+		//json으로 전달하기 위해 맵형식으로 바꿔준다.
+		Map<String,Object> pagingList = new HashMap<String,Object>();
+		pagingList.put("oto", onetooneList);
+		pagingList.put("PageMaker",temp);
+		
+		System.out.println(pagingList);
+		return pagingList;
+	}
+	@RequestMapping(value="searchOtoCategory.do")
+	public String searchOtoCategory (HttpServletRequest request ,Model model,Criteria cri) {
+		System.out.println("여기들어오나욥");
+		String [] category = request.getParameterValues("Category");
+		List<String> searchList = new ArrayList<String>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		for(int i = 0 ; i < category.length;i++) {
+
+			searchList.add(i,category[i]);
+		}
+		map.put("search", searchList);
+		List<OnetooneVO> resultList=adminService.searchOtoCategory(map);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("onetoone" ,resultList);
+		model.addAttribute("PageMaker",temp);
+		
 		return "shoppingMall/admin/service_OneToOne";
 	}
 

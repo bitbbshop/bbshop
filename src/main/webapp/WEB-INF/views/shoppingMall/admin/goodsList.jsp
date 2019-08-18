@@ -69,19 +69,12 @@ th{
                   
                     <table class="table" style="background-color: rgba(230, 236, 236, 0.4)">
                       <thead class=" text-primary">
-                          <th style="text-align: center">
-                          <!-- 
-                          <div class="form-check">
-                          	<label class="form-check-label">
-                            <input class="form-check-input" id='check_all' type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                  </label>
-                                  </div> -->
-                         <input type='checkbox' id='check_all' class="form-check-input">
+                            <th style="text-align: center"  width=4%>
+                    
+                         <input type='checkbox' id='check_all'>
                           
                         </th>
+                        
                                <th style="text-align: center">
                           상품번호
                         </th>
