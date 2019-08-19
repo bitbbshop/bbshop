@@ -423,7 +423,6 @@ public class AdminController {
 	}
 	@RequestMapping(value="searchOtoCategory.do")
 	public String searchOtoCategory (HttpServletRequest request ,Model model,Criteria cri) {
-		System.out.println("여기들어오나욥");
 		String [] category = request.getParameterValues("Category");
 		List<String> searchList = new ArrayList<String>();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -433,6 +432,23 @@ public class AdminController {
 		}
 		map.put("search", searchList);
 		List<OnetooneVO> resultList=adminService.searchOtoCategory(map);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("onetoone" ,resultList);
+		model.addAttribute("PageMaker",temp);
+		
+		return "shoppingMall/admin/service_OneToOne";
+	}
+	
+	@RequestMapping("searchOtoAnswer.do")
+	public String searchOtoAnswer(HttpServletRequest request, Model model,Criteria cri) {
+		String answer = request.getParameter("Answer");
+		
+	
+		System.out.println("답변하기 리스트"+answer);
+		
+		List<OnetooneVO> resultList = adminService.searchOtoAnswer(answer);
 		cri.setAmount(5);
 		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
 		

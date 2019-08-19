@@ -157,10 +157,10 @@ label{
 							<form action="searchOtoAnswer.do">
 							
 								<td><label for="answer">답변여부</label> &nbsp; &nbsp;</td>
-								<td><input type='checkbox' id='answer_all' name='FAQ_category'>전체 &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='complete_answer' name='FAQ_category'>답변O &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='no_answer' name='FAQ_category'>답변X&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='submit' id='FAQ_submit' name='FAQ_category_submit' value='조회' class='btn btn-info btn-sm'>
+								<td><input type='checkbox' id='answer_all' name='Answer' value='answerAll'>전체 &nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='complete_answer' name='Answer' value='answerOk'>답변O &nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='no_answer' name='Answer' value='answerNo'>답변X&nbsp;&nbsp;&nbsp;</td>
+								<td><input type='submit' id='FAQ_submit' name='answer_category_submit' value='조회' class='btn btn-info btn-sm'>
 							</form>	
 						
 							</tr>
@@ -200,20 +200,20 @@ label{
                       		<tr>
                       		<td style='text-align:center'>${oto.one_one_num}</td>
                       		<td style='text-align:center'>${oto.one_category}</td>
-                      		<td style='text-align:center'><Button id="info_FAQ" type="button" class="btn btn-link" align=center>${oto.one_title}</Button></td>
+                      		<td style='text-align:center'><Button id="info_FAQ${status.index}" type="button" class="btn btn-link" align=center>${oto.one_title}</Button></td>
                       		<td style='text-align:center'>${oto.user_key}</td>
                       		<td style='text-align:center'>${oto.regdate }</td>
                       		<td style='text-align:center'>
                       		<c:choose>
                           	<c:when test="${oto.lev==0}">
-                              X
+                              <button class='btn btn-default btn-sm' value='답변 없음'>답변없음</button>
                             </c:when>
                                    	<c:when test="${oto.lev==1}">
-                              O
+                              <button class='btn btn-success btn-sm' value='답변 보기'>답변보기</button>
                             </c:when>
                                         
                           </c:choose></td>
-                      		<td style='text-align:center'><input type='button' id='goanswer' class='btn btn-info btn-sm' value='답변' onclick="location.href='answerOnetoone.do?answer=${oto.one_one_num}'"></td>
+                      		<td style='text-align:center'><input type='button' id='goanswer' class='btn btn-info btn-sm' value='답변하기' onclick="location.href='answerOnetoone.do?answer=${oto.one_one_num}'"></td>
                       	</tr>
                       	</c:forEach>
                       </tbody>
@@ -335,7 +335,7 @@ label{
     var info = document.getElementById('info_modal');
     var span = document.getElementsByClassName('close')[0];
 
-    $('#info_FAQ').click(function(){
+    $('#info_FAQ0').click(function(){
       info.style.display = "block";
     })
 
@@ -344,6 +344,46 @@ label{
         info.style.display="none";
       }
     }
+	
+    $('#info_FAQ1').click(function(){
+        info.style.display = "block";
+      })
+
+      window.onclick = function (event){
+        if(event.target == info){
+          info.style.display="none";
+        }
+      }
+
+    $('#info_FAQ2').click(function(){
+        info.style.display = "block";
+      })
+
+      window.onclick = function (event){
+        if(event.target == info){
+          info.style.display="none";
+        }
+      }
+
+    $('#info_FAQ3').click(function(){
+        info.style.display = "block";
+      })
+
+      window.onclick = function (event){
+        if(event.target == info){
+          info.style.display="none";
+        }
+      }
+
+    $('#info_FAQ4').click(function(){
+        info.style.display = "block";
+      })
+
+      window.onclick = function (event){
+        if(event.target == info){
+          info.style.display="none";
+        }
+      }
 
   </script>
   
@@ -393,10 +433,11 @@ label{
                       		+"<td style='text-align:center'>"+values.regdate+"</td>"
                       		+"<td style='text-align:center'>";
                       		
-                      		if(${oto.lev==0})
-                            str+=  "X</td>";
-                      		else{
-                      			str+= "O</td>";
+                      		if(values.lev==0){
+                            str+=  "<button class='btn btn-default btn-sm' value='답변 없음' disabled='true'>답변없음</button></td>";
+                      		}
+                            else{
+                      			str+= " <button class='btn btn-success btn-sm' value='답변 보기'>답변보기</button></td>";
                       		}
                             
                       		str+="<td style='text-align:center'><input type='button' id='goanswer' class='btn btn-info btn-sm' value='답변' onclick='location.href='"+"answerOnetoone.do?answer=${oto.one_one_num}></td></tr>";

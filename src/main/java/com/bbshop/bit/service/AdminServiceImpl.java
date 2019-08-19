@@ -271,4 +271,27 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return list;
 	}
+
+
+	@Override
+	public List<OnetooneVO> searchOtoAnswer(String answer) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<OnetooneVO> list = new ArrayList<OnetooneVO>();
+		
+		System.out.println("impl에서 answer값 ="+answer);
+		
+		try {
+
+			list =mapper.searchOtoAnswer(answer);
+			
+			System.out.println("답변여부 찾기 성공"+list);
+		}
+		catch(Exception e) {
+			System.out.println(list);
+			System.out.println("답변 여부 찾기 실패");
+		}
+		return list;
+	}
 }

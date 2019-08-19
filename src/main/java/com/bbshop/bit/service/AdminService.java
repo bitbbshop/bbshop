@@ -20,4 +20,5 @@ public interface AdminService {
 	public void ModifyFAQ(FAQVO faq);
 	public List<OnetooneVO> getOnetoone();
 	public List<OnetooneVO> searchOtoCategory(Map<String, Object> map);
+	public List<OnetooneVO> searchOtoAnswer(String answer);
 }
