@@ -1,6 +1,7 @@
 package com.bbshop.bit.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bbshop.bit.domain.CommunityVO;
 import com.bbshop.bit.domain.FAQVO;
 import com.bbshop.bit.domain.Gd_BallVO;
 import com.bbshop.bit.domain.Gd_BatVO;
@@ -16,6 +18,7 @@ import com.bbshop.bit.domain.Gd_ShoesVO;
 import com.bbshop.bit.domain.Gd_UniformVO;
 import com.bbshop.bit.domain.GoodsVO;
 import com.bbshop.bit.domain.OnetooneVO;
+import com.bbshop.bit.domain.ReportBoardVO;
 import com.bbshop.bit.mapper.AdminMapper;
 
 @Service("adminService")
@@ -293,5 +296,67 @@ public class AdminServiceImpl implements AdminService {
 			System.out.println("답변 여부 찾기 실패");
 		}
 		return list;
+	}
+
+
+	@Override
+	public List<ReportBoardVO> getReportBoard() {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<ReportBoardVO> ReportBoardList =mapper.getReportBoard();
+		return ReportBoardList;
+	}
+
+
+	@Override
+	public List<CommunityVO> getBoard(List<ReportBoardVO> reportList) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<CommunityVO> boardList = new ArrayList<CommunityVO>();
+		try {
+			List<Integer> reportNum = new ArrayList<Integer>();
+			for(int i = 0 ; i < reportList.size();i++) {
+		reportNum.add(i, (int) reportList.get(i).getBOARD_NUM());
+			}
+			System.out.println(reportNum);
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("reportNum", reportNum);
+		boardList = mapper.getBoard(map);
+		System.out.println("게시글 가져오기 성공");
+		System.out.println(boardList);
+		}
+		catch(Exception e) {
+			System.out.println("게시글 가져오기 실패");
+		}
+		return boardList;
+	}
+
+
+	@Override
+	public List<CommunityVO> getBoardAll() {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<CommunityVO> boardList = new ArrayList<CommunityVO>();
+		
+		try {
+			boardList=mapper.getBoardAll();
+			System.out.println("게시글 전체 불러오기 성공!!");
+		}
+		catch(Exception e) {
+			System.out.println("게시글 전체 불러오기 실패");
+		}
+		return boardList;
+	}
+
+
+	@Override
+	public void deleteBoard(Map<String, Object> deleteMap) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		mapper.deleteBoard(deleteMap);
 	}
 }

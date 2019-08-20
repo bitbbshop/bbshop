@@ -3,6 +3,7 @@ package com.bbshop.bit.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.bbshop.bit.domain.CommunityVO;
 import com.bbshop.bit.domain.FAQVO;
 import com.bbshop.bit.domain.Gd_BallVO;
 import com.bbshop.bit.domain.Gd_BatVO;
@@ -11,6 +12,7 @@ import com.bbshop.bit.domain.Gd_ShoesVO;
 import com.bbshop.bit.domain.Gd_UniformVO;
 import com.bbshop.bit.domain.GoodsVO;
 import com.bbshop.bit.domain.OnetooneVO;
+import com.bbshop.bit.domain.ReportBoardVO;
 
 public interface AdminMapper {
 
@@ -36,4 +38,8 @@ public interface AdminMapper {
 	public List<OnetooneVO> getOnetoone();
 	public List<OnetooneVO> searchOtoCategory(Map<String,Object> map);
 	public List<OnetooneVO> searchOtoAnswer(String answer);
+	public List<ReportBoardVO> getReportBoard();
+	public List<CommunityVO> getBoard(Map<String, Object> map);
+	public List<CommunityVO> getBoardAll();
+	public void deleteBoard(Map<String, Object> deleteMap);
 }

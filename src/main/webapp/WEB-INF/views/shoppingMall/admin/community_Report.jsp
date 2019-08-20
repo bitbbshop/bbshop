@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,38 +131,21 @@ body{font-family:NanumBarunpen, sans-serif}
                   <p class="card-category">신고 내용을 볼수있습니다.</p>
                 </div>
                 <div class="card-body">
-                  <table id='categoryList'>
 						<form>
+                  <table id='categoryList'>
 							<tr>
 								<td><label for="category">카테고리</label> &nbsp; &nbsp;</td>
-								<td><input type='checkbox' id='Report_all' name='Report_category'>전체 &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_abuse' name='Report_category'>욕설 &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_spread' name='Report_category'>도배&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_ad' name='Report_category'>광고&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_sex' name='Report_category'>음란물&nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_all' name='Report_category' value='Report_all'>전체 &nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_abuse' name='Report_category' value='Report_abuse'>욕설 &nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_spread' name='Report_category' value='Report_spread'>도배&nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_ad' name='Report_category' value='Report_ad'>광고&nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_sex' name='Report_category' value='Report_sex'>음란물&nbsp;&nbsp;&nbsp;</td>
 								<td><input type='submit' id='Report_submit' name='Report_category_submit' value='조회' class='btn btn-info'>
 								
-						</form>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<form>
 							
-								<td><label for="category">구단 게시판 분류</label> &nbsp; &nbsp;</td>
-								<td><input type='checkbox' id='Report_all' name='Team_Notice_category'>전체 &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_LG' name='LG_category'>LG &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_Doosan' name='Doosan_category'>두산&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_Hanwha' name='Hanwha_category'>한화&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_Samsung' name='Samsung_category'>삼성&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_Kia' name='Kia_category'>기아&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_NC' name='NC_category'>NC&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_SK' name='SK_category'>SK&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_KT' name='KT_category'>KT&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_Lotte' name='Lotte_category'>롯데&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_Kiwoom' name='Kiwoom_category'>키움&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='submit' id='notice_submit' name='notice_category_submit' value='조회' class='btn btn-info'>
-							</form>	
-						
 							</tr>
 				  </table>
+						</form>
                  
                   <div class="table-responsive">
       			   	<table class="table" style="background-color: rgba(230, 236, 236, 0.4)">
@@ -169,21 +153,18 @@ body{font-family:NanumBarunpen, sans-serif}
                     <th style="text-align: center"  width=2%>
                          <input type='checkbox' id='allcheck'>
                         </th>
+                        <th style="text-align: center">
+                          글번호
+                        </th>
                         
+                        <th style="text-align: center">
+                          글제목
+                        </th>
                         <th style="text-align: center"  width=10%>
                          신고 사유
                         </th>
-                        <th  style="text-align:center" width=10%>
-                         카테고리
-                        </th>
-                        <th style="text-align: center">
-                          글번호(구단)
-                        </th>
-                        <th style="text-align: center">
-                          글제목(구단)
-                        </th>
 					   <th style="text-align: center">
-                          회원 ID
+                          NICKNAME
                         </th>                
 				        <th style="text-align: center;" width=5%>
                 삭제          
@@ -191,18 +172,18 @@ body{font-family:NanumBarunpen, sans-serif}
                         
                       </thead>	
                       <tbody>
+                     <c:forEach var='report' items="${reportList}" varStatus="status">
                       	<tr>
                       		
                       		<td style='text-align:center'><input type='checkbox' id='check'>
-                      		<td style='text-align:center'>욕설</td>
-                      		<td style='text-align:center'>LG</td>
-                      		<td style='text-align:center'>1351</td>
-                      		<td style='text-align:center'><Button id="info_Report" type="button" class="btn btn-link" align=center>신고신고신고신고신고신고신고신고신고신고신고신고신고신고신고신고신고신고신고</Button></td>
-                      		<td style='text-align:center'>user2</td>
+                      		<td style='text-align:center'>${report.BOARD_NUM }</td>
+                      		<td style='text-align:center'><Button id="info_Report" type="button" class="btn btn-link" align=center>${boardList[status.index].TITLE}</Button></td>
+                      		<td style='text-align:center'>${report.RE_CATEGORY}</td>
+                      		<td style='text-align:center'>${report.WRITER }</td>
                       		<td style='text-align:center'><button id="ReportDelete" class="btn btn-danger">삭제</button>
                       	</tr>
                      	
-                      	
+                      	</c:forEach>
                       </tbody>
                       <table id='table_footer'width="100%">
                       	<tr>

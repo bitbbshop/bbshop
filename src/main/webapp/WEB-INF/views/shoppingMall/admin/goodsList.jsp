@@ -534,8 +534,8 @@ th{
 			             	 +"<td  style='text-align: center'>"+values.regdate+"</td>"
 			               	 +"<td  style='text-align: center'>일반</td>"
 			               	 +"<td  style='text-align: center'>"+values.discount+"</td>"
-			                 +"<td  style='text-align: center'>X</td>"
-			                 +"<td  style='text-align: center'><button class='btn btn-danger btn-sm'>삭제</button></td></tr>";
+			                 +"<td  style='text-align: center'>X</td>";
+			                 
 							//마지막 페이지에서 증가 사이즈를 5의 폭으로 줬는데 마지막페이지가 5가 안될경우에는 오류가 나기 때문에 goodsList[i+1]가 null일경우 포문을 빠져나간다.
 							if(data.goodsList[i+1]==null)
 								break;
