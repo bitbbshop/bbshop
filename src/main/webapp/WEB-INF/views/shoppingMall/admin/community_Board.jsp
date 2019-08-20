@@ -169,6 +169,12 @@ height:100%;}
          .pagination {
 	margin-left: 300px;
 }
+label{
+	font-weight:bold;
+	font-size:large;
+	color:#50bcdf;
+	
+}
 </style>
 </head>
 
@@ -189,14 +195,12 @@ height:100%;}
                   <h4 class="card-title ">커뮤니티 게시글관리</h4>
                   <p class="card-category">게시글 내용을 볼수있습니다.</p>
                 
-                   <div style='float:right'>
-                   <a href="community_Notice_write">
-          			    <i class="material-icons" style='color:white'>create</i></a></div>
+
               		
                 </div>
                 <div class="card-body">
-					<form>
-    	              <table id='categoryList'>
+					<form action="searchBoardCategory.do" >
+    	              <table id='categoryList' align=right>
 						<tr>
 							<td><label for="category">구단 게시판 분류</label> &nbsp; &nbsp;</td>
 							<td><input type='checkbox' id='notice_all' name='Team_Notice_category' value="all">전체 &nbsp;&nbsp;&nbsp;</td>
@@ -210,7 +214,7 @@ height:100%;}
 							<td><input type='checkbox' id='notice_KT' name='category' value='kt'>KT&nbsp;&nbsp;&nbsp;</td>
 							<td><input type='checkbox' id='notice_Lotte' name='category' value='lotte'>롯데&nbsp;&nbsp;&nbsp;</td>
 							<td><input type='checkbox' id='notice_Kiwoom' name='category' value='kiwoom'>키움&nbsp;&nbsp;&nbsp;</td>
-							<td><input type='submit' id='notice_submit' name='notice_category_submit' value='조회' class='btn btn-info'></td>
+							<td><input type='submit' id='notice_submit' name='notice_category_submit' value='조회' class='btn btn-info btn-sm'></td>
 						</tr>		
 					  </table>
 					</form>
@@ -253,7 +257,7 @@ height:100%;}
                       		<td style='text-align:center'><input type='checkbox' class='check'>
                       		<td style='text-align:center'><text id='board_numbtn${status.index}'>${board.BOARD_NUM}</text></td>
                       		<td style='text-align:center'>${board.TEAM_NAME}</td>
-                      		<td style='text-align:center'><Button id="info_QNA" type="button" class="btn btn-link" align=center>${board.TITLE }</Button></td>
+                      		<td style='text-align:center'><Button id="info_board${status.index}" type="button" class="btn btn-link" align=center>${board.TITLE }</Button></td>
                       		<td style='text-align:center'>${board.WRITER}</td>
                       		<td style='text-align:center'>${board.REGDATE}</td>
                       		<td style='text-align:center'>${board.HIT}</td>
@@ -329,31 +333,40 @@ height:100%;}
 			<span class='close'>&times;</span>
 			<h4 align =center>글조회</h4>
 			<div class='modal_body' style='padding:40px 50px;'>
-			<table width=100%>
+			<table width=100% style="text-align:center">
 				<tr>
 					<td>
-						<label for='writer'>작성자</label><input type='text' class=form-control id='content_writer' name='content_writer'></td> 
+						<label for='writer'>작성자</label></td>
+						<td><text id="writer"></text></td> 
 				</tr>
 				<tr>
 					<td>
-						<label for='title'>제목</label><input type='text' class=form-control id='content_title' name='content_title'></td>
+						<label for='title'>제목</label></td>
+						<td><text id="subject"></text></td>
 				</tr>
 				<tr>
 					<td>
-						<label for='goodsCategory'>상품 분류</label><
+						<label for='goodsCategory'>구단</label></td>
+						<td>
+						<text id="team"></text>
 														</td>
 				</tr>
 				<tr>
 					<td>
-						<label for='write_date'>작성일</label>
-						<input type='text' id='write_date' name='write_date' class='form-control'>
+						<label for='write_date'>작성일</label></td>
+						<td>
+						<text id="regdate"></text>
 						</td>
 				</tr>
 				<tr>
 					<td>
 						<label for='write_content'>내용</label>
-						<input width='70%'  type='text' id='write_content' name='write_content' class='form-control'></td>
+						</td>
+						<td><textarea id="contents"rows="10" cols="40"></textarea></td>
 				</tr>
+				
+				
+				
 				
 			</table>
 		
@@ -397,9 +410,47 @@ height:100%;}
     var info = document.getElementById('info_modal');
     var answer = document.getElementById('answer_modal');
 	var card = document.getElementsByClassName('card-header card-header-primary');
-    $('#info_QNA').click(function(){
-      info.style.display = "block";
-    })
+	$('#info_board0').click(function(){
+	      info.style.display = "block";
+	      $('#writer').html("${boardList[0].WRITER}")
+	      $('#subject').html("${boardList[0].TITLE}");
+	      $('#team').html("${boardList[0].TEAM_NAME}")
+	      $('#regdate').html("${boardList[0].REGDATE}")
+	      $('#contents').html("${boardList[0].BOARD_CONTENT}");
+	    });
+	$('#info_board1').click(function(){
+	      info.style.display = "block";
+
+	      $('#writer').html("${boardList[1].WRITER}")
+	      $('#subject').html("${boardList[1].TITLE}");
+	      $('#team').html("${boardList[1].TEAM_NAME}")
+	      $('#regdate').html("${boardList[1].REGDATE}")
+	      $('#contents').html("${boardList[1].BOARD_CONTENT}");});
+	$('#info_board2').click(function(){
+	      info.style.display = "block";
+
+	      $('#writer').html("${boardList[2].WRITER}")
+	      $('#subject').html("${boardList[2].TITLE}");
+	      $('#team').html("${boardList[2].TEAM_NAME}")
+	      $('#regdate').html("${boardList[2].REGDATE}")
+	      $('#contents').html("${boardList[2].BOARD_CONTENT}");});
+	$('#info_board3').click(function(){
+	      info.style.display = "block";
+
+	      $('#writer').html("${boardList[3].WRITER}")
+	      $('#subject').html("${boardList[3].TITLE}");
+	      $('#team').html("${boardList[3].TEAM_NAME}")
+	      $('#regdate').html("${boardList[3].REGDATE}")
+	      $('#contents').html("${boardList[3].BOARD_CONTENT}");});
+	$('#info_board4').click(function(){
+	      info.style.display = "block";
+
+	      $('#writer').html("${boardList[4].WRITER}")
+	      $('#subject').html("${boardList[4].TITLE}");
+	      $('#team').html("${boardList[4].TEAM_NAME}")
+	      $('#regdate').html("${boardList[4].REGDATE}")
+	      $('#contents').html("${boardList[4].BOARD_CONTENT}");})
+	    
 
     $('#goanswer1').click(function(){
     	answer.style.display='block';

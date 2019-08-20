@@ -199,4 +199,24 @@ from community
 	#{delete.value}
 	</foreach>
 </delete>
+
+<select id="searchBoardCategory" resultType="com.bbshop.bit.domain.CommunityVO">
+	select boardnum BOARD_NUM,team_name,title, board_content,uploadfile,writer,hit,regdate,moddate,reply_count,report_num,user_key
+	from community
+	where
+	<foreach collection="search" item ="category" open="(" close=")" separator="or">
+	team_name = #{category}
+	</foreach>
+	
+</select>
+
+<select id="searchReportCategory" resultType="com.bbshop.bit.domain.ReportBoardVO">
+select *
+from report_board
+where
+	<foreach collection="search" item ="category" open="(" close=")" separator="or">
+	re_category = #{category}
+	</foreach>
+	
+</select>
 </mapper>

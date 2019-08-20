@@ -532,6 +532,48 @@ public class AdminController {
 	String msg = "삭제성공";
 	return msg;
 }
+	@RequestMapping(value="searchBoardCategory.do")
+	public String searchBoardCategory(Model model, HttpServletRequest request,Criteria cri) {
+		String [] category = request.getParameterValues("category");
+		List<String> searchList = new ArrayList<String>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		for(int i = 0 ; i < category.length;i++) {
+
+			searchList.add(i,category[i]);
+		}
+		map.put("search", searchList);
+		List<CommunityVO> resultList=adminService.searchBoardCategory(map);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("boardList" ,resultList);
+		model.addAttribute("PageMaker",temp);
+		
+		return "shoppingMall/admin/community_Board";
+	}
+	
+	@RequestMapping(value="searchReportCategory.do")
+	public String searchReportCategory(Model model, HttpServletRequest request,Criteria cri) {
+		String [] category = request.getParameterValues("category");
+		List<String> searchList = new ArrayList<String>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		for(int i = 0 ; i < category.length;i++) {
+
+			searchList.add(i,category[i]);
+		}
+		map.put("search", searchList);
+		List<ReportBoardVO> resultList=adminService.searchReportCategory(map);
+		List<CommunityVO> boardList = adminService.getBoard(resultList);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("reportList" ,resultList);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("PageMaker",temp);
+		
+		return "shoppingMall/admin/community_Report";
+	}
+	
 	@RequestMapping(value="adminAccount.do" ,method=RequestMethod.POST)
 	public String adminAccount() {
 		return "shoppingMall/admin/adminAccount";

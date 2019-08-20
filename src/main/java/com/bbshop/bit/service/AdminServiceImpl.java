@@ -359,4 +359,27 @@ public class AdminServiceImpl implements AdminService {
 		sqlSession.getMapper(AdminMapper.class);
 		mapper.deleteBoard(deleteMap);
 	}
+
+
+	@Override
+	public List<CommunityVO> searchBoardCategory(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<CommunityVO> resultList = mapper.searchBoardCategory(map);
+		System.out.println("카테고리에서 찾은것"+resultList);
+		return resultList;
+	}
+
+
+	@Override
+	public List<ReportBoardVO> searchReportCategory(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<ReportBoardVO> resultList = mapper.searchReportCategory(map);
+		System.out.println("카테고리에서 찾은것"+resultList);
+		return resultList;
+		
+	}
 }

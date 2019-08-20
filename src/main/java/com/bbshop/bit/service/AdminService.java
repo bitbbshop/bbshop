@@ -27,4 +27,6 @@ public interface AdminService {
 	public List<CommunityVO> getBoard(List<ReportBoardVO> reportList);
 	public List<CommunityVO> getBoardAll();
 	public void deleteBoard(Map<String, Object> deleteMap);
+	public List<CommunityVO> searchBoardCategory(Map<String, Object> map);
+	public List<ReportBoardVO> searchReportCategory(Map<String, Object> map);
 }

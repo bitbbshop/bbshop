@@ -110,6 +110,12 @@ body{font-family:NanumBarunpen, sans-serif}
      .pagination {
 	margin-left: 300px;
 }
+label{
+	font-weight:bold;
+	font-size:large;
+	color:#50bcdf;
+	
+}
 </style>
 </head>
 
@@ -131,16 +137,16 @@ body{font-family:NanumBarunpen, sans-serif}
                   <p class="card-category">신고 내용을 볼수있습니다.</p>
                 </div>
                 <div class="card-body">
-						<form>
-                  <table id='categoryList'>
+						<form action=searchReportCategory.do>
+                  <table id='categoryList' align=right>
 							<tr>
 								<td><label for="category">카테고리</label> &nbsp; &nbsp;</td>
-								<td><input type='checkbox' id='Report_all' name='Report_category' value='Report_all'>전체 &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_abuse' name='Report_category' value='Report_abuse'>욕설 &nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_spread' name='Report_category' value='Report_spread'>도배&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_ad' name='Report_category' value='Report_ad'>광고&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='checkbox' id='Report_sex' name='Report_category' value='Report_sex'>음란물&nbsp;&nbsp;&nbsp;</td>
-								<td><input type='submit' id='Report_submit' name='Report_category_submit' value='조회' class='btn btn-info'>
+								<td><input type='checkbox' id='Report_all' name='category' value='Report_all'>전체 &nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_abuse' name='category' value='욕설'>욕설 &nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_spread' name='category' value='도배'>도배&nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_ad' name='category' value='광고'>광고&nbsp;&nbsp;&nbsp;</td>
+								<td><input type='checkbox' id='Report_sex' name='category' value='음란물'>음란물&nbsp;&nbsp;&nbsp;</td>
+								<td><input type='submit' id='Report_submit' name='Report_category_submit' value='조회' class='btn btn-info btn-sm'>
 								
 							
 							</tr>
@@ -151,7 +157,7 @@ body{font-family:NanumBarunpen, sans-serif}
       			   	<table class="table" style="background-color: rgba(230, 236, 236, 0.4)">
                       <thead class=" text-primary">
                     <th style="text-align: center"  width=2%>
-                         <input type='checkbox' id='allcheck'>
+                         <input type='checkbox' id='check_all'>
                         </th>
                         <th style="text-align: center">
                           글번호
@@ -166,41 +172,46 @@ body{font-family:NanumBarunpen, sans-serif}
 					   <th style="text-align: center">
                           NICKNAME
                         </th>                
-				        <th style="text-align: center;" width=5%>
-                삭제          
-                        </th>
+				      
                         
                       </thead>	
                       <tbody>
                      <c:forEach var='report' items="${reportList}" varStatus="status">
                       	<tr>
                       		
-                      		<td style='text-align:center'><input type='checkbox' id='check'>
+                      		<td style='text-align:center'><input type='checkbox' class='check'>
                       		<td style='text-align:center'>${report.BOARD_NUM }</td>
-                      		<td style='text-align:center'><Button id="info_Report" type="button" class="btn btn-link" align=center>${boardList[status.index].TITLE}</Button></td>
+                      		<td style='text-align:center'><Button id="info_Report${status.index}" type="button" class="btn btn-link" align=center>${boardList[status.index].TITLE}</Button></td>
                       		<td style='text-align:center'>${report.RE_CATEGORY}</td>
                       		<td style='text-align:center'>${report.WRITER }</td>
-                      		<td style='text-align:center'><button id="ReportDelete" class="btn btn-danger">삭제</button>
                       	</tr>
                      	
                       	</c:forEach>
                       </tbody>
                       <table id='table_footer'width="100%">
                       	<tr>
-                      	 	<td align=left><button class='btn btn-dark btn-sm'>선택 삭제</button></td>
+                      	 	<td align=left><button class="btn btn-danger btn-sm">선택 삭제</button></td>
                       
                    
                       	<td style='text-align:center'>
                       		<ul class="pagination">
+										<c:if test="${PageMaker.prev}">
 										<li class="page-item disabled"><a class="page-link"
-											href="#">이전</a></li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item"><a class="page-link" href="#">4</a></li>
-										<li class="page-item"><a class="page-link" href="#">5</a></li>
-										<li class="page-item"><a class="page-link" href="#">다음</a></li>
+											href="${PageMaker.startPage -1 }">이전</a></li>
+										</c:if>
+										<c:forEach var="num" begin="${PageMaker.startPage}" end="${PageMaker.endPage}">
+										<li class="page-item ${PageMaker.cri.pageNum==num?"active":"" }" id="btn_${num}">
+										<a class="page-link" href="<c:out value="${num}"/>"><c:out value="${num}"/></a></li>
+										</c:forEach>
+										<c:if test="${PageMaker.next}">
+										<li class="page-item"><a class="page-link"
+											href="${PageMaker.endPage+1 }">다음</a></li>
+										</c:if>
 									</ul>
+							<form id='pageForm' action="goodsList.do" method='POST'>
+								<input type='hidden' name='pageNum' value='${PageMaker.cri.pageNum}'>
+								<input type='hidden' name='amount' value='${PageMaker.cri.amount}'>
+							</form>
                       	</td>
                       		
                       	<td style='text-align:right;' width=30%>
@@ -245,26 +256,34 @@ body{font-family:NanumBarunpen, sans-serif}
 			<span class='close'>&times;</span>
 			<h4 align =center>글조회</h4>
 			<div class='modal_body' style='padding:40px 50px;'>
-			<table width=100%>
+			<table width=100% style="text-align:center">
 				<tr>
 					<td>
-						<label for='category'>카테고리</label><input type='text' class=form-control id='report_category' name='report_category'></td> 
+						<label for='category'>글 번호</label></td>
+					<td><text id='board_num'></text></td> 
 				</tr>
 				<tr>
 					<td>
-						<label for='title'>제목</label><input type='text' class=form-control id='content_title' name='content_title'></td>
+						<label for='title'>제목</label></td>
+						<td><text id='title'></text></td>
 				</tr>
-				<tr>
-					<td>
-						<label for='content'>신고 내용</label>
 				
-														</td>
+				<tr>
+					<td>
+						<label for='content'>글쓴이</label></td>
+						<td><text id='writer'></text></td>
 				</tr>
 				<tr>
 					<td>
-						<textarea id='report_contents'></textarea>
-						</td>
+						<label for='content'>신고 사유</label></td>
+						<td><text id='re_category'></text></td>
 				</tr>
+				<tr>
+					<td>
+						<label for='contents'>신고 내용</label></td>
+						<td><textarea id='contents' rows="10" cols="40"></textarea></td>
+				</tr>
+			
 				
 			</table>
 			<table width=100%>
@@ -276,122 +295,50 @@ body{font-family:NanumBarunpen, sans-serif}
 		</div>
 	 </div>
 
-
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="https://creative-tim.com/presentation">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="https://www.creative-tim.com/license">
-                  Licenses
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-        <i class="fa fa-cog fa-2x"> </i>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="header-title"> Sidebar Filters</li>
-        <li class="adjustments-line">
-          <a href="javascript:void(0)" class="switch-trigger active-color">
-            <div class="badge-colors ml-auto mr-auto">
-              <span class="badge filter badge-purple" data-color="purple"></span>
-              <span class="badge filter badge-azure" data-color="azure"></span>
-              <span class="badge filter badge-green" data-color="green"></span>
-              <span class="badge filter badge-warning" data-color="orange"></span>
-              <span class="badge filter badge-danger" data-color="danger"></span>
-              <span class="badge filter badge-rose active" data-color="rose"></span>
-            </div>
-            <div class="clearfix"></div>
-          </a>
-        </li>
-        <li class="header-title">Images</li>
-        <li class="active">
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
-          </a>
-        </li>
-        <li class="button-container">
-          <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank" class="btn btn-primary btn-block">Free Download</a>
-        </li>
-        <!-- <li class="header-title">Want more components?</li>
-            <li class="button-container">
-                <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
-                  Get the pro version
-                </a>
-            </li> -->
-        <li class="button-container">
-          <a href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block">
-            View Documentation
-          </a>
-        </li>
-        <li class="button-container github-star">
-          <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-        </li>
-        <li class="header-title">Thank you for 95 shares!</li>
-        <li class="button-container text-center">
-          <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
-          <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50</button>
-          <br>
-          <br>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
-  
   <script type="text/javascript">
     var info = document.getElementById('info_modal');
     var span = document.getElementsByClassName('close')[0];
 
-    $('#info_Report').click(function(){
-      info.style.display = "block";
-    })
-
+    $('#info_Report0').click(function(){
+	      info.style.display = "block";
+	      $('#board_num').html("${reportList[0].BOARD_NUM}")
+	      $('#writer').html("${reportList[0].WRITER}")
+	      $('#title').html("${boardList[0].TITLE}");
+	      $('#re_category').html("${reportList[0].RE_CATEGORY}")
+	      $('#contents').html("${boardList[0].BOARD_CONTENT}");
+	 });
+    $('#info_Report1').click(function(){
+	      info.style.display = "block";
+	      $('#board_num').html("${reportList[1].BOARD_NUM}")
+	      $('#writer').html("${reportList[1].WRITER}")
+	      $('#title').html("${boardList[1].TITLE}");
+	      $('#re_category').html("${reportList[1].RE_CATEGORY}")
+	      $('#contents').html("${boardList[1].BOARD_CONTENT}");
+	 });
+    $('#info_Report2').click(function(){
+		      info.style.display = "block";
+		      $('#board_num').html("${reportList[2].BOARD_NUM}")
+		      $('#writer').html("${reportList[2].WRITER}")
+		      $('#title').html("${boardList[2].TITLE}");
+		      $('#re_category').html("${reportList[2].RE_CATEGORY}")
+		      $('#contents').html("${boardList[2].BOARD_CONTENT}");
+    }); 
+    $('#info_Report3').click(function(){
+			      info.style.display = "block";
+			      $('#board_num').html("${reportList[3].BOARD_NUM}")
+			      $('#writer').html("${reportList[3].WRITER}")
+			      $('#title').html("${boardList[3].TITLE}");
+			      $('#re_category').html("${reportList[3].RE_CATEGORY}")
+			      $('#contents').html("${boardList[3].BOARD_CONTENT}");   
+    }); 
+    $('#info_Report4').click(function(){
+				      info.style.display = "block";
+				      $('#board_num').html("${reportList[4].BOARD_NUM}")
+				      $('#writer').html("${reportList[4].WRITER}")
+				      $('#title').html("${boardList[4].TITLE}");
+				      $('#re_category').html("${reportList[4].RE_CATEGORY}")
+				      $('#contents').html("${boardList[4].BOARD_CONTENT}");
+	 });
     window.onclick = function (event){
       if(event.target == info){
         info.style.display="none";
@@ -420,21 +367,16 @@ body{font-family:NanumBarunpen, sans-serif}
     			}
     		});
     	 
-    		
     		$('#anserSubmit').click(function(){
     			//id가 contents인 textarea에 에디터에서 대입해온다
     			editor_object.getById['contents'].exec("UPDATE_CONTENTS_FILED",[]);
     			//이부분에서 서브밋발생
-    			$('answerForm').submit();
-    			
-    			
+    			$('answerForm').submit();	
     		});
     	 
-    	 
-    	
       $().ready(function() {
     	
-    	  $(".sidebar-wrapper li").eq(7).addClass('active');
+    	$(".sidebar-wrapper li").eq(7).addClass('active');
     	  
         $sidebar = $('.sidebar');
 
