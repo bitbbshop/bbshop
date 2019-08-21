@@ -1,6 +1,7 @@
 package com.bbshop.bit.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bbshop.bit.domain.CommunityVO;
 import com.bbshop.bit.domain.FAQVO;
 import com.bbshop.bit.domain.Gd_BallVO;
 import com.bbshop.bit.domain.Gd_BatVO;
@@ -15,6 +17,8 @@ import com.bbshop.bit.domain.Gd_GloveVO;
 import com.bbshop.bit.domain.Gd_ShoesVO;
 import com.bbshop.bit.domain.Gd_UniformVO;
 import com.bbshop.bit.domain.GoodsVO;
+import com.bbshop.bit.domain.OnetooneVO;
+import com.bbshop.bit.domain.ReportBoardVO;
 import com.bbshop.bit.mapper.AdminMapper;
 
 @Service("adminService")
@@ -231,5 +235,173 @@ public class AdminServiceImpl implements AdminService {
 			System.out.println("수정 실패");
 		}
 		
+	}
+
+
+	@Override
+	public List<OnetooneVO> getOnetoone() {
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<OnetooneVO> list = new ArrayList<OnetooneVO>();
+		try {
+			list= mapper.getOnetoone();
+			System.out.println("List 불러오기 성공");
+		}
+		catch(Exception e) {
+			System.out.println("List 불러오기 실패");
+		}
+		
+		
+		return list;
+	}
+
+
+	@Override
+	public List<OnetooneVO> searchOtoCategory(Map<String,Object> map) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<OnetooneVO> list = new ArrayList<OnetooneVO>();
+		System.out.println(map);
+		try {
+			list= mapper.searchOtoCategory(map);
+			System.out.println(list);
+			System.out.println("List 불러오기 성공");
+		}
+		catch(Exception e) {
+			System.out.println(list);
+			System.out.println("List 불러오기 실패");
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<OnetooneVO> searchOtoAnswer(String answer) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<OnetooneVO> list = new ArrayList<OnetooneVO>();
+		
+		System.out.println("impl에서 answer값 ="+answer);
+		
+		try {
+
+			list =mapper.searchOtoAnswer(answer);
+			
+			System.out.println("답변여부 찾기 성공"+list);
+		}
+		catch(Exception e) {
+			System.out.println(list);
+			System.out.println("답변 여부 찾기 실패");
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<ReportBoardVO> getReportBoard() {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<ReportBoardVO> ReportBoardList =mapper.getReportBoard();
+		return ReportBoardList;
+	}
+
+
+	@Override
+	public List<CommunityVO> getBoard(List<ReportBoardVO> reportList) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<CommunityVO> boardList = new ArrayList<CommunityVO>();
+		try {
+			List<Integer> reportNum = new ArrayList<Integer>();
+			for(int i = 0 ; i < reportList.size();i++) {
+		reportNum.add(i, (int) reportList.get(i).getBOARD_NUM());
+			}
+			System.out.println(reportNum);
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("reportNum", reportNum);
+		boardList = mapper.getBoard(map);
+		System.out.println("게시글 가져오기 성공");
+		System.out.println(boardList);
+		}
+		catch(Exception e) {
+			System.out.println("게시글 가져오기 실패");
+		}
+		return boardList;
+	}
+
+
+	@Override
+	public List<CommunityVO> getBoardAll() {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<CommunityVO> boardList = new ArrayList<CommunityVO>();
+		
+		try {
+			boardList=mapper.getBoardAll();
+			System.out.println("게시글 전체 불러오기 성공!!");
+		}
+		catch(Exception e) {
+			System.out.println("게시글 전체 불러오기 실패");
+		}
+		return boardList;
+	}
+
+
+	@Override
+	public void deleteBoard(Map<String, Object> deleteMap) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		mapper.deleteBoard(deleteMap);
+	}
+
+
+	@Override
+	public List<CommunityVO> searchBoardCategory(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<CommunityVO> resultList = mapper.searchBoardCategory(map);
+		System.out.println("카테고리에서 찾은것"+resultList);
+		return resultList;
+	}
+
+
+	@Override
+	public List<ReportBoardVO> searchReportCategory(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		List<ReportBoardVO> resultList = mapper.searchReportCategory(map);
+		System.out.println("카테고리에서 찾은것"+resultList);
+		return resultList;
+		
+	}
+
+
+	@Override
+	public void sanctionsUser(String user ,String board_num) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		try {
+			mapper.sanctionUser(user);
+			System.out.println("user 경고 증가 성공");
+		}
+		catch(Exception e) {
+			System.out.println("user 경고 증가 실패");
+		}
+		try {
+		mapper.sanctionBoard(board_num);
+		System.out.println("board_num 삭제 성공");
+		}
+		catch(Exception e) {
+			System.out.println("board_num 삭제 실패");
+		}
 	}
 }

@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bbshop.bit.domain.AdminPageDTO;
+import com.bbshop.bit.domain.CommunityVO;
 import com.bbshop.bit.domain.Criteria;
 import com.bbshop.bit.domain.FAQVO;
 import com.bbshop.bit.domain.Gd_BallVO;
@@ -28,6 +29,8 @@ import com.bbshop.bit.domain.Gd_GloveVO;
 import com.bbshop.bit.domain.Gd_ShoesVO;
 import com.bbshop.bit.domain.Gd_UniformVO;
 import com.bbshop.bit.domain.GoodsVO;
+import com.bbshop.bit.domain.OnetooneVO;
+import com.bbshop.bit.domain.ReportBoardVO;
 import com.bbshop.bit.service.AdminService;
 
 @Controller
@@ -377,7 +380,82 @@ public class AdminController {
 	}
 	
 	@RequestMapping("service_OneToOne.do")
-	public String onetoone() {
+	public String onetoone(Model model,Criteria cri) {
+		
+		List<OnetooneVO> onetooneList =adminService.getOnetoone();
+		System.out.println(onetooneList);
+		
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,onetooneList.size());
+		
+		
+		
+		model.addAttribute("onetoone",onetooneList);
+		model.addAttribute("PageMaker",temp);
+		return "shoppingMall/admin/service_OneToOne";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="service_OnetoonePaging.do", consumes = "application/json", method= {RequestMethod.POST,RequestMethod.GET})
+	public Map<String,Object> OnetooneListPaging(Model model , Criteria cri,HttpServletRequest request) {
+		System.out.println("FAQ 페이지 입니다.");
+		List<OnetooneVO> onetooneList = adminService.getOnetoone();
+		System.out.println(onetooneList);
+		
+		cri.setAmount(5);
+		
+		
+		//post방식으로 넘어온 pageNum을 출력하고 그값을 criteria객체에 넣어준다.
+			System.out.println("pageNum:"+request.getParameter("pageNum"));
+			cri.setAmount(5);
+			cri.setPageNum(Integer.parseInt(request.getParameter("pageNum")));
+	
+		
+		AdminPageDTO temp = new AdminPageDTO(cri,onetooneList.size());
+		System.out.println(temp);
+		System.out.println(cri);
+		//json으로 전달하기 위해 맵형식으로 바꿔준다.
+		Map<String,Object> pagingList = new HashMap<String,Object>();
+		pagingList.put("oto", onetooneList);
+		pagingList.put("PageMaker",temp);
+		
+		System.out.println(pagingList);
+		return pagingList;
+	}
+	@RequestMapping(value="searchOtoCategory.do")
+	public String searchOtoCategory (HttpServletRequest request ,Model model,Criteria cri) {
+		String [] category = request.getParameterValues("Category");
+		List<String> searchList = new ArrayList<String>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		for(int i = 0 ; i < category.length;i++) {
+
+			searchList.add(i,category[i]);
+		}
+		map.put("search", searchList);
+		List<OnetooneVO> resultList=adminService.searchOtoCategory(map);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("onetoone" ,resultList);
+		model.addAttribute("PageMaker",temp);
+		
+		return "shoppingMall/admin/service_OneToOne";
+	}
+	
+	@RequestMapping("searchOtoAnswer.do")
+	public String searchOtoAnswer(HttpServletRequest request, Model model,Criteria cri) {
+		String answer = request.getParameter("Answer");
+		
+	
+		System.out.println("답변하기 리스트"+answer);
+		
+		List<OnetooneVO> resultList = adminService.searchOtoAnswer(answer);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("onetoone" ,resultList);
+		model.addAttribute("PageMaker",temp);
+		
 		return "shoppingMall/admin/service_OneToOne";
 	}
 
@@ -386,23 +464,130 @@ public class AdminController {
 		return "shoppingMall/admin/service_QNA";
 	}
 
-	@RequestMapping("community_Notice.do")
-	public String community_Notice() {
-		return "shoppingMall/admin/community_Notice";
+	@RequestMapping("community_Board.do")
+	public String community_Notice(Model model, Criteria cri) {
+		
+		List<CommunityVO> boardList = adminService.getBoardAll();
+		System.out.println(boardList);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,boardList.size());
+		
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("PageMaker",temp);
+		return "shoppingMall/admin/community_Board";
 	}
 
 
-	@RequestMapping("report.do")
-	public String report() {
-		return "shoppingMall/admin/report";
+	@RequestMapping("community_Report.do")
+	public String report(Model model,Criteria cri) {
+		List<ReportBoardVO> reportList = adminService.getReportBoard();
+		//Map<String,Object> reportMap = new HashMap<String,Object>();
+		System.out.println(reportList);
+		List<CommunityVO> boardList = adminService.getBoard(reportList);
+		
+		
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,reportList.size());
+		model.addAttribute("reportList",reportList);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("PageMaker",temp);
+		
+		return "shoppingMall/admin/community_Report";
 	}
+	@ResponseBody
+	@RequestMapping(value="boardListPaging.do" , consumes = "application/json", method= {RequestMethod.POST,RequestMethod.GET})
+	public Map<String,Object> boardListPaging(Model model, Criteria cri, HttpServletRequest request) {
+		List<CommunityVO> boardList = adminService.getBoardAll();
+		cri.setAmount(5);
+		//Get방식으로 넘어온 pageNum을 출력하고 그값을 criteria객체에 넣어준다.
+			System.out.println("pageNum:"+request.getParameter("pageNum"));
+			cri.setAmount(5);
+			cri.setPageNum(Integer.parseInt(request.getParameter("pageNum")));
+		AdminPageDTO temp = new AdminPageDTO(cri,boardList.size());
+		System.out.println(temp);
+		System.out.println(cri);
+		//json으로 전달하기 위해 맵형식으로 바꿔준다.
+		Map<String,Object> pagingList = new HashMap<String,Object>();
+		pagingList.put("board",boardList);
+		pagingList.put("PageMaker",temp);
+		
+		System.out.println(pagingList);
+		return pagingList;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="selectBoardDelete.do" ,method=RequestMethod.POST)
+	public String selectBoardDelete(HttpServletRequest request){
+	List<Integer> delnum = new ArrayList<Integer>();
+	Map<String,Object> deleteMap = new HashMap<String,Object>();
+	String[] num = request.getParameterValues("boardnum");
+	
+	for(int i = 0 ; i <num.length;i++) {
+		delnum.add(Integer.parseInt(num[i]));
+	}
+	System.out.println(delnum);
+	deleteMap.put("delnum", delnum);
+	
+	adminService.deleteBoard(deleteMap);
+	String msg = "삭제성공";
+	return msg;
+}
+	@RequestMapping(value="searchBoardCategory.do")
+	public String searchBoardCategory(Model model, HttpServletRequest request,Criteria cri) {
+		String [] category = request.getParameterValues("category");
+		List<String> searchList = new ArrayList<String>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		for(int i = 0 ; i < category.length;i++) {
 
-	@RequestMapping("adminAccount.do")
+			searchList.add(i,category[i]);
+		}
+		map.put("search", searchList);
+		List<CommunityVO> resultList=adminService.searchBoardCategory(map);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("boardList" ,resultList);
+		model.addAttribute("PageMaker",temp);
+		
+		return "shoppingMall/admin/community_Board";
+	}
+	
+	@RequestMapping(value="searchReportCategory.do")
+	public String searchReportCategory(Model model, HttpServletRequest request,Criteria cri) {
+		String [] category = request.getParameterValues("category");
+		List<String> searchList = new ArrayList<String>();
+		Map<String,Object> map = new HashMap<String,Object>();
+		for(int i = 0 ; i < category.length;i++) {
+
+			searchList.add(i,category[i]);
+		}
+		map.put("search", searchList);
+		List<ReportBoardVO> resultList=adminService.searchReportCategory(map);
+		List<CommunityVO> boardList = adminService.getBoard(resultList);
+		cri.setAmount(5);
+		AdminPageDTO temp = new AdminPageDTO(cri,resultList.size());
+		
+		model.addAttribute("reportList" ,resultList);
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("PageMaker",temp);
+		
+		return "shoppingMall/admin/community_Report";
+	}
+	
+	@RequestMapping(value="adminAccount.do" ,method=RequestMethod.POST)
 	public String adminAccount() {
 		return "shoppingMall/admin/adminAccount";
 	}
 
-	
+	@RequestMapping(value="sanctions.do" ,method=RequestMethod.GET)
+	public String sanctionsUser(@RequestParam("writer")String user, @RequestParam("board_num") String board_num) {
+		System.out.println("신고당한 유저 닉네임:"+user);
+		System.out.println("신고당한 게시글 번호:"+board_num);
+		
+		adminService.sanctionsUser(user ,board_num);
+		
+		return "community_Report.do";
+	}
 	
 	
 }

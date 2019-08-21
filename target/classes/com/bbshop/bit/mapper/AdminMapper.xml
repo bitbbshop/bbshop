@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	<result property ="dtl_img2" column ="dtl_img2"/>
 	<result property ="best" column ="best"/>
 	<result property ="discount" column ="discount"/>
-	<result property ="SAILS" column ="SAILS"/>
+	<result property ="sales" column ="sales"/>
 	<result property ="regdate" column ="regdate"/>
 	<result property ="brand" column ="brand"/>
 </resultMap>
@@ -148,5 +148,84 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 	where faq_num=#{FAQ_NUM}
 
 </update>
+
+<select id="getOnetoone" resultType="com.bbshop.bit.domain.OnetooneVO">
+	select * from onetoone order by one_one_num desc
+</select>
+
+<select id="searchOtoCategory" parameterType="hashmap" resultType="com.bbshop.bit.domain.OnetooneVO">
+	select * from onetoone
+	where 
+	 <foreach collection="search" item ="category" open="(" close=")" separator="or">
+	one_category = #{category}
+	</foreach>
+	   
+</select>
+
+<select id='searchOtoAnswer' parameterType="String" resultType="com.bbshop.bit.domain.OnetooneVO">
+	select * from onetoone
+	
+	<if test='_parameter =="answerOk"'>
+	where lev=1
+	</if>
+	<if test='_parameter =="answerNo"'>
+	where lev=0
+	</if>
+
+</select>
+
+<select id='getReportBoard' resultType="com.bbshop.bit.domain.ReportBoardVO">
+	select * from report_board
+</select>
+
+<select id='getBoard' resultType="com.bbshop.bit.domain.CommunityVO">
+	select *
+    from community
+	where 
+	<foreach collection="reportNum" item ="report" open="(" close=")" separator="or">
+	boardnum = #{report.value}
+	</foreach>
+
+</select>
+<select id='getBoardAll' resultType="com.bbshop.bit.domain.CommunityVO">
+	
+select boardnum BOARD_NUM,team_name,title, board_content,uploadfile,writer,hit,regdate,moddate,reply_count,report_num,user_key
+from community
+
+</select>
+<delete id="deleteBoard">
+	delete from community where boardnum IN
+	<foreach collection="delnum" item="delete" open="(" close=")" separator=",">
+	#{delete.value}
+	</foreach>
+</delete>
+
+<select id="searchBoardCategory" resultType="com.bbshop.bit.domain.CommunityVO">
+	select boardnum BOARD_NUM,team_name,title, board_content,uploadfile,writer,hit,regdate,moddate,reply_count,report_num,user_key
+	from community
+	where
+	<foreach collection="search" item ="category" open="(" close=")" separator="or">
+	team_name = #{category}
+	</foreach>
+	
+</select>
+
+<select id="searchReportCategory" resultType="com.bbshop.bit.domain.ReportBoardVO">
+select *
+from report_board
+where
+	<foreach collection="search" item ="category" open="(" close=")" separator="or">
+	re_category = #{category}
+	</foreach>
+	
+</select>
+
+<update id="sanctionUser" >
+	update sh_user
+	set caution = caution+1 where nickname=#{user}
+</update>
+<delete id="sanctionBoard">
+delete from community where boardnum=#{board_num}
+</delete>
 
 </mapper>
