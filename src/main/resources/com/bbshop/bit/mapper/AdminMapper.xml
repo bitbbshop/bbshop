@@ -219,4 +219,13 @@ where
 	</foreach>
 	
 </select>
+
+<update id="sanctionUser" >
+	update sh_user
+	set caution = caution+1 where nickname=#{user}
+</update>
+<delete id="sanctionBoard">
+delete from community where boardnum=#{board_num}
+</delete>
+
 </mapper>

@@ -93,7 +93,7 @@ body{font-family:NanumBarunpen, sans-serif}
 			
         }
     #info_modal {
-            opacity: 0.9;
+            opacity: 1;
         }
     .close {
             color: #aaa;
@@ -170,7 +170,7 @@ label{
                          신고 사유
                         </th>
 					   <th style="text-align: center">
-                          NICKNAME
+                          신고자
                         </th>                
 				      
                         
@@ -181,10 +181,20 @@ label{
                       		
                       		<td style='text-align:center'><input type='checkbox' class='check'>
                       		<td style='text-align:center'>${report.BOARD_NUM }</td>
-                      		<td style='text-align:center'><Button id="info_Report${status.index}" type="button" class="btn btn-link" align=center>${boardList[status.index].TITLE}</Button></td>
+                      		<td style='text-align:center'><Button id="info_Report${status.index}" type="button" class="btn btn-link" align=center>
+                      		<c:choose>
+                      			<c:when test='${boardList[status.index].TITLE!=null}'>
+                      		${boardList[status.index].TITLE}
+                      		</c:when>
+                      		<c:otherwise>
+                      		삭제되었습니다.
+                      		</c:otherwise>
+                      		</c:choose>
+                      		</Button></td>
                       		<td style='text-align:center'>${report.RE_CATEGORY}</td>
-                      		<td style='text-align:center'>${report.WRITER }</td>
-                      	</tr>
+                      		<td style='text-align:center'>${report.WRITER}</td>
+                      		
+                       	</tr>
                      	
                       	</c:forEach>
                       </tbody>
@@ -287,7 +297,12 @@ label{
 				
 			</table>
 			<table width=100%>
-				<tr><td style='text-align:center'><button class='btn btn-info'>확인</button>
+				<tr>
+				<td style='text-align:center'>
+				<button class='btn btn-info'>확인</button>
+				<Button id='sanctions' class="btn btn-danger">제재</Button>
+				</td>
+				</tr>
 			</table>
 			
 			
@@ -339,6 +354,12 @@ label{
 				      $('#re_category').html("${reportList[4].RE_CATEGORY}")
 				      $('#contents').html("${boardList[4].BOARD_CONTENT}");
 	 });
+    
+	
+    $('#sanctions').click(function(){
+    	location.href="sanctions.do?writer="+$('#writer').html()+"&board_num="+$('#board_num').html();
+    });
+    
     window.onclick = function (event){
       if(event.target == info){
         info.style.display="none";

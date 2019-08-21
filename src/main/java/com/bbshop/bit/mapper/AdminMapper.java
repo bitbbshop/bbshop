@@ -44,4 +44,6 @@ public interface AdminMapper {
 	public void deleteBoard(Map<String, Object> deleteMap);
 	public List<CommunityVO> searchBoardCategory(Map<String, Object> map);
 	public List<ReportBoardVO> searchReportCategory(Map<String, Object> map);
+	public void sanctionUser(String user);
+	public void sanctionBoard(String board_num);
 }

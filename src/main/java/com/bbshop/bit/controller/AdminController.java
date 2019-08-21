@@ -579,7 +579,15 @@ public class AdminController {
 		return "shoppingMall/admin/adminAccount";
 	}
 
-	
+	@RequestMapping(value="sanctions.do" ,method=RequestMethod.GET)
+	public String sanctionsUser(@RequestParam("writer")String user, @RequestParam("board_num") String board_num) {
+		System.out.println("신고당한 유저 닉네임:"+user);
+		System.out.println("신고당한 게시글 번호:"+board_num);
+		
+		adminService.sanctionsUser(user ,board_num);
+		
+		return "community_Report.do";
+	}
 	
 	
 }

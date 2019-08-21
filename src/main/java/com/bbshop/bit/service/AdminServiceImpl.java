@@ -382,4 +382,26 @@ public class AdminServiceImpl implements AdminService {
 		return resultList;
 		
 	}
+
+
+	@Override
+	public void sanctionsUser(String user ,String board_num) {
+		// TODO Auto-generated method stub
+		AdminMapper mapper = sqlSession.getMapper(AdminMapper.class);
+		sqlSession.getMapper(AdminMapper.class);
+		try {
+			mapper.sanctionUser(user);
+			System.out.println("user 경고 증가 성공");
+		}
+		catch(Exception e) {
+			System.out.println("user 경고 증가 실패");
+		}
+		try {
+		mapper.sanctionBoard(board_num);
+		System.out.println("board_num 삭제 성공");
+		}
+		catch(Exception e) {
+			System.out.println("board_num 삭제 실패");
+		}
+	}
 }

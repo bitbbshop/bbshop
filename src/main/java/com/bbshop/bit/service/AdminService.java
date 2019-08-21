@@ -29,4 +29,5 @@ public interface AdminService {
 	public void deleteBoard(Map<String, Object> deleteMap);
 	public List<CommunityVO> searchBoardCategory(Map<String, Object> map);
 	public List<ReportBoardVO> searchReportCategory(Map<String, Object> map);
+	public void sanctionsUser(String user, String board_num);
 }
