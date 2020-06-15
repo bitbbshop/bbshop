@@ -203,7 +203,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>5.0.6.RELEASE</version>
+			<version>5.0.17.RELEASE</version>
 		</dependency>
 
 		<!-- 이메일 인증 2018.11.20 KW -->
